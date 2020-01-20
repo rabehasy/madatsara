@@ -25,15 +25,5 @@ class FrontendEventController extends AbstractController
         return $this->render('frontend/event/index.html.twig', [
             'controller_name' => __METHOD__,
         ]);
-    }
-
-    /**
-     * @Route("/evenements-mois.html", name="frontend_event_month")
-     */
-    public function month()
-    {
-        return $this->render('frontend/event/index.html.twig', [
-            'controller_name' => __METHOD__,
-        ]);
-    }
+    } 
 }
