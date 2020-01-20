@@ -13,7 +13,7 @@ class FrontendDefaultController extends AbstractController
     public function index()
     {
         return $this->render('frontend/default/index.html.twig', [
-            'controller_name' => 'Page Accueil',
+            'controller_name' => __METHOD__,
         ]);
     }
 }
