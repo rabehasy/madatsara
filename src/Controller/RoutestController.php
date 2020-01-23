@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\Request;
 
 class RoutestController extends AbstractController
 {
@@ -38,18 +39,18 @@ class RoutestController extends AbstractController
     }
 
     /**
-     * @Route("/routest/{param}", name="routest_param")
+     * @Route("/routest/p/{param}", name="routest_param")
      */
-    // http://madatsara.localhost/routest/pr
+    // http://madatsara.localhost/routest/p/pr
     public function routeWithParam(String $param)
     {
         return new Response('<body><h2>' . __METHOD__. ' -- param : "' . $param . '"</h2></body>');
     }
 
     /**
-     * @Route("/routest/p/{page}", requirements={"page": "\d+"})
+     * @Route("/routest/pg/{page}", requirements={"page": "\d+"})
      */
-    // http://madatsara.localhost/routest/pr/5200
+    // http://madatsara.localhost/routest/pg/5200
     public function routeWithParamInt(int $page)
     {
         return new Response('<body><h2>' . __METHOD__. ' -- page :  ' . $page . ' </h2></body>');
@@ -125,5 +126,35 @@ class RoutestController extends AbstractController
     public function routeSlashcharacter($token)
     {
         return new Response('<body><h2>' . __METHOD__. ' - token: ' . $token . ' </h2></body>');
+    }
+
+    /**
+     * @Route(
+     *     "/routest/na/{param}",
+     *     name="routest_nameparam"
+     * )
+     */
+    public function getNameAndParams(Request $request, $param)
+    {
+        $routeName = $request->attributes->get('_route');
+        $routeParams = $request->attributes->get('_route_params');
+        $routeAll = $request->attributes->all();
+
+        return new Response('<body><h2>' . __METHOD__. ' - routeName: ' . $routeName . ' - routeParams: ' . print_r($routeAll, true) . '  </h2></body>');
+    }
+
+    /**
+     * @Route(
+     *     "/",
+     *     host="m.localho.st"
+     * )
+     */
+    public function getNameAndParams(Request $request, $param)
+    {
+        $routeName = $request->attributes->get('_route');
+        $routeParams = $request->attributes->get('_route_params');
+        $routeAll = $request->attributes->all();
+
+        return new Response('<body><h2>' . __METHOD__. ' - routeName: ' . $routeName . ' - routeParams: ' . print_r($routeAll, true) . '  </h2></body>');
     }
 }
