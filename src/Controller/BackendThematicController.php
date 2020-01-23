@@ -5,10 +5,13 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/backend", name="backend_thematic_")
+ */
 class BackendThematicController extends AbstractController
 {
     /**
-     * @Route("/backend/thematic", name="backend_thematic")
+     * @Route("/thematic", name="index")
      */
     public function index()
     {

@@ -5,10 +5,13 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/member", name="member_event")
+ */
 class MemberEventController extends AbstractController
 {
     /**
-     * @Route("/member/event", name="member_event")
+     * @Route("/event", name="index")
      */
     public function index()
     {

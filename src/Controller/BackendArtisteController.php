@@ -5,10 +5,13 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/backend", name="backend_artiste_")
+ */
 class BackendArtisteController extends AbstractController
 {
     /**
-     * @Route("/backend/artiste", name="backend_artiste")
+     * @Route("/artiste", name="index")
      */
     public function index()
     {

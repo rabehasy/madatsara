@@ -5,10 +5,13 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/backend", name="backend_subscribenewsletter_")
+ */
 class BackendSubscribenewsletterController extends AbstractController
 {
     /**
-     * @Route("/backend/subscribenewsletter", name="backend_subscribenewsletter")
+     * @Route("/subscribenewsletter", name="index")
      */
     public function index()
     {

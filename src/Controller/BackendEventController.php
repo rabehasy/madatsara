@@ -5,10 +5,13 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/backend", name="backend_event_")
+ */
 class BackendEventController extends AbstractController
 {
     /**
-     * @Route("/backend/event", name="backend_event")
+     * @Route("/event", name="index")
      */
     public function index()
     {
