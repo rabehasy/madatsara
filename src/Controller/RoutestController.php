@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class RoutestController extends AbstractController
 {
@@ -39,7 +40,7 @@ class RoutestController extends AbstractController
     }
 
     /**
-     * @Route("/routest/p/{param}", name="routest_param")
+     * @Route("/routest/p/{param}",name="routest_param")
      */
     // http://madatsara.localhost/routest/p/pr
     public function routeWithParam(String $param)
@@ -48,7 +49,7 @@ class RoutestController extends AbstractController
     }
 
     /**
-     * @Route("/routest/pg/{page}", requirements={"page": "\d+"})
+     * @Route("/routest/pg/{page}", name="route_with_param_int", requirements={"page": "\d+"})
      */
     // http://madatsara.localhost/routest/pg/5200
     public function routeWithParamInt(int $page)
@@ -57,7 +58,7 @@ class RoutestController extends AbstractController
     }
 
     /**
-     * @Route("/routest/pr/{page<\d+>}")
+     * @Route("/routest/pr/{page<\d+>}", name="route_with_param_inline_requirement")
      */
     // http://madatsara.localhost/routest/pr/5200
     public function routeWithParamInlineRequirements(int $page)
@@ -66,7 +67,7 @@ class RoutestController extends AbstractController
     }
 
     /**
-     * @Route("/routest/op/{page<\d+>?}/{param2?}")
+     * @Route("/routest/op/{page<\d+>?}/{param2?}", name="route_with_optionnal_param")
      */
     // http://madatsara.localhost/routest/op/2
     public function routeWithOptionnalParam(int $page = 5, $param2 = 'optionnal')
@@ -75,7 +76,7 @@ class RoutestController extends AbstractController
     }
 
     /**
-     * @Route("/routest/pc/{date}")
+     * @Route("/routest/pc/{date}", name="route_paramconverter_datetime")
      * @ParamConverter("date", options={"format": "!Y-m-d"})
      */
     // http://madatsara.localhost/routest/pc/2020-01-15 ✅
@@ -88,6 +89,7 @@ class RoutestController extends AbstractController
     /**
      * @Route(
      *     "/routest/sp/{_locale}/s.{_format}",
+     *     name="route_special_param",
      *     locale="en",
      *     format="json",
      *     requirements={
@@ -107,6 +109,7 @@ class RoutestController extends AbstractController
     /**
      * @Route(
      *     "/routest/xp/{param}",
+     *     name="route_extra_param",
      *     defaults={"param", "toto", "title": "titre de la page"}
      * )
      */
@@ -119,6 +122,7 @@ class RoutestController extends AbstractController
     /**
      * @Route(
      *     "/routest/tk/{token}",
+     *     name="route_slash_character",
      *     requirements={"token": ".+"}
      * )
      */
@@ -146,15 +150,40 @@ class RoutestController extends AbstractController
     /**
      * @Route(
      *     "/",
+     *     name="mobile_home",
      *     host="m.localho.st"
      * )
      */
-    public function getNameAndParams(Request $request, $param)
+    public function getMobileHome(Request $request )
     {
-        $routeName = $request->attributes->get('_route');
-        $routeParams = $request->attributes->get('_route_params');
-        $routeAll = $request->attributes->all();
 
-        return new Response('<body><h2>' . __METHOD__. ' - routeName: ' . $routeName . ' - routeParams: ' . print_r($routeAll, true) . '  </h2></body>');
+        return new Response('<body><h2>' . __METHOD__. ' </h2></body>');
+    }
+
+    /**
+     * @Route(
+     *     "/urlgen",
+     *     name="url_generated"
+     * )
+     */
+    public function getUrlGenerated()
+    {
+        $urlGet = $this->generateUrl('routest_get');
+        $urlSpecialParam = $this->generateUrl(
+            'route_special_param',
+            [
+                '_locale' => 'en',
+                'autre' => 'json'
+            ]
+        );
+        $absoluteUrl = $this->generateUrl('routest_post', [], UrlGeneratorInterface::ABSOLUTE_URL);
+
+        $retour = implode('<br>', [
+           'urlGet: ' . $urlGet,
+           'urlSpecialParam: ' . $urlSpecialParam, // /routest/sp/en/s?autre=json
+           'absoluteUrl: ' . $absoluteUrl // http://madatsara.localhost/routest
+        ]);
+
+        return new Response('<body><h2>' . __METHOD__. '</h2><p>' . $retour . '</p></body>');
     }
 }

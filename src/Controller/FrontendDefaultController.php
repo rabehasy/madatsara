@@ -8,7 +8,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class FrontendDefaultController extends AbstractController
 {
     /**
-     * @Route("/", name="frontend_default")
+     * @Route(
+     *     "/",
+     *     name="frontend_default",
+     *     host="{domain}",
+     *     defaults={"domain"="madatsara.localhost"},
+     *     requirements={"domain"="madatsara.localhost|madatsara.com"}
+     * )
      */
     public function index()
     {

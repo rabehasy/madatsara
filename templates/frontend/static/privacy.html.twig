@@ -11,6 +11,11 @@
     <div class="example-wrapper">
         <h1>Hello ✅</h1>
 
+        <p><a href="{{ path("route_with_param_inline_requirement", {page: 5420}) }}">Link example</a></p>
+
+        <script>
+            const Route = "{{ path('route_with_param_inline_requirement', {page: 1200}) | escape('js') }}";
+        </script>
 
     </div>
 {% endblock %}
