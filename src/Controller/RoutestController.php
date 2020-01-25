@@ -193,4 +193,31 @@ class RoutestController extends AbstractController
     {
         return new Response('<body><h2>' . __METHOD__. '</h2><p> parameter: ' . $parameter . '</p></body>');
     }
+
+    /**
+     * @Route("/redirectadminer", name="adminer")
+     */
+    // http://madatsara.localhost/redirectadminer
+    public function redirectadminer()
+    {
+        return $this->redirect('http://adminer.localhost'); // http://madatsara.localhost/testctrl/adminer
+    }
+
+    /**
+     * @Route("/redirecttoaccueil")
+     */
+    // http://madatsara.localhost/redirecttoaccueil
+    public function redirecttoaccueil()
+    {
+        return $this->redirectToRoute('frontend_default');
+    }
+
+    /**
+     * @Route("/redirecttoaccueilqs", name="redirecttoaccueilqs")
+     */
+    // http://madatsara.localhost/redirecttoaccueilqs?a=b&c=d&e=f --> http://madatsara.localhost/?a=b&c=d&e=f
+    public function redirecttoaccueilWithQuerystring(Request $request)
+    {
+        return $this->redirectToRoute('frontend_default', $request->query->all());
+    }
 }
