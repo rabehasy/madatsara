@@ -186,4 +186,11 @@ class RoutestController extends AbstractController
 
         return new Response('<body><h2>' . __METHOD__. '</h2><p>' . $retour . '</p></body>');
     }
+
+    // CustomLoader Route
+    // http://madatsara.localhost/customloader/456
+    public function customloader($parameter)
+    {
+        return new Response('<body><h2>' . __METHOD__. '</h2><p> parameter: ' . $parameter . '</p></body>');
+    }
 }

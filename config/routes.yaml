@@ -21,3 +21,7 @@ contact_page:
   defaults:
     route: frontend_contact
     permanent: true
+
+app_customloader:
+    resource: .
+    type: customloader
