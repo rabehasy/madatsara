@@ -9,12 +9,30 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/madatsara.com/symfony5.1/src/Controller/FonctionctrlController.php'|file_link(0) }}">src/Controller/FonctionctrlController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/madatsara.com/symfony5.1/templates/fonctionctrl/index.html.twig'|file_link(0) }}">templates/fonctionctrl/index.html.twig</a></code></li>
-    </ul>
+    {# read and display several types of flash messages #}
+    {% for label, messages in app.flashes(['success', 'warning']) %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    {# read and display all flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <p><a href="{{ path('fonctionctrl_flashmessages', {flash: 1}) }}">set flash</a></p>
 </div>
 {% endblock %}
