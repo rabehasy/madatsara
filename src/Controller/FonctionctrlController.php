@@ -79,5 +79,49 @@ class FonctionctrlController extends AbstractController
 
     }
 
+    /**
+     * @Route("/getparameter", name="getparameter")
+     */
+    // http://madatsara.localhost/fonctionctrl/getparameter
+    public function parameter()
+    {
+
+
+        $ret = implode('<br>', [
+            'parameter "kernel.project_dir": ' . $this->getparameter('kernel.project_dir') // /var/www/madatsara.com/symfony5.1
+        ]);
+        return new Response('<body>' . $ret . '</body>');
+
+    }
+
+    /**
+     * @Route("/responsejson", name="responsejson")
+     */
+    // http://madatsara.localhost/fonctionctrl/responsejson
+    public function responsejson()
+    {
+
+
+        $ret =  [
+            'parameter "kernel.project_dir": ' . $this->getparameter('kernel.project_dir') // /var/www/madatsara.com/symfony5.1
+        ] ;
+        return $this->json($ret); // ["parameter \u0022kernel.project_dir\u0022: \/var\/www\/madatsara.com\/symfony5.1"]
+
+    }
+
+    /**
+     * @Route("/forward-contact", name="forward")
+     */
+    // http://madatsara.localhost/fonctionctrl/forward-contact
+    public function setForward()
+    {
+
+
+        return $this->forward(
+            'App\Controller\FrontendContactController::index',
+            []
+        );
+    }
+
 
 }
