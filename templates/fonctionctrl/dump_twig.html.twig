@@ -34,5 +34,7 @@
     {# ESI #}
     {{ render_esi(controller('App\\Controller\\FrontendEventController::month')) }}
 
+    <p>{{ "500000" | price(2, ',', '.') }}</p>
+
 </div>
 {% endblock %}
