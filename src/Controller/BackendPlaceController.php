@@ -15,7 +15,7 @@ class BackendPlaceController extends AbstractController
      */
     public function index()
     {
-        return $this->render('backend/place/index.html.twig', [
+        return $this->render('@backend/place/index.html.twig', [
             'controller_name' => 'BackendPlaceController',
         ]);
     }

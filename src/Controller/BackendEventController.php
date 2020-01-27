@@ -15,7 +15,7 @@ class BackendEventController extends AbstractController
      */
     public function index()
     {
-        return $this->render('backend/event/index.html.twig', [
+        return $this->render('@backend/event/index.html.twig', [
             'controller_name' => 'BackendEventController',
         ]);
     }

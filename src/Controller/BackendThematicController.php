@@ -15,7 +15,7 @@ class BackendThematicController extends AbstractController
      */
     public function index()
     {
-        return $this->render('backend/thematic/index.html.twig', [
+        return $this->render('@backend/thematic/index.html.twig', [
             'controller_name' => 'BackendThematicController',
         ]);
     }

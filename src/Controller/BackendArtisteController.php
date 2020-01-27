@@ -15,7 +15,7 @@ class BackendArtisteController extends AbstractController
      */
     public function index()
     {
-        return $this->render('backend/artiste/index.html.twig', [
+        return $this->render('@backend/artiste/index.html.twig', [
             'controller_name' => 'BackendArtisteController',
         ]);
     }

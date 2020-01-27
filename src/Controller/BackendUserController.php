@@ -15,7 +15,7 @@ class BackendUserController extends AbstractController
      */
     public function index()
     {
-        return $this->render('backend/user/index.html.twig', [
+        return $this->render('@backend/user/index.html.twig', [
             'controller_name' => 'BackendUserController',
         ]);
     }

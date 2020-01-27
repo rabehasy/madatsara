@@ -15,7 +15,7 @@ class BackendDefaultController extends AbstractController
      */
     public function index()
     {
-        return $this->render('backend/default/index.html.twig', [
+        return $this->render('@backend/default/index.html.twig', [
             'controller_name' => 'BackendDefaultController',
         ]);
     }

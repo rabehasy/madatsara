@@ -15,7 +15,7 @@ class BackendSubscribenewsletterController extends AbstractController
      */
     public function index()
     {
-        return $this->render('backend/subscribenewsletter/index.html.twig', [
+        return $this->render('@backend/subscribenewsletter/index.html.twig', [
             'controller_name' => 'BackendSubscribenewsletterController',
         ]);
     }

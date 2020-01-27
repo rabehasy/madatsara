@@ -15,7 +15,7 @@ class BackendOrganisateurController extends AbstractController
      */
     public function index()
     {
-        return $this->render('backend/organisateur/index.html.twig', [
+        return $this->render('@backend/organisateur/index.html.twig', [
             'controller_name' => 'BackendOrganisateurController',
         ]);
     }
