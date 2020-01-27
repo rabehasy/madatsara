@@ -30,9 +30,6 @@
 
     {# ESI #}
     {{ render_esi(controller('App\\Controller\\FrontendEventController::month')) }}
-
-    {#  hinclude.js  #}
-    {{ render_hinclude(controller('App\\Controller\\FrontendSearchController::index'), { default: 'Search content...'}) }}
-
+ 
 </div>
 {% endblock %}
