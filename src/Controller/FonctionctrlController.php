@@ -123,5 +123,16 @@ class FonctionctrlController extends AbstractController
         );
     }
 
+    /**
+     * @Route("/dump-twig", name="dump_twig")
+     */
+    // http://madatsara.localhost/fonctionctrl/dump-twig
+    public function dumpTwig()
+    {
+
+
+        return $this->render('fonctionctrl/dump_twig.html.twig');
+    }
+
 
 }

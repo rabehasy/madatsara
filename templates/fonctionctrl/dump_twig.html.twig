@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FonctionctrlController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+    <script src="{{ asset('assets/js/hinclude.js') }}"></script>
+
+<div class="example-wrapper">
+    {# content not rendered on page but inside web debug toolbar #}
+    {%  dump app %}
+
+    {# content rendered on page #}
+    {{ dump(app.environment) }}
+
+    {# Include other template #}
+    {{ include('fragments/_testfragment.html.twig') }}
+
+    {# Include other template with variables #}
+    {{ include('fragments/_testfragment.html.twig', {user: 'ttotot' }) }}
+
+    {# render controller with route name #}
+    {{ render(path('frontend_contact')) }}
+
+    {# render controller without route  #}
+    {{ render(controller('App\\Controller\\FonctionctrlController::responsejson')) }}
+
+    {# ESI #}
+    {{ render_esi(controller('App\\Controller\\FrontendEventController::month')) }}
+
+    {#  hinclude.js  #}
+    {{ render_hinclude(controller('App\\Controller\\FrontendSearchController::index'), { default: 'Search content...'}) }}
+
+</div>
+{% endblock %}
