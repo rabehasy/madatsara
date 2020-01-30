@@ -19,6 +19,7 @@ class ExampleFormController extends AbstractController
     /**
      * @Route("/simple", name="simple")
      */
+    // http://madatsara.localhost/example/form/simple
     public function simple()
     {
         $task = new Task();
@@ -37,6 +38,7 @@ class ExampleFormController extends AbstractController
     /**
      * @Route("/type", name="simple")
      */
+    // http://madatsara.localhost/example/form/type
     public function type()
     {
         $task = new Task();
