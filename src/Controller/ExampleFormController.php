@@ -42,6 +42,8 @@ class ExampleFormController extends AbstractController
     public function type()
     {
         $task = new Task();
+        $task->setTask('Write a blog post');
+        $task->setDueDate(new \DateTime('tomorrow'));
 
         $form = $this->createForm(TaskType::class, $task);
 
