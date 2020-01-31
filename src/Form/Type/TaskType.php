@@ -15,15 +15,18 @@ class TaskType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Task::class
+            'data_class' => Task::class,
+            'required_due_date' => false
         ]);
+
+        $resolver->addAllowedTypes('required_due_date', 'bool');
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('task', TextType::class)
-            ->add('dueDate', DateType::class)
+            ->add('dueDate', DateType::class, ['required' => $options['required_due_date']])
             ->add('save', SubmitType::class, ['label'=>'Add task']
             );
     }
