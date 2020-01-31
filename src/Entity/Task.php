@@ -8,8 +8,15 @@ class Task
 {
     /**
      * @Assert\NotBlank;
+     * @Assert\Length(max = 5);
      */
     protected $task;
+
+    /**
+     * @Assert\NotBlank;
+     * @Assert\Length(max = 20);
+     */
+    protected $todo;
 
     /**
      * @Assert\NotBlank;
@@ -25,6 +32,16 @@ class Task
     public function setTask($task)
     {
         $this->task = $task;
+    }
+
+    public function getTodo()
+    {
+        return $this->todo;
+    }
+
+    public function setTodo($todo)
+    {
+        $this->todo = $todo;
     }
 
     public function getDueDate()

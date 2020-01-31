@@ -131,6 +131,7 @@ class ExampleFormController extends AbstractController
         $form = $this->createFormBuilder($task)
 
             ->add('task')
+            ->add('todo', null, ['attr' => ['maxlength' => 6]])
             ->add('dueDate', null)
             ->add('save', SubmitType::class, ['label' => 'Add task'])
             ->getForm();
