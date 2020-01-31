@@ -26,6 +26,9 @@ class ExampleFormController extends AbstractController
         $task = new Task();
 
         $form = $this->createFormBuilder($task)
+            ->setMethod('DELETE')
+            ->setAction($this->generateUrl('example_form_simple'))
+
             ->add('task', TextType::class)
             ->add('dueDate', DateType::class)
             ->add('save', SubmitType::class, ['label' => 'Add task'])
@@ -46,7 +49,63 @@ class ExampleFormController extends AbstractController
         $task->setTask('Write a blog post');
         $task->setDueDate(new \DateTime('tomorrow'));
 
-        $form = $this->createForm(TaskType::class, $task, ['required_due_date' => true]);
+        $form = $this->createForm(TaskType::class, $task, [
+            'method' => 'PUT',
+            'action' => $this->generateUrl('example_form_type'),
+            'required_due_date' => true
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+
+            return $this->redirectToRoute('frontend_default');
+        }
+
+        return $this->render('example_form/index.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/template", name="template")
+     */
+    // http://madatsara.localhost/example/form/template
+    public function template(Request $request)
+    {
+        $task = new Task();
+        $task->setTask('Overide template');
+        $task->setDueDate(new \DateTime('tomorrow'));
+
+        $form = $this->createForm(TaskType::class, $task, [
+            'required_due_date' => true
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+
+            return $this->redirectToRoute('frontend_default');
+        }
+
+        return $this->render('example_form/overideform.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/formfactory", name="formfactory")
+     */
+    // http://madatsara.localhost/example/form/formfactory
+    public function formfactory(Request $request)
+    {
+        $task = new Task();
+        $task->setTask('Overide template');
+        $task->setDueDate(new \DateTime('tomorrow'));
+
+        $form = $this->get('form.factory')->createNamed('my_name', TaskType::class, $task);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

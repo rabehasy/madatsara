@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ExampleFormController!{% endblock %}
+
+{% block body %}
+
+
+<div class="example-wrapper">
+    {{ form(form, {'action': path('example_form_template'), 'method': 'PUT'}) }}
+</div>
+{% endblock %}
