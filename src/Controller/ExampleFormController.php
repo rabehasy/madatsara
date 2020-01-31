@@ -119,4 +119,24 @@ class ExampleFormController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/guessing", name="guessing")
+     */
+    // http://madatsara.localhost/example/form/guessing
+    public function guessing()
+    {
+        $task = new Task();
+
+        $form = $this->createFormBuilder($task)
+
+            ->add('task')
+            ->add('dueDate', null)
+            ->add('save', SubmitType::class, ['label' => 'Add task'])
+            ->getForm();
+
+        return $this->render('example_form/index.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 }
