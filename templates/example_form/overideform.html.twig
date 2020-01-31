@@ -6,6 +6,6 @@
 
 
 <div class="example-wrapper">
-    {{ form(form, {'action': path('example_form_template'), 'method': 'PUT'}) }}
+    {{ form(form, {'attr': {'novalidate': 'novalidate'}, 'action': path('example_form_template'), 'method': 'PUT'}) }}
 </div>
 {% endblock %}
