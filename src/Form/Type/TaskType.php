@@ -18,7 +18,10 @@ class TaskType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Task::class,
-            'required_due_date' => false
+            'required_due_date' => false,
+            'csrf_field_name' => '_token',
+            'csrf_field_id' => 'task_item'
+
         ]);
 
         $resolver->addAllowedTypes('required_due_date', 'bool');
