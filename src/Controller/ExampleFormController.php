@@ -35,6 +35,7 @@ use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\WeekType;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -272,6 +273,52 @@ class ExampleFormController extends AbstractController
             $tos = $form->get('agreeTermsOfService')->getData();
 
             return new Response('<body><h1>Agree: ' . $tos . '</h1></body>');
+        }
+
+        return $this->render('example_form/index.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/uploadfile", name="uploadfile")
+     */
+    // http://madatsara.localhost/example/form/uploadfile
+    public function uploadfile(Request $request)
+    {
+        $task = new Task();
+        $task->setTask('abcd');
+        $task->setTodo('efgh');
+        $task->setDueDate(new \DateTime('tomorrow'));
+
+        $form = $this->createForm(TaskType::class, $task, [
+            'required_due_date' => true
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // filepdf data
+            $filepdf = $form->get('filepdf')->getData();
+            if ($filepdf) {
+
+                $originalFilename = pathinfo($filepdf->getClientOriginalName(), PATHINFO_FILENAME);
+
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$filepdf->guessExtension();
+
+                try {
+                    $filepdf->move(
+                        $this->getParameter('dossier.flyers'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+            }
+
+            return $this->redirectToRoute('frontend_default');
         }
 
         return $this->render('example_form/index.html.twig', [

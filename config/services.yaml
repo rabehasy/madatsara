@@ -7,6 +7,9 @@ parameters:
     router.request_context.host: 'madatsara.com'
     router.request_context.scheme: 'https'
     router.request_context.secure: true
+    dossier.artistes_photo: '%kernel.project_dir%/public/assets/artistes_orig'
+    dossier.flyers: '%kernel.project_dir%/public/assets/flyers'
+    dossier.flyers.users: '%kernel.project_dir%/public/assets/flyerseventbyuser'
 
 services:
     # default configuration for services in *this* file

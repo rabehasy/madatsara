@@ -18,11 +18,14 @@ class Task
      */
     protected $todo;
 
+
     /**
      * @Assert\NotBlank;
      * @Assert\Type("\DateTime")
      */
     protected $dueDate;
+
+    protected $docFile;
 
     public function getTask()
     {
@@ -52,5 +55,15 @@ class Task
     public function setDueDate(\DateTime $dueDate = null)
     {
         $this->dueDate = $dueDate;
+    }
+
+    public function getDocFile()
+    {
+        return $this->docFile;
+    }
+
+    public function setDocFile($docFile)
+    {
+        $this->docFile = $docFile;
     }
 }
