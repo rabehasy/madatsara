@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Task;
 use App\Form\Type\TaskType;
+use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -316,6 +317,38 @@ class ExampleFormController extends AbstractController
                 } catch (FileException $e) {
                     // ... handle exception if something happens during file upload
                 }
+            }
+
+            return $this->redirectToRoute('frontend_default');
+        }
+
+        return $this->render('example_form/index.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/uploadfileservice", name="uploadfileservice")
+     */
+    // http://madatsara.localhost/example/form/uploadfileservice
+    public function uploadfileservice(Request $request, FileUploader $fileUploader)
+    {
+        $task = new Task();
+        $task->setTask('serv');
+        $task->setTodo('vres');
+        $task->setDueDate(new \DateTime('tomorrow'));
+
+        $form = $this->createForm(TaskType::class, $task, [
+            'required_due_date' => true
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // filepdf data
+            $filepdf = $form['filepdf']->getData();
+            if ($filepdf) {
+                $fileUploader->upload($filepdf);
             }
 
             return $this->redirectToRoute('frontend_default');

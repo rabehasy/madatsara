@@ -34,3 +34,7 @@ services:
 
     App\Routing\ExtraLoader:
         tags: [routing.loader]
+
+    App\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%dossier.flyers%'
