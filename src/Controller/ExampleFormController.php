@@ -358,4 +358,29 @@ class ExampleFormController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/validcsrftoken", name="validcsrftoken")
+     */
+    // http://madatsara.localhost/example/form/validcsrftoken
+    public function validcsrftoken(Request $request)
+    {
+        $dataHidden = $request->request->get('token');
+
+        if ($this->isCsrfTokenValid('montoken', $dataHidden)) {
+            return new Response('<body>OK token valide</body>');
+        }
+
+        return new Response('<body>Token invalide</body>');
+
+    }
+    /**
+     * @Route("/csrftoken", name="csrftoken")
+     */
+    // http://madatsara.localhost/example/form/csrftoken
+    public function csrftoken(Request $request)
+    {
+
+        return $this->render('example_form/csrftoken.html.twig');
+    }
 }
