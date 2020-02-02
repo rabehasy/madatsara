@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Task;
+use App\Form\Type\PostalAdressType;
 use App\Form\Type\ShippingType;
 use App\Form\Type\TaskType;
 use App\Service\FileUploader;
@@ -262,8 +263,16 @@ class ExampleFormController extends AbstractController
                 'entry_type' => EmailType::class
             ])
 
-            // Custom Type
+            // Custom Type extends from parent
             ->add('shippingType', ShippingType::class)
+
+            // Custom Type from scratch
+            ->add('PostalAdressType1', PostalAdressType::class)
+
+            ->add('PostalAdressType2', PostalAdressType::class, [
+                'is_extended_address' => true,
+                'allowed_states' => ['CA', 'FL', 'TX']
+            ])
 
             // Button Fields
             ->add('SubmitType', SubmitType::class)
