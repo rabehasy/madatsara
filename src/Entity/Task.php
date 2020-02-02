@@ -31,6 +31,8 @@ class Task
 
     protected $tags2;
 
+    protected $issue;
+
     public function getTask()
     {
         return $this->task;
@@ -88,5 +90,15 @@ class Task
     public function setTags2($tags2)
     {
         $this->tags2 = $tags2;
+    }
+
+    public function getIssue()
+    {
+        return $this->issue;
+    }
+
+    public function setIssue($issue)
+    {
+        $this->issue = $issue;
     }
 }

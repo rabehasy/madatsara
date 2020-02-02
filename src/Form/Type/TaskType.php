@@ -15,6 +15,12 @@ use Symfony\Component\Validator\Constraints\File;
 
 class TaskType extends AbstractType
 {
+    private $transformer;
+
+    public function __construct()
+    {
+    }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -67,6 +73,8 @@ class TaskType extends AbstractType
                     }
                 ))
             )
+
+
 
             ->add('save', SubmitType::class, ['label'=>'Add task']);
 
