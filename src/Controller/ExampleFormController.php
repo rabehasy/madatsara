@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Task;
+use App\Form\Type\ShippingType;
 use App\Form\Type\TaskType;
 use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -261,6 +262,8 @@ class ExampleFormController extends AbstractController
                 'entry_type' => EmailType::class
             ])
 
+            // Custom Type
+            ->add('shippingType', ShippingType::class)
 
             // Button Fields
             ->add('SubmitType', SubmitType::class)
