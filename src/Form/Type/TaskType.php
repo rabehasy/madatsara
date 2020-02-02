@@ -4,6 +4,7 @@ namespace App\Form\Type;
 
 use App\Entity\Task;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -36,6 +37,7 @@ class TaskType extends AbstractType
 
             // File
             ->add('filepdf', FileType::class, [
+                'required' => false,
                 'label' => 'Document (PDF)',
                 'mapped' => false,
 
@@ -52,7 +54,30 @@ class TaskType extends AbstractType
                 ]
             ])
 
-            ->add('save', SubmitType::class, ['label'=>'Add task']
-            );
+            ->add('tags', TextType::class)
+
+            ->add(
+                $builder->create('tags2', TextType::class)
+                ->addModelTransformer(new CallbackTransformer(
+                    function ($tagsAsArray) {
+                        return !empty($tagsAsArray) ? implode(',', $tagsAsArray) : '';
+                    },
+                    function ($tagsAsString) {
+                        return explode(',',$tagsAsString);
+                    }
+                ))
+            )
+
+            ->add('save', SubmitType::class, ['label'=>'Add task']);
+
+        $builder->get('tags')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($tagsAsArray) {
+                    return !empty($tagsAsArray) ? implode(',', $tagsAsArray) : '';
+                },
+                function ($tagsAsString) {
+                    return explode(',',$tagsAsString);
+                }
+            ));
     }
 }

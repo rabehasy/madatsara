@@ -345,10 +345,17 @@ class ExampleFormController extends AbstractController
     // http://madatsara.localhost/example/form/uploadfileservice
     public function uploadfileservice(Request $request, FileUploader $fileUploader)
     {
+
+        $tags = range('a','f');
+        $tags2 = range('g','k');
+
         $task = new Task();
         $task->setTask('serv');
         $task->setTodo('vres');
         $task->setDueDate(new \DateTime('tomorrow'));
+
+        $task->setTags($tags);
+        $task->setTags2($tags2);
 
         $form = $this->createForm(TaskType::class, $task, [
             'required_due_date' => true
@@ -363,7 +370,13 @@ class ExampleFormController extends AbstractController
                 $fileUploader->upload($filepdf);
             }
 
-            return $this->redirectToRoute('frontend_default');
+            $data = print_r([
+                'filepdf' => $filepdf?$filepdf->getClientOriginalName():'',
+                'tags' => $form['tags']->getData(),
+                'tags2' => $form['tags2']->getData()
+            ],true);
+
+            return new Response('<body>' . $data . '</body>');
         }
 
         return $this->render('example_form/index.html.twig', [

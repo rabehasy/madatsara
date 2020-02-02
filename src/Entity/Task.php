@@ -27,6 +27,10 @@ class Task
 
     protected $docFile;
 
+    protected $tags;
+
+    protected $tags2;
+
     public function getTask()
     {
         return $this->task;
@@ -65,5 +69,24 @@ class Task
     public function setDocFile($docFile)
     {
         $this->docFile = $docFile;
+    }
+
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+    }
+    public function getTags2()
+    {
+        return $this->tags2;
+    }
+
+    public function setTags2($tags2)
+    {
+        $this->tags2 = $tags2;
     }
 }
