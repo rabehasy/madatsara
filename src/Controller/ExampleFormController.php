@@ -408,4 +408,43 @@ class ExampleFormController extends AbstractController
 
         return $this->render('example_form/csrftoken.html.twig');
     }
+
+    /**
+     * @Route("/customrender", name="customrender")
+     */
+    // http://madatsara.localhost/example/form/customrender
+    public function customrender(Request $request)
+    {
+
+        $tags = range('a','f');
+        $tags2 = range('g','k');
+
+        $task = new Task();
+        $task->setTask('serv');
+        $task->setTodo('vres');
+        $task->setDueDate(new \DateTime('tomorrow'));
+
+        $task->setTags($tags);
+        $task->setTags2($tags2);
+
+        $form = $this->createForm(TaskType::class, $task, [
+            'required_due_date' => true
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+
+            $data = print_r([
+                'task' => $form['task']->getData()
+            ],true);
+
+            return new Response('<body>' . $data . '</body>');
+        }
+
+        return $this->render('example_form/customrender.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 }

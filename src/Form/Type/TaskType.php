@@ -37,7 +37,13 @@ class TaskType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('task', TextType::class)
+            ->add('task', TextType::class, [
+                'help' => '<b> ❓ Aide à la saisie</b>', // Help text
+                'help_html' => true, // allow HTML tag inside help
+                'help_attr' => [ // Help HTML attributes
+                    'class' => 'class-aide'
+                ]
+            ])
             ->add('todo')
             ->add('dueDate', DateType::class, ['required' => $options['required_due_date']])
 

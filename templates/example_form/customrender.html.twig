@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+    {% if form is rootform %}
+        {{ form_errors(form) }}
+    {% endif %}
+
+    <div class="task_render">
+        {{ form_label(form.task,'Libelle de la tache') }}
+        <div class="widget">{{ form_widget(form.task, {'attr': {'class': 'task-widget'}}) }}</div>
+        <div class="help-msg">{{ form_help(form.task) }}</div>
+        <div class="error-msg">{{ form_errors(form.task) }}</div>
+        form.task.vars.id : <strong>{{ form.task.vars.id }}</strong>
+    </div>
+    <div class="task_duedate">
+        {{ form_label(form.dueDate, null, { 'label': 'Date due',  'label_attr': { 'class': 'label-due-date' }}) }}
+        <div class="widget">{{ form_widget(form.dueDate) }}</div>
+        <div class="error-msg">{{ form_errors(form.dueDate) }}</div>
+    </div>
+    {{ form_row(form.save) }}
+    <input type="hidden" name="token" value="{{ csrf_token('montoken') }}">
+    {{ form_end(form, {'render_rest': false}) }}
+{% endblock %}
+
+
+
