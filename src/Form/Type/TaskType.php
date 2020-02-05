@@ -44,7 +44,9 @@ class TaskType extends AbstractType
                     'class' => 'class-aide'
                 ]
             ])
-            ->add('todo')
+            ->add('todo', TextType::class, [
+                'block_name' => 'my_todo_likedname'
+            ])
             ->add('dueDate', DateType::class, ['required' => $options['required_due_date']])
 
             // File

@@ -2,6 +2,22 @@
 
 {% block title %}{% endblock %}
 
+{# Custom Form theme #}
+{% form_theme form _self %}
+
+
+{% block text_widget %}
+    <div class="my-custom-text-widget">
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
+{% block _task_my_todo_likedname_widget %}
+    <div class="my-custom-todo-widget">
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
+
 {% block body %}
     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
@@ -21,6 +37,9 @@
         <div class="widget">{{ form_widget(form.dueDate) }}</div>
         <div class="error-msg">{{ form_errors(form.dueDate) }}</div>
     </div>
+
+    {{ form_row(form.todo) }}
+
     {{ form_row(form.save) }}
     <input type="hidden" name="token" value="{{ csrf_token('montoken') }}">
     {{ form_end(form, {'render_rest': false}) }}
