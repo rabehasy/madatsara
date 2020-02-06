@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Task;
+use App\Form\EventListener\AddNameFieldSubscriber;
 use App\Form\Type\PostalAdressType;
 use App\Form\Type\ShippingType;
 use App\Form\Type\TaskType;
@@ -444,6 +445,28 @@ class ExampleFormController extends AbstractController
         }
 
         return $this->render('example_form/customrender.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/formevent", name="formevent")
+     */
+    // http://madatsara.localhost/example/form/formevent
+    public function formevent(Request $request)
+    {
+
+        $collections = range('a', 'g');
+        $form = $this->createFormBuilder()
+
+            ->add('TextType', TextType::class) // <input type="text" name="form[TextType]">
+            ->add('TextareaType', TextareaType::class) // <textarea name="form[TextareaType]">
+            // Button Fields
+            ->add('SubmitType', SubmitType::class)
+            ->addEventSubscriber(new AddNameFieldSubscriber())
+            ->getForm();
+
+        return $this->render('example_form/index.html.twig', [
             'form' => $form->createView(),
         ]);
     }
