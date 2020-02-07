@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator\Constraints as MyAssert;
 
 class Task
 {
     /**
      * @Assert\NotBlank;
      * @Assert\Length(max = 5);
+     * @MyAssert\ContainsAlphanumeric
      */
     protected $task;
 
