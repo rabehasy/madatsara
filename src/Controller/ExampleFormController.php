@@ -66,6 +66,10 @@ class ExampleFormController extends AbstractController
             ->add('task', TextType::class)
             ->add('dueDate', DateType::class)
             ->add('save', SubmitType::class, ['label' => 'Add task'])
+            ->add('next', SubmitType::class, [
+                'validation_groups' => false,
+                'label' => 'Next task'
+            ])
             ->getForm();
 
         return $this->render('example_form/index.html.twig', [
