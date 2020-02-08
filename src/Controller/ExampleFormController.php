@@ -541,6 +541,10 @@ class ExampleFormController extends AbstractController
 
                 $data = print_r([
                     'task' => $form['task']->getData(),
+                    'todo' => $form['todo']->getData(),
+                    'tags' => $form['tags']->getData(),
+                    'tags2' => $form['tags2']->getData(),
+                    'dueDate' => $form['dueDate']->getData(),
                     'form->getName' => $form->getName()
                 ], true);
 
