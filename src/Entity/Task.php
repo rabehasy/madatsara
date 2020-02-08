@@ -20,7 +20,7 @@ class Task implements GroupSequenceProviderInterface
     protected $task;
 
     /**
-     * @Assert\NotBlank;
+     * @Assert\NotBlank(payload={"security"="error"});
      * @Assert\Length(max = 20);
      */
     protected $todo;
