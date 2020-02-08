@@ -43,6 +43,8 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @Route("/example/form", name="example_form_")
@@ -465,6 +467,44 @@ class ExampleFormController extends AbstractController
             ->add('SubmitType', SubmitType::class)
             ->addEventSubscriber(new AddNameFieldSubscriber())
             ->getForm();
+
+        return $this->render('example_form/index.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/validaterawscalar", name="validaterawscalar")
+     */
+    // http://madatsara.localhost/example/form/validaterawscalar
+    public function validateRawScalar(Request $request, ValidatorInterface $validator)
+    {
+        $emailConstraints = new Assert\Email();
+        $emailConstraints->message = 'EMail invalid';
+
+        $form = $this->createFormBuilder()
+
+            ->add('TextType', TextType::class) // <input type="text" name="form[TextType]">
+            ->add('TextareaType', TextareaType::class) // <textarea name="form[TextareaType]">
+            // Button Fields
+            ->add('SubmitType', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $textType = $form->get('TextType')->getData();
+
+            // Validator
+            $errors = $validator->validate($textType, $emailConstraints);
+
+            if (count($errors)>0) {
+                return new Response('<body><p>Error: ' . $errors[0]->getMessage() . '</p></body>');
+            }
+
+            return new Response('<body><p>textType: ' . $textType . '</p></body>');
+        }
 
         return $this->render('example_form/index.html.twig', [
             'form' => $form->createView(),
