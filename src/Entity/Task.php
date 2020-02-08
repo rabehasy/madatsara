@@ -166,6 +166,6 @@ class Task implements GroupSequenceProviderInterface
 
     public function removeTag3(Tag3 $tag3)
     {
-        //
+        $this->tags3->removeElement($tag3);
     }
 }

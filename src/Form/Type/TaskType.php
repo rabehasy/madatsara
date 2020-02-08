@@ -90,7 +90,8 @@ class TaskType extends AbstractType
                 'entry_type' => Tag3Type::class,
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
-                'by_reference' => false
+                'by_reference' => false,
+                'allow_delete' => true
             ])
 
 
