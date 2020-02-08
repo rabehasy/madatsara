@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Tag3;
 use App\Entity\Task;
 use App\Form\EventListener\AddNameFieldSubscriber;
 use App\Form\Type\PostalAdressType;
@@ -45,6 +46,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Zend\Code\Generator\DocBlock\Tag;
 
 /**
  * @Route("/example/form", name="example_form_")
@@ -594,6 +596,53 @@ class ExampleFormController extends AbstractController
         }
 
         return $this->render('example_form/embedsingleobject.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/formembedcollection", name="formembedcollection")
+     */
+    // http://madatsara.localhost/example/form/formembedcollection
+    public function formembedcollection(Request $request)
+    {
+
+        $task = new Task();
+        $task->setTask('serv');
+        $task->setTodo('serv');
+        $task->setTags(range('a','e'));
+        $task->setTags2(range(0,5));
+        $task->setDueDate(new \DateTime('tomorrow'));
+
+        $tag3_1 = new Tag3();
+        $tag3_1->setName("tag1 name");
+        $task->getTags3()->add($tag3_1);
+
+        $tag3_2 = new Tag3();
+        $tag3_2->setName("tag2 name");
+        $task->getTags3()->add($tag3_2);
+
+
+        $form = $this->createForm(TaskType::class, $task);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = print_r([
+                'task' => $form['task']->getData(),
+                'todo' => $form['todo']->getData(),
+                'tags' => $form['tags']->getData(),
+                'tags2' => $form['tags2']->getData(),
+                'tags3' => $form['tags3']->getData(),
+                'dueDate' => $form['dueDate']->getData(),
+                'form->getName' => $form->getName()
+            ], true);
+
+            return new Response('<body>' . $data . '</body>');
+        }
+
+        return $this->render('example_form/embedcollection.html.twig', [
             'form' => $form->createView(),
         ]);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Validator\Constraints as MyAssert;
 use Symfony\Component\Validator\Constraints\GroupSequence;
@@ -38,6 +39,8 @@ class Task implements GroupSequenceProviderInterface
 
     protected $tags2;
 
+    protected $tags3;
+
     protected $issue;
 
     /**
@@ -46,6 +49,11 @@ class Task implements GroupSequenceProviderInterface
      */
     protected $category;
 
+
+    public function __construct()
+    {
+        $this->tags3 = new ArrayCollection();
+    }
 
     public function getTask()
     {
@@ -144,5 +152,10 @@ class Task implements GroupSequenceProviderInterface
     public function setCategory($category)
     {
         $this->category = $category;
+    }
+
+    public function getTags3()
+    {
+        return $this->tags3;
     }
 }

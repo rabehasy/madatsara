@@ -3,8 +3,10 @@
 namespace App\Form\Type;
 
 use App\Entity\Task;
+use App\Form\Tag3Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -83,6 +85,11 @@ class TaskType extends AbstractType
             )
 
             ->add('category', CategoryType::class)
+
+            ->add('tags3', CollectionType::class, [
+                'entry_type' => Tag3Type::class,
+                'entry_options' => ['label' => false],
+            ])
 
 
 
