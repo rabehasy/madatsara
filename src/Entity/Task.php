@@ -40,6 +40,13 @@ class Task implements GroupSequenceProviderInterface
 
     protected $issue;
 
+    /**
+     * @Assert\Type(type="App\Entity\Category")
+     * @Assert\Valid
+     */
+    protected $category;
+
+
     public function getTask()
     {
         return $this->task;
@@ -109,6 +116,7 @@ class Task implements GroupSequenceProviderInterface
         $this->issue = $issue;
     }
 
+
     /**
      * @Assert\IsTrue(message="isTodoTaskSame(): Task and Todo must be different", groups={"Strict"})
      */
@@ -126,5 +134,15 @@ class Task implements GroupSequenceProviderInterface
     public function getGroupSequence()
     {
         return ['Task', 'Special'];
+    }
+
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    public function setCategory($category)
+    {
+        $this->category = $category;
     }
 }

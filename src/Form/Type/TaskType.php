@@ -82,6 +82,8 @@ class TaskType extends AbstractType
                 ))
             )
 
+            ->add('category', CategoryType::class)
+
 
 
             ->add('save', SubmitType::class, ['label'=>'Add task']);

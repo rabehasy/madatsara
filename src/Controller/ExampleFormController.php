@@ -535,7 +535,10 @@ class ExampleFormController extends AbstractController
         $form = $this->createForm(TaskType::class, $task);
 
         if ($request->isMethod('POST')) {
+
             $form->submit($request->request->get($form->getName()));
+
+
 
             if ($form->isSubmitted() && $form->isValid()) {
 
@@ -553,6 +556,44 @@ class ExampleFormController extends AbstractController
         }
 
         return $this->render('example_form/index.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/formembedsingleobject", name="formsubmit")
+     */
+    // http://madatsara.localhost/example/form/formembedsingleobject
+    public function formembedsingleobject(Request $request)
+    {
+
+        $task = new Task();
+        $task->setTask('serv');
+        $task->setTodo('serv');
+        $task->setTags(range('a','e'));
+        $task->setTags2(range(0,5));
+        $task->setDueDate(new \DateTime('tomorrow'));
+
+
+        $form = $this->createForm(TaskType::class, $task);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = print_r([
+                'task' => $form['task']->getData(),
+                'todo' => $form['todo']->getData(),
+                'tags' => $form['tags']->getData(),
+                'tags2' => $form['tags2']->getData(),
+                'dueDate' => $form['dueDate']->getData(),
+                'form->getName' => $form->getName()
+            ], true);
+
+            return new Response('<body>' . $data . '</body>');
+        }
+
+        return $this->render('example_form/embedsingleobject.html.twig', [
             'form' => $form->createView(),
         ]);
     }
