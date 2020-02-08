@@ -4,11 +4,13 @@ namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Validator\Constraints as MyAssert;
+use Symfony\Component\Validator\Constraints\GroupSequence;
+use Symfony\Component\Validator\GroupSequenceProviderInterface;
 
 /**
  * @Assert\GroupSequence({"Task", "Strict"})
  */
-class Task
+class Task implements GroupSequenceProviderInterface
 {
     /**
      * @Assert\NotBlank;
@@ -26,7 +28,7 @@ class Task
 
     /**
      * @Assert\NotBlank;
-     * @Assert\Type("\DateTime")
+     * @Assert\Type("\DateTime", groups={"Special"})
      */
     protected $dueDate;
 
@@ -108,10 +110,21 @@ class Task
     }
 
     /**
-     * @Assert\IsFalse(message="isTodoTaskSame(): Task and Todo must be different", groups={"Strict"})
+     * @Assert\IsTrue(message="isTodoTaskSame(): Task and Todo must be different", groups={"Strict"})
      */
     public function isTodoTaskSame()
     {
-        return ($this->task !== $this->todo);
+        return ($this->task === $this->todo);
+    }
+
+    /**
+     * Returns which validation groups should be used for a certain state
+     * of the object.
+     *
+     * @return string[]|string[][]|GroupSequence An array of validation groups
+     */
+    public function getGroupSequence()
+    {
+        return ['Task', 'Special'];
     }
 }
