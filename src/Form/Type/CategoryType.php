@@ -3,12 +3,20 @@
 namespace App\Form\Type;
 
 use App\Entity\Category;
+use App\Form\Type\NamecommonType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CategoryType extends AbstractType
 {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('baar',NamecommonType::class, [
+            'data_class' => Category::class
+        ]);
+    }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -16,8 +24,5 @@ class CategoryType extends AbstractType
         ]);
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder->add('name');
-    }
+
 }
