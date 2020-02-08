@@ -516,4 +516,40 @@ class ExampleFormController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/formsubmit", name="formsubmit")
+     */
+    // http://madatsara.localhost/example/form/formsubmit
+    public function formsubmit(Request $request)
+    {
+
+        $task = new Task();
+        $task->setTask('serv');
+        $task->setTodo('serv');
+        $task->setTags(range('a','e'));
+        $task->setTags2(range(0,5));
+        $task->setDueDate(new \DateTime('tomorrow'));
+
+
+        $form = $this->createForm(TaskType::class, $task);
+
+        if ($request->isMethod('POST')) {
+            $form->submit($request->request->get($form->getName()));
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $data = print_r([
+                    'task' => $form['task']->getData(),
+                    'form->getName' => $form->getName()
+                ], true);
+
+                return new Response('<body>' . $data . '</body>');
+            }
+        }
+
+        return $this->render('example_form/index.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 }
