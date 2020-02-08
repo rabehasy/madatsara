@@ -158,4 +158,14 @@ class Task implements GroupSequenceProviderInterface
     {
         return $this->tags3;
     }
+
+    public function addTag3(Tag3 $tag3)
+    {
+        $this->tags3->add($tag3);
+    }
+
+    public function removeTag3(Tag3 $tag3)
+    {
+        //
+    }
 }
