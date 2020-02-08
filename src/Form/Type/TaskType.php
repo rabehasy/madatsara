@@ -89,6 +89,7 @@ class TaskType extends AbstractType
             ->add('tags3', CollectionType::class, [
                 'entry_type' => Tag3Type::class,
                 'entry_options' => ['label' => false],
+                'allow_add' => true
             ])
 
 
