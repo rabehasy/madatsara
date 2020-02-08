@@ -5,6 +5,9 @@ namespace App\Entity;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Validator\Constraints as MyAssert;
 
+/**
+ * @Assert\GroupSequence({"Task", "Strict"})
+ */
 class Task
 {
     /**
@@ -102,5 +105,13 @@ class Task
     public function setIssue($issue)
     {
         $this->issue = $issue;
+    }
+
+    /**
+     * @Assert\IsFalse(message="isTodoTaskSame(): Task and Todo must be different", groups={"Strict"})
+     */
+    public function isTodoTaskSame()
+    {
+        return ($this->task !== $this->todo);
     }
 }

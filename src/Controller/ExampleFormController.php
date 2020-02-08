@@ -375,6 +375,8 @@ class ExampleFormController extends AbstractController
 
             $data = print_r([
                 'filepdf' => $filepdf?$filepdf->getClientOriginalName():'',
+                'task' => $form['task']->getData(),
+                'todo' => $form['todo']->getData(),
                 'tags' => $form['tags']->getData(),
                 'tags2' => $form['tags2']->getData()
             ],true);
