@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Tag3;
 use App\Entity\Task;
 use App\Form\EventListener\AddNameFieldSubscriber;
+use App\Form\Type\BlogType;
 use App\Form\Type\PostalAdressType;
 use App\Form\Type\ShippingType;
 use App\Form\Type\TaskType;
@@ -655,6 +656,30 @@ class ExampleFormController extends AbstractController
         }
 
         return $this->render('example_form/embedcollection.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/formemptydata", name="formemptydata")
+     */
+    // http://madatsara.localhost/example/form/formemptydata
+    public function formemptydata(Request $request)
+    {
+        $form = $this->createForm(BlogType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = print_r([
+                'form->get(title)' => $form->getData()
+            ], true);
+
+            return new Response('<body>' . $data . '</body>');
+        }
+
+        return $this->render('example_form/index.html.twig', [
             'form' => $form->createView(),
         ]);
     }
