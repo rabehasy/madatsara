@@ -10,6 +10,8 @@ parameters:
     dossier.artistes_photo: '%kernel.project_dir%/public/assets/artistes_orig'
     dossier.flyers: '%kernel.project_dir%/public/assets/flyers'
     dossier.flyers.users: '%kernel.project_dir%/public/assets/flyerseventbyuser'
+#    Services
+    service.google.recatcha.key: '%env(GOOGLE_RECAPTCHA_KEY)%'
 
 services:
     # default configuration for services in *this* file
