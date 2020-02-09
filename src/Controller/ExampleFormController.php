@@ -494,8 +494,11 @@ class ExampleFormController extends AbstractController
 
             ->add('TextType', TextType::class) // <input type="text" name="form[TextType]">
             ->add('TextareaType', TextareaType::class) // <textarea name="form[TextareaType]">
+
             // Button Fields
-            ->add('SubmitType', SubmitType::class)
+            ->add('Save', SubmitType::class, ['label' => 'Create Task'])
+            ->add('SaveAndAdd', SubmitType::class, ['label' => 'Save and Add'])
+
             ->getForm();
 
         $form->handleRequest($request);
@@ -511,7 +514,16 @@ class ExampleFormController extends AbstractController
                 return new Response('<body><p>Error: ' . $errors[0]->getMessage() . '</p></body>');
             }
 
-            return new Response('<body><p>textType: ' . $textType . '</p></body>');
+            $btnClicked = $form->getClickedButton()->getName();
+
+            $isSaveAndAddClicked = ($form['SaveAndAdd']->isClicked() ? 'Yes' : 'No');
+
+            $data = print_r([
+                'btnClicked' => $btnClicked,
+                'isSaveAndAddClicked' => $isSaveAndAddClicked
+            ],true);
+
+            return new Response('<body><pre>' . $data . '</pre></body>');
         }
 
         return $this->render('example_form/index.html.twig', [
