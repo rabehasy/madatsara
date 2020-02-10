@@ -43,7 +43,7 @@ class ExampleDoctrineController extends AbstractController
 
         $api = $this->getDoctrine()->getRepository(Api::class)->find($id);
 
-        return new Response('<p>' . $api->getName() . '</p>');
+        return new Response('<body><p>' . $api->getName() . '</p></body>');
     }
 
     /**
@@ -55,6 +55,24 @@ class ExampleDoctrineController extends AbstractController
 
         $api = $repository->find($id);
 
-        return new Response('<p>show_other : ' . $api->getName() . '</p>');
+        return new Response('<body><p>show_other : ' . $api->getName() . '</p></body>');
+    }
+
+    /**
+     * @Route("/example/paramconverterauto/{id}", name="example_paramconverterauto")
+     */
+    // http://madatsara.localhost/example/paramconverterauto/1
+    public function paramconverter_auto(Api $api)
+    {
+        return new Response('<body><p>Name : ' . $api->getName() . '</p></body>');
+    }
+
+    /**
+     * @Route("/example/paramconverterfindoneby/{name}", name="example_paramconverterfindoneby")
+     */
+    // http://madatsara.localhost/example/paramconverterfindoneby/ANDROID
+    public function paramconverter_auto_findoneby(Api $api)
+    {
+        return new Response('<body><p>ID : ' . $api->getId() . '</p></body>');
     }
 }
