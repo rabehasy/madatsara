@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Api;
+use App\Entity\Artiste;
 use App\Repository\ApiRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -74,5 +76,25 @@ class ExampleDoctrineController extends AbstractController
     public function paramconverter_auto_findoneby(Api $api)
     {
         return new Response('<body><p>ID : ' . $api->getId() . '</p></body>');
+    }
+
+    /**
+     * @Route("/example/paramconverterautoexpr/{api_id}", name="example_paramconverterautoexpr")
+     * @Entity("api", expr="repository.find(api_id)")
+     */
+    // http://madatsara.localhost/example/paramconverterautoexpr/1
+    public function paramconverter_auto_expr(Api $api)
+    {
+        return new Response('<body><p>Name : ' . $api->getName() . '</p></body>');
+    }
+
+    /**
+     * @Route("/example/api/{id}/artiste/{artiste}", name="example_paramconverter_api_artiste")
+     * @Entity("artiste", expr="repository.find(artiste)")
+     */
+    // http://madatsara.localhost/example/api/1/artiste/1
+    public function paramconverter_api_artiste(Api $api, Artiste $artiste)
+    {
+        return new Response('<body><p>API : ' . $api->getName() . ' - ' . $artiste->getName() . '</p></body>');
     }
 }
