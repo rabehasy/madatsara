@@ -7,6 +7,7 @@ use App\Entity\Artiste;
 use App\Repository\ApiRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -97,4 +98,15 @@ class ExampleDoctrineController extends AbstractController
     {
         return new Response('<body><p>API : ' . $api->getName() . ' - ' . $artiste->getName() . '</p></body>');
     }
+
+    /**
+     * @Route("/example/artiste/{artisteId}", name="example_paramconverter_option_id")
+     * @ParamConverter("artiste", options={"id"="artisteId"})
+     */
+    // http://madatsara.localhost/example/artiste/1
+    public function paramconverter_option_id(Artiste $artiste)
+    {
+        return new Response('<body><p>Artiste : ' . $artiste->getName() . '</p></body>');
+    }
+
 }
