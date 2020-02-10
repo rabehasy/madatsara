@@ -109,4 +109,14 @@ class ExampleDoctrineController extends AbstractController
         return new Response('<body><p>Artiste : ' . $artiste->getName() . '</p></body>');
     }
 
+    /**
+     * @Route("/example/paramconvertermapping/ap/{api}/ar/{artiste}", name="paramconverter_mapping")
+     * @ParamConverter("api", options={"mapping": {"api": "name"}})
+     * @ParamConverter("artiste", options={"mapping": {"artiste": "name"}})
+     */
+    // http://madatsara.localhost/example/paramconvertermapping/ap/ANDROID/ar/Bodo
+    public function mapping_artisteapi(Api $api, Artiste $artiste)
+    {
+        return new Response('<body><p>API : ' . $api->getId() . ' - ' . $artiste->getId() . '</p></body>');
+    }
 }
