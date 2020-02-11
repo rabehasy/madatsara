@@ -174,6 +174,13 @@ class ExampleDoctrineController extends AbstractController
 
         $data = $fakeDataRepository->findAll();
 
+        if ($request->query->get('age') > 0) {
+            $age = $request->query->get('age');
+//            $data = $fakeDataRepository->findAllGreatherThanAgeDQL($age);
+//            $data = $fakeDataRepository->findAllGreatherThanAgeQueryBuilder($age);
+            $data = $fakeDataRepository->findAllGreatherThanAgeSQL($age);
+        }
+
         return $this->render('example_doctrine/index.html.twig', [
             'form' => $form->createView(),
             'data' => $data,

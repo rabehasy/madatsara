@@ -6,7 +6,12 @@
 
     <h1>Liste</h1>
 
-
+    <div class="card p-2 mb-5">
+        <h3>filter</h3>
+        <a href="{{ path('doctrine_crud_create', {'age': '25'}) }}" class="btn btn-primary">Age &gt; 25</a> -
+        <a href="{{ path('doctrine_crud_create', {'age': '10'}) }}" class="btn btn-primary">Age &gt; 10</a> -
+        <a href="{{ path('doctrine_crud_create', {'age': '50'}) }}" class="btn btn-primary">Age &gt; 50</a>
+    </div>
     <div class="card">
         {% for row in data %}
             <div class="p-2">

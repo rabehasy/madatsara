@@ -47,4 +47,44 @@ class FakeDataRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findAllGreatherThanAgeDQL($age): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            "SELECT p FROM App\Entity\FakeData p WHERE p.age > :age"
+        )->setParameter('age', $age);
+
+        return $query->getResult();
+    }
+
+    public function findAllGreatherThanAgeQueryBuilder($age): array
+    {
+
+        $qb = $this->createQueryBuilder('p')
+            ->where('p.age > :age')
+            ->setParameter('age', $age)
+            ->orderBy('p.age', 'ASC');
+
+        $query = $qb->getQuery();
+
+        return $query->execute();
+
+    }
+
+    public function findAllGreatherThanAgeSQL($age): array
+    {
+
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "SELECT * FROM fake_data WHERE age > :age";
+
+        $stmt = $conn->prepare($sql);
+
+        $stmt->execute(['age' => $age]);
+
+        return $stmt->fetchAll();
+
+    }
 }
