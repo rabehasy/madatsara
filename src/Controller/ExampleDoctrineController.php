@@ -4,11 +4,15 @@ namespace App\Controller;
 
 use App\Entity\Api;
 use App\Entity\Artiste;
+use App\Entity\FakeData;
+use App\Form\Type\FakeDataType;
 use App\Repository\ApiRepository;
+use App\Repository\FakeDataRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -118,5 +122,136 @@ class ExampleDoctrineController extends AbstractController
     public function mapping_artisteapi(Api $api, Artiste $artiste)
     {
         return new Response('<body><p>API : ' . $api->getId() . ' - ' . $artiste->getId() . '</p></body>');
+    }
+
+    /**
+     * @Route("/example/doctrine/crud/create", name="doctrine_crud_create")
+     */
+    // http://madatsara.localhost/example/doctrine/crud/create
+    public function crud_create(Request $request, FakeDataRepository $fakeDataRepository)
+    {
+
+
+        $form = $this->createForm(FakeDataType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $name = $form['name']->getData();
+            $description = $form['description']->getData();
+            $age = $form['age']->getData();
+            $hidden = $form['hidden']->getData();
+            $creele = $form['creele']->getData();
+            $data = [
+                'name' => $name,
+                'description' => $description,
+                'age' => $age,
+                'hidden' => $hidden,
+                'creele' => $creele,
+            ];
+
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $fakeData = new FakeData();
+            $fakeData->setName($name);
+            $fakeData->setDescription($description);
+            $fakeData->setAge($age);
+            $fakeData->setHidden($hidden);
+            $fakeData->setCreele($creele);
+
+            // tell doctrine to save the API - no queries yet
+            $entityManager->persist($fakeData);
+
+            // executes the queries
+            $entityManager->flush();
+
+            // Create flash message
+            $this->addFlash('notice', 'FakeData ' . $name . ' has been created');
+
+
+            return $this->redirectToRoute('doctrine_crud_create');
+        }
+
+        $data = $fakeDataRepository->findAll();
+
+        return $this->render('example_doctrine/index.html.twig', [
+            'form' => $form->createView(),
+            'data' => $data,
+        ]);
+    }
+
+    /**
+     * @Route("/example/doctrine/crud/edit/{id}", name="doctrine_crud_edit")
+     */
+    // http://madatsara.localhost/example/doctrine/crud/edit/1
+    public function crud_edit(Request $request, FakeData $fakeData)
+    {
+
+
+        $form = $this->createForm(FakeDataType::class, $fakeData);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $name = $form['name']->getData();
+            $description = $form['description']->getData();
+            $age = $form['age']->getData();
+            $hidden = $form['hidden']->getData();
+            $creele = $form['creele']->getData();
+            $data = [
+                'name' => $name,
+                'description' => $description,
+                'age' => $age,
+                'hidden' => $hidden,
+                'creele' => $creele,
+            ];
+
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $fakeData->setName($name);
+            $fakeData->setDescription($description);
+            $fakeData->setAge($age);
+            $fakeData->setHidden($hidden);
+            $fakeData->setCreele($creele);
+
+            $id = $fakeData->getId();
+
+            // executes the queries
+            $entityManager->flush();
+
+            // Create flash message
+            $this->addFlash('notice', 'FakeData ' . $name . ' (' . $id . ') has been updated');
+
+
+            return $this->redirectToRoute('doctrine_crud_create');
+        }
+
+        return $this->render('example_doctrine/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/example/doctrine/crud/remove/{id}", name="doctrine_crud_remove")
+     */
+    // http://madatsara.localhost/example/doctrine/crud/remove/1
+    public function crud_remove(FakeData $fakeData)
+    {
+
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $name = $fakeData->getName();
+            $id = $fakeData->getId();
+
+            $entityManager->remove($fakeData);
+
+            // executes the queries
+            $entityManager->flush();
+
+            // Create flash message
+            $this->addFlash('notice', 'FakeData ' . $name . ' (' . $id . ') has been removed');
+
+
+            return $this->redirectToRoute('doctrine_crud_create');
     }
 }

@@ -1,20 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ExampleDoctrineController!{% endblock %}
+{% block title %}Hello ExampleFormController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Liste</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/madatsara.com/symfony5.1/src/Controller/ExampleDoctrineController.php'|file_link(0) }}">src/Controller/ExampleDoctrineController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/madatsara.com/symfony5.1/templates/example_doctrine/index.html.twig'|file_link(0) }}">templates/example_doctrine/index.html.twig</a></code></li>
-    </ul>
-</div>
+
+    <div class="card">
+        {% for row in data %}
+            <div class="p-2">
+                {{ row.name }}
+                - <a href="{{ path('doctrine_crud_edit', {'id': row.id}) }}" class="btn btn-primary">Edit</a>
+                - <a onclick="if (confirm('Remove ?')) { return true; } else { return false; }" href="{{ path('doctrine_crud_remove', {'id': row.id}) }}" href="" class="btn btn-danger">Remove</a>
+            </div>
+        {% endfor %}
+    </div>
+
+
+    <h1>Create</h1>
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div role="alert" class="alert alert-warning flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    {{ form(form) }}
+
 {% endblock %}
