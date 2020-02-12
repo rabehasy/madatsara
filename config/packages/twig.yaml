@@ -4,4 +4,4 @@ twig:
     paths:
         'templates_backend' : 'backend'
 
-    form_themes: ['bootstrap_4_layout.html.twig', 'form/postal_address.html.twig']
+    form_themes: ['form/tailwind_layout.html.twig']
