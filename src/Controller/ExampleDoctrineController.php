@@ -277,4 +277,18 @@ class ExampleDoctrineController extends AbstractController
 
         return new Response('<body>' . $apiName . '</body>');
     }
+
+    /**
+     * @Route("/example/doctrine/fetch_related_object_inverse", name="fetch_related_object_inverse")
+     */
+    // http://madatsara.localhost/example/doctrine/fetch_related_object_inverse
+    public function fetch_related_object_inverse(ApiRepository $apiRepository)
+    {
+
+        $api = $apiRepository->find(1);
+
+        $events = $api->getEvents();
+
+        return new Response('<body>' . print_r($events[0]->getName(),true) . '</body>');
+    }
 }
