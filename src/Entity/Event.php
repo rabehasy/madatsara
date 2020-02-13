@@ -26,6 +26,12 @@ class Event
      */
     private $description;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Api", inversedBy="events")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $api;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +57,18 @@ class Event
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getApi(): ?Api
+    {
+        return $this->api;
+    }
+
+    public function setApi(?Api $api): self
+    {
+        $this->api = $api;
 
         return $this;
     }
