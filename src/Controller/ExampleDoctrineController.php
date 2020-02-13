@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Api;
 use App\Entity\Artiste;
+use App\Entity\Event;
 use App\Entity\FakeData;
 use App\Form\Type\FakeDataType;
 use App\Repository\ApiRepository;
+use App\Repository\EventRepository;
 use App\Repository\FakeDataRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
@@ -260,5 +262,19 @@ class ExampleDoctrineController extends AbstractController
 
 
             return $this->redirectToRoute('doctrine_crud_create');
+    }
+
+    /**
+     * @Route("/example/doctrine/fetch_related_object", name="fetch_related_object")
+     */
+    // http://madatsara.localhost/example/doctrine/fetch_related_object
+    public function fetch_related_object(EventRepository $eventRepository)
+    {
+
+        $event = $eventRepository->find(1);
+
+        $apiName = $event->getApi()->getName();
+
+        return new Response('<body>' . $apiName . '</body>');
     }
 }
