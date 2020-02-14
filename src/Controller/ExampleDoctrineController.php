@@ -291,4 +291,19 @@ class ExampleDoctrineController extends AbstractController
 
         return new Response('<body>' . print_r($events[0]->getName(),true) . '</body>');
     }
+
+    /**
+     * @Route("/example/doctrine/fetch_related_object_onequery", name="fetch_related_object_onequery")
+     */
+    // http://madatsara.localhost/example/doctrine/fetch_related_object_onequery
+    public function fetch_related_object_onequery(FakeDataRepository $fakeDataRepository)
+    {
+
+        $event = $fakeDataRepository->findOneByIdJoinedToApi(1);
+
+        $api = $event->getApi();
+        $apiName = $api->getName();
+
+        return new Response('<body>' . $apiName . '</body>');
+    }
 }

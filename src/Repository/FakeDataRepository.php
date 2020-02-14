@@ -87,4 +87,20 @@ class FakeDataRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
 
     }
+
+    public function findOneByIdJoinedToApi($id)
+    {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            "SELECT p,c 
+                FROM App\Entity\Event p 
+                INNER JOIN p.api c
+                WHERE p.id = :id"
+        )->setParameter('id', $id);
+
+        return $query->getOneOrNullResult();
+
+    }
 }
