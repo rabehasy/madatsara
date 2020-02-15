@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FakeDataRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class FakeData
 {
@@ -104,5 +105,13 @@ class FakeData
         $this->creele = $creele;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function setCreeleValue()
+    {
+        $this->creele = new \DateTime();
     }
 }

@@ -306,4 +306,44 @@ class ExampleDoctrineController extends AbstractController
 
         return new Response('<body>' . $apiName . '</body>');
     }
+
+    /**
+     * @Route("/example/doctrine/event/prepersist", name="doctrine_event_prepersist")
+     */
+    // http://madatsara.localhost/example/doctrine/event/prepersist
+    public function doctrine_event_prepersist()
+    {
+            // Now: 2020-02-15
+            // Value given : 2020-02-18
+            // Value saved in DB : 2020-02-15
+
+            $arrData = [];
+
+            $dt = new \DateTime('next tuesday');
+
+            $fakeData = new FakeData();
+            $fakeData->setName('mydata');
+            $fakeData->setDescription('description');
+            $fakeData->setAge(22);
+            $fakeData->setHidden(true);
+            $fakeData->setCreele($dt);
+
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $arrData['Creele_prepersist'] = $fakeData->getCreele()->format('Y-m-d');
+
+            // tell doctrine to save the API - no queries yet
+            $entityManager->persist($fakeData);
+
+            // executes the queries
+            $entityManager->flush();
+
+            $arrData['Creele'] = $fakeData->getCreele()->format('Y-m-d');
+
+            $data = print_r($arrData,true);
+
+
+
+        return new Response('<body>' . $data .  '</body>');
+    }
 }
