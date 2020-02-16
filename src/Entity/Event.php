@@ -80,6 +80,11 @@ class Event
      */
     private $memberEvent;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Hour", inversedBy="events")
+     */
+    private $hour;
+
     public function __construct()
     {
         $this->thematic = new ArrayCollection();
@@ -89,6 +94,7 @@ class Event
         $this->organisateur = new ArrayCollection();
         $this->place = new ArrayCollection();
         $this->eventGroup = new ArrayCollection();
+        $this->hour = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -334,6 +340,32 @@ class Event
     public function setMemberEvent(?MemberEvent $memberEvent): self
     {
         $this->memberEvent = $memberEvent;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Hour[]
+     */
+    public function getHour(): Collection
+    {
+        return $this->hour;
+    }
+
+    public function addHour(Hour $hour): self
+    {
+        if (!$this->hour->contains($hour)) {
+            $this->hour[] = $hour;
+        }
+
+        return $this;
+    }
+
+    public function removeHour(Hour $hour): self
+    {
+        if ($this->hour->contains($hour)) {
+            $this->hour->removeElement($hour);
+        }
 
         return $this;
     }
