@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,14 +24,24 @@ class Commune
     private $name;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=4)
+     */
+    private $country;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Region", inversedBy="communes")
      */
     private $region;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\OneToMany(targetEntity="App\Entity\Quartier", mappedBy="commune")
      */
-    private $country;
+    private $quartiers;
+
+    public function __construct()
+    {
+        $this->quartiers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -48,18 +60,6 @@ class Commune
         return $this;
     }
 
-    public function getRegion(): ?int
-    {
-        return $this->region;
-    }
-
-    public function setRegion(int $region): self
-    {
-        $this->region = $region;
-
-        return $this;
-    }
-
     public function getCountry(): ?int
     {
         return $this->country;
@@ -68,6 +68,49 @@ class Commune
     public function setCountry(int $country): self
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    public function getRegion(): ?Region
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?Region $region): self
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Quartier[]
+     */
+    public function getQuartiers(): Collection
+    {
+        return $this->quartiers;
+    }
+
+    public function addQuartier(Quartier $quartier): self
+    {
+        if (!$this->quartiers->contains($quartier)) {
+            $this->quartiers[] = $quartier;
+            $quartier->setCommune($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuartier(Quartier $quartier): self
+    {
+        if ($this->quartiers->contains($quartier)) {
+            $this->quartiers->removeElement($quartier);
+            // set the owning side to null (unless already changed)
+            if ($quartier->getCommune() === $this) {
+                $quartier->setCommune(null);
+            }
+        }
 
         return $this;
     }

@@ -22,19 +22,14 @@ class Quartier
     private $name;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $commune;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $region;
-
-    /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=4)
      */
     private $country;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Commune", inversedBy="quartiers")
+     */
+    private $commune;
 
     public function getId(): ?int
     {
@@ -53,38 +48,26 @@ class Quartier
         return $this;
     }
 
-    public function getCommune(): ?int
-    {
-        return $this->commune;
-    }
-
-    public function setCommune(int $commune): self
-    {
-        $this->commune = $commune;
-
-        return $this;
-    }
-
-    public function getRegion(): ?int
-    {
-        return $this->region;
-    }
-
-    public function setRegion(int $region): self
-    {
-        $this->region = $region;
-
-        return $this;
-    }
-
-    public function getCountry(): ?int
+    public function getCountry(): ?string
     {
         return $this->country;
     }
 
-    public function setCountry(int $country): self
+    public function setCountry(string $country): self
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    public function getCommune(): ?Commune
+    {
+        return $this->commune;
+    }
+
+    public function setCommune(?Commune $commune): self
+    {
+        $this->commune = $commune;
 
         return $this;
     }

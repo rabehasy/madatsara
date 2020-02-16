@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,7 +24,7 @@ class Region
     private $name;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=4)
      */
     private $country;
 
@@ -35,6 +37,16 @@ class Region
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commune", mappedBy="region")
+     */
+    private $communes;
+
+    public function __construct()
+    {
+        $this->communes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -53,12 +65,12 @@ class Region
         return $this;
     }
 
-    public function getCountry(): ?int
+    public function getCountry(): ?string
     {
         return $this->country;
     }
 
-    public function setCountry(int $country): self
+    public function setCountry(string $country): self
     {
         $this->country = $country;
 
@@ -85,6 +97,37 @@ class Region
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commune[]
+     */
+    public function getCommunes(): Collection
+    {
+        return $this->communes;
+    }
+
+    public function addCommune(Commune $commune): self
+    {
+        if (!$this->communes->contains($commune)) {
+            $this->communes[] = $commune;
+            $commune->setRegion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommune(Commune $commune): self
+    {
+        if ($this->communes->contains($commune)) {
+            $this->communes->removeElement($commune);
+            // set the owning side to null (unless already changed)
+            if ($commune->getRegion() === $this) {
+                $commune->setRegion(null);
+            }
+        }
 
         return $this;
     }
