@@ -25,9 +25,6 @@ final class Version20200216180743 extends AbstractMigration
         $this->addSql('CREATE TABLE artiste_artiste (artiste_source INT NOT NULL, artiste_target INT NOT NULL, INDEX IDX_EB5A742F5FB8972 (artiste_source), INDEX IDX_EB5A742F1C1ED9FD (artiste_target), PRIMARY KEY(artiste_source, artiste_target)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE artiste_artiste ADD CONSTRAINT FK_EB5A742F5FB8972 FOREIGN KEY (artiste_source) REFERENCES artiste (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE artiste_artiste ADD CONSTRAINT FK_EB5A742F1C1ED9FD FOREIGN KEY (artiste_target) REFERENCES artiste (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE artiste DROP FOREIGN KEY FK_9C07354F727ACA70');
-        $this->addSql('DROP INDEX IDX_9C07354F727ACA70 ON artiste');
-        $this->addSql('ALTER TABLE artiste DROP parent_id');
     }
 
     public function down(Schema $schema) : void
