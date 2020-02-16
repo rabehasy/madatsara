@@ -49,9 +49,20 @@ class EventGroup
      */
     private $deletedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\EventGroup", inversedBy="eventGroups")
+     */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\EventGroup", mappedBy="parent")
+     */
+    private $eventGroups;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
+        $this->eventGroups = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -161,5 +172,48 @@ class EventGroup
     public function PreUpdate()
     {
         $this->updatedAt = new \DateTime();
+    }
+
+    public function getParent(): ?self
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?self $parent): self
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getEventGroups(): Collection
+    {
+        return $this->eventGroups;
+    }
+
+    public function addEventGroup(self $eventGroup): self
+    {
+        if (!$this->eventGroups->contains($eventGroup)) {
+            $this->eventGroups[] = $eventGroup;
+            $eventGroup->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventGroup(self $eventGroup): self
+    {
+        if ($this->eventGroups->contains($eventGroup)) {
+            $this->eventGroups->removeElement($eventGroup);
+            // set the owning side to null (unless already changed)
+            if ($eventGroup->getParent() === $this) {
+                $eventGroup->setParent(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -74,9 +74,15 @@ class Place
      */
     private $deletedAt;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Media", inversedBy="places")
+     */
+    private $media;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
+        $this->media = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -246,5 +252,31 @@ class Place
     public function PreUpdate()
     {
         $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * @return Collection|Media[]
+     */
+    public function getMedia(): Collection
+    {
+        return $this->media;
+    }
+
+    public function addMedium(Media $medium): self
+    {
+        if (!$this->media->contains($medium)) {
+            $this->media[] = $medium;
+        }
+
+        return $this;
+    }
+
+    public function removeMedium(Media $medium): self
+    {
+        if ($this->media->contains($medium)) {
+            $this->media->removeElement($medium);
+        }
+
+        return $this;
     }
 }
