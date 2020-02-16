@@ -317,11 +317,11 @@ class ExampleDoctrineController extends AbstractController
             $arrData = [];
 
             // Create
-            $entity = new Event();
+            $entity = new Artiste();
 
             // Update
 //            $entity = $apiRepository->find(3);
-            $entity->setName('ééze çç dd test de événement');
+            $entity->setName('ajout de l\'artistééé');
 
 
             $entityManager = $this->getDoctrine()->getManager();
