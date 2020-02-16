@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MemberEventRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class MemberEvent
 {
@@ -138,5 +139,21 @@ class MemberEvent
         $this->deletedAt = $deletedAt;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function PrePersist()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function PreUpdate()
+    {
+        $this->updatedAt = new \DateTime();
     }
 }

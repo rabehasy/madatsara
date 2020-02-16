@@ -308,37 +308,30 @@ class ExampleDoctrineController extends AbstractController
     }
 
     /**
-     * @Route("/example/doctrine/event/prepersist", name="doctrine_event_prepost_persist")
+     * @Route("/example/doctrine/event/persist", name="doctrine_event_persist")
      */
-    // http://madatsara.localhost/example/doctrine/event/prepersist
-    public function doctrine_event_prepost_persist()
+    // http://madatsara.localhost/example/doctrine/event/persist
+    public function doctrine_event_persist(ApiRepository $apiRepository)
     {
-            // Now: 2020-02-15
-            // Value given : 2020-02-18
-            // Value saved in DB : 2020-02-15
 
             $arrData = [];
 
-            $dt = new \DateTime('next tuesday');
+            // Create
+            $entity = new Api();
 
-            $fakeData = new FakeData();
-            $fakeData->setName('mydata');
-            $fakeData->setDescription('description');
-            $fakeData->setAge(22);
-            $fakeData->setHidden(true);
-            $fakeData->setCreele($dt);
+            // Update
+//            $entity = $apiRepository->find(3);
+            $entity->setName('IOS 3');
 
             $entityManager = $this->getDoctrine()->getManager();
 
-            $arrData['Creele_prepersist'] = $fakeData->getCreele()->format('Y-m-d');
-
-            // tell doctrine to save the API - no queries yet
-            $entityManager->persist($fakeData);
+            // Create - tell doctrine to save the API - no queries yet
+            $entityManager->persist($entity);
 
             // executes the queries
             $entityManager->flush();
 
-            $arrData['Creele'] = $fakeData->getCreele()->format('Y-m-d');
+            $arrData['name'] = $entity->getName();
 
             $data = print_r($arrData,true);
 
