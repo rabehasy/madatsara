@@ -308,10 +308,10 @@ class ExampleDoctrineController extends AbstractController
     }
 
     /**
-     * @Route("/example/doctrine/event/prepersist", name="doctrine_event_prepersist")
+     * @Route("/example/doctrine/event/prepersist", name="doctrine_event_prepost_persist")
      */
     // http://madatsara.localhost/example/doctrine/event/prepersist
-    public function doctrine_event_prepersist()
+    public function doctrine_event_prepost_persist()
     {
             // Now: 2020-02-15
             // Value given : 2020-02-18

@@ -110,8 +110,16 @@ class FakeData
     /**
      * @ORM\PrePersist()
      */
-    public function setCreeleValue()
+    public function setCreelePrePersist()
     {
         $this->creele = new \DateTime();
+    }
+
+    /**
+     * @ORM\PostPersist()
+     */
+    public function setCreelePostPersist()
+    {
+        $this->creele = new \DateTime('next month');
     }
 }
