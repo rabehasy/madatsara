@@ -39,18 +39,19 @@ class Artiste
     private $events;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Artiste", inversedBy="artistes")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Artiste", inversedBy="artistes")
      */
     private $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Artiste", mappedBy="parent")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Artiste", mappedBy="parent")
      */
     private $artistes;
 
     public function __construct()
     {
         $this->events = new ArrayCollection();
+        $this->parent = new ArrayCollection();
         $this->artistes = new ArrayCollection();
     }
 
@@ -123,14 +124,28 @@ class Artiste
         return $this;
     }
 
-    public function getParent(): ?self
+    /**
+     * @return Collection|self[]
+     */
+    public function getParent(): Collection
     {
         return $this->parent;
     }
 
-    public function setParent(?self $parent): self
+    public function addParent(self $parent): self
     {
-        $this->parent = $parent;
+        if (!$this->parent->contains($parent)) {
+            $this->parent[] = $parent;
+        }
+
+        return $this;
+    }
+
+    public function removeParent(self $parent): self
+    {
+        if ($this->parent->contains($parent)) {
+            $this->parent->removeElement($parent);
+        }
 
         return $this;
     }
@@ -147,7 +162,7 @@ class Artiste
     {
         if (!$this->artistes->contains($artiste)) {
             $this->artistes[] = $artiste;
-            $artiste->setParent($this);
+            $artiste->addParent($this);
         }
 
         return $this;
@@ -157,10 +172,7 @@ class Artiste
     {
         if ($this->artistes->contains($artiste)) {
             $this->artistes->removeElement($artiste);
-            // set the owning side to null (unless already changed)
-            if ($artiste->getParent() === $this) {
-                $artiste->setParent(null);
-            }
+            $artiste->removeParent($this);
         }
 
         return $this;
