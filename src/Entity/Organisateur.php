@@ -38,6 +38,11 @@ class Organisateur
      */
     private $events;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $deletedAt;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -108,6 +113,18 @@ class Organisateur
             $this->events->removeElement($event);
             $event->removeOrganisateur($this);
         }
+
+        return $this;
+    }
+
+    public function getDeletedAt(): ?\DateTimeInterface
+    {
+        return $this->deletedAt;
+    }
+
+    public function setDeletedAt(?\DateTimeInterface $deletedAt): self
+    {
+        $this->deletedAt = $deletedAt;
 
         return $this;
     }

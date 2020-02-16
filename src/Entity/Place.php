@@ -68,6 +68,11 @@ class Place
      */
     private $Quartier;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $deletedAt;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -210,6 +215,18 @@ class Place
     public function setQuartier(?Quartier $Quartier): self
     {
         $this->Quartier = $Quartier;
+
+        return $this;
+    }
+
+    public function getDeletedAt(): ?\DateTimeInterface
+    {
+        return $this->deletedAt;
+    }
+
+    public function setDeletedAt(?\DateTimeInterface $deletedAt): self
+    {
+        $this->deletedAt = $deletedAt;
 
         return $this;
     }

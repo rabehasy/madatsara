@@ -48,6 +48,11 @@ class Region
      */
     private $Commune;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $deletedAt;
+
     public function __construct()
     {
         $this->communes = new ArrayCollection();
@@ -144,5 +149,17 @@ class Region
     public function getCommune(): Collection
     {
         return $this->Commune;
+    }
+
+    public function getDeletedAt(): ?\DateTimeInterface
+    {
+        return $this->deletedAt;
+    }
+
+    public function setDeletedAt(?\DateTimeInterface $deletedAt): self
+    {
+        $this->deletedAt = $deletedAt;
+
+        return $this;
     }
 }
