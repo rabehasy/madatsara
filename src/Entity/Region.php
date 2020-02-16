@@ -54,6 +54,11 @@ class Region
      */
     private $deletedAt;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->communes = new ArrayCollection();
@@ -178,5 +183,17 @@ class Region
     public function PreUpdate()
     {
         $this->updatedAt = new \DateTime();
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }

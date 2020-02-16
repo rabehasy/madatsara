@@ -31,7 +31,7 @@ class Event
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Api", inversedBy="events")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $api;
 
@@ -100,6 +100,11 @@ class Event
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $deletedAt;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -436,5 +441,17 @@ class Event
     public function PreUpdate()
     {
         $this->updatedAt = new \DateTime();
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }

@@ -59,6 +59,11 @@ class Artiste
      */
     private $media;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -240,6 +245,18 @@ class Artiste
         if ($this->media->contains($medium)) {
             $this->media->removeElement($medium);
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

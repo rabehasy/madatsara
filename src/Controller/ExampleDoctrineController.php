@@ -317,11 +317,12 @@ class ExampleDoctrineController extends AbstractController
             $arrData = [];
 
             // Create
-            $entity = new Api();
+            $entity = new Event();
 
             // Update
 //            $entity = $apiRepository->find(3);
-            $entity->setName('IOS 3');
+            $entity->setName('ééze çç dd test de événement');
+
 
             $entityManager = $this->getDoctrine()->getManager();
 
@@ -332,6 +333,7 @@ class ExampleDoctrineController extends AbstractController
             $entityManager->flush();
 
             $arrData['name'] = $entity->getName();
+            $arrData['slug'] = $entity->getSlug();
 
             $data = print_r($arrData,true);
 
