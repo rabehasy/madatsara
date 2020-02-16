@@ -24,7 +24,7 @@ class Commune
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=4)
+     * @ORM\Column(type="string", length=4, nullable=true)
      */
     private $country;
 
@@ -38,9 +38,15 @@ class Commune
      */
     private $quartiers;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Place", mappedBy="Commune")
+     */
+    private $places;
+
     public function __construct()
     {
         $this->quartiers = new ArrayCollection();
+        $this->places = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -65,7 +71,7 @@ class Commune
         return $this->country;
     }
 
-    public function setCountry(int $country): self
+    public function setCountry(?int $country): self
     {
         $this->country = $country;
 
@@ -109,6 +115,37 @@ class Commune
             // set the owning side to null (unless already changed)
             if ($quartier->getCommune() === $this) {
                 $quartier->setCommune(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Place[]
+     */
+    public function getPlaces(): Collection
+    {
+        return $this->places;
+    }
+
+    public function addPlace(Place $place): self
+    {
+        if (!$this->places->contains($place)) {
+            $this->places[] = $place;
+            $place->setCommune($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlace(Place $place): self
+    {
+        if ($this->places->contains($place)) {
+            $this->places->removeElement($place);
+            // set the owning side to null (unless already changed)
+            if ($place->getCommune() === $this) {
+                $place->setCommune(null);
             }
         }
 

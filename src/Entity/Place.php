@@ -44,29 +44,29 @@ class Place
     private $gps;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=4, nullable=true)
      */
     private $country;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $region;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $commune;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $quartier;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Event", mappedBy="place")
      */
     private $events;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Region", inversedBy="Commune")
+     */
+    private $region;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Commune", inversedBy="places")
+     */
+    private $Commune;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Quartier", inversedBy="places")
+     */
+    private $Quartier;
 
     public function __construct()
     {
@@ -138,50 +138,14 @@ class Place
         return $this;
     }
 
-    public function getCountry(): ?int
+    public function getCountry(): ?string
     {
         return $this->country;
     }
 
-    public function setCountry(?int $country): self
+    public function setCountry(?string $country): self
     {
         $this->country = $country;
-
-        return $this;
-    }
-
-    public function getRegion(): ?int
-    {
-        return $this->region;
-    }
-
-    public function setRegion(?int $region): self
-    {
-        $this->region = $region;
-
-        return $this;
-    }
-
-    public function getCommune(): ?int
-    {
-        return $this->commune;
-    }
-
-    public function setCommune(?int $commune): self
-    {
-        $this->commune = $commune;
-
-        return $this;
-    }
-
-    public function getQuartier(): ?int
-    {
-        return $this->quartier;
-    }
-
-    public function setQuartier(?int $quartier): self
-    {
-        $this->quartier = $quartier;
 
         return $this;
     }
@@ -210,6 +174,42 @@ class Place
             $this->events->removeElement($event);
             $event->removePlace($this);
         }
+
+        return $this;
+    }
+
+    public function getRegion(): ?Region
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?Region $region): self
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    public function getCommune(): ?Commune
+    {
+        return $this->Commune;
+    }
+
+    public function setCommune(?Commune $Commune): self
+    {
+        $this->Commune = $Commune;
+
+        return $this;
+    }
+
+    public function getQuartier(): ?Quartier
+    {
+        return $this->Quartier;
+    }
+
+    public function setQuartier(?Quartier $Quartier): self
+    {
+        $this->Quartier = $Quartier;
 
         return $this;
     }

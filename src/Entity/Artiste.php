@@ -38,9 +38,20 @@ class Artiste
      */
     private $events;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Artiste", inversedBy="artistes")
+     */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Artiste", mappedBy="parent")
+     */
+    private $artistes;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
+        $this->artistes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -107,6 +118,49 @@ class Artiste
         if ($this->events->contains($event)) {
             $this->events->removeElement($event);
             $event->removeArtiste($this);
+        }
+
+        return $this;
+    }
+
+    public function getParent(): ?self
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?self $parent): self
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getArtistes(): Collection
+    {
+        return $this->artistes;
+    }
+
+    public function addArtiste(self $artiste): self
+    {
+        if (!$this->artistes->contains($artiste)) {
+            $this->artistes[] = $artiste;
+            $artiste->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArtiste(self $artiste): self
+    {
+        if ($this->artistes->contains($artiste)) {
+            $this->artistes->removeElement($artiste);
+            // set the owning side to null (unless already changed)
+            if ($artiste->getParent() === $this) {
+                $artiste->setParent(null);
+            }
         }
 
         return $this;

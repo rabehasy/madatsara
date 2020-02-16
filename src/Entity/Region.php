@@ -24,7 +24,7 @@ class Region
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=4)
+     * @ORM\Column(type="string", length=4, nullable=true)
      */
     private $country;
 
@@ -43,9 +43,15 @@ class Region
      */
     private $communes;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Place", mappedBy="region")
+     */
+    private $Commune;
+
     public function __construct()
     {
         $this->communes = new ArrayCollection();
+        $this->Commune = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -70,7 +76,7 @@ class Region
         return $this->country;
     }
 
-    public function setCountry(string $country): self
+    public function setCountry(?string $country): self
     {
         $this->country = $country;
 
@@ -130,5 +136,13 @@ class Region
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Place[]
+     */
+    public function getCommune(): Collection
+    {
+        return $this->Commune;
     }
 }
