@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use function Symfony\Component\String\u;
 
 /**
  * @Route("/fonctionctrl", name="fonctionctrl_")
@@ -134,5 +136,19 @@ class FonctionctrlController extends AbstractController
         return $this->render('fonctionctrl/dump_twig.html.twig');
     }
 
+
+    /**
+     * @Route("/slug", name="slug_example")
+     */
+    // http://madatsara.localhost/fonctionctrl/slug
+    public function slugexample(SluggerInterface $slugger)
+    {
+
+        $texteSlugifie = $slugger->slug("Nouvel an des DJS&nbsp;Présentée par Takariva.com pour commencer l'année 2013 en beauté&nbsp;HAP");
+
+        $texteSlugifie = u($texteSlugifie)->lower();
+
+        return new Response('<body>' . $texteSlugifie . '</body>');
+    }
 
 }
