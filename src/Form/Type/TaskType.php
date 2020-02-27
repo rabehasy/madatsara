@@ -3,7 +3,7 @@
 namespace App\Form\Type;
 
 use App\Entity\Task;
-use App\Form\Tag3Type;
+use App\Form\Type\Tag3Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
