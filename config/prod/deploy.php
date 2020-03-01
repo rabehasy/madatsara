@@ -8,7 +8,7 @@ return new class extends DefaultDeployer
     {
         return $this->getConfigBuilder()
             // SSH connection string to connect to the remote server (format: user@host-or-IP:port-number)
-            ->server('web@91.121.132.77:2222')
+            ->server('madatsara')
             // the absolute path of the remote server directory where the project is deployed
             ->deployDir('/home/web/madatsara/prod')
             // the URL of the Git repository where the project code is hosted
@@ -18,7 +18,9 @@ return new class extends DefaultDeployer
             // avoid error: Script @auto-scripts was called via post-install-cmd
             ->composerInstallFlags('--prefer-dist --no-interaction --no-dev')
             // avoid PHP Fatal error:  Uncaught Symfony\Component\Dotenv\Exception\PathException: Unable to read the
-            ->sharedFilesAndDirs(['.env'])
+            ->sharedFilesAndDirs(['.env', '.env.local'])
+            // Releases folder to keep
+            ->keepReleases(1)
         ;
     }
 
@@ -28,10 +30,17 @@ return new class extends DefaultDeployer
         // $this->runLocal('./vendor/bin/simple-phpunit');
     }
 
+    public function beforePublishing()
+    {
+        $this->log('<h1>chown -R web: /releases</>');
+        $this->runRemote('sudo chown -R web: {{ deploy_dir }}/releases');
+    }
     // run some local or remote commands after the deployment is finished
     public function beforeFinishingDeploy()
     {
         // $this->runRemote('{{ console_bin }} app:my-task-name');
         // $this->runLocal('say "The deployment has finished."');
+        $this->log('<h1>chown -R www-data: /current/var</>');
+        $this->runRemote('sudo chown -R www-data: {{ deploy_dir }}/current/var');
     }
 };
