@@ -13,7 +13,7 @@ class FrontendDefaultController extends AbstractController
      *     name="frontend_default",
      *     host="{domain}",
      *     defaults={"domain"="madatsara.localhost"},
-     *     requirements={"domain"="madatsara.localhost|madatsara.com"}
+     *     requirements={"domain"="madatsara.localhost|madatsara.com|dev.madatsara.com"}
      * )
      */
     public function index()
