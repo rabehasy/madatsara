@@ -8,11 +8,11 @@
         {% block headertag %}{% endblock %}
     </head>
     <body class="font-sans leading-normal tracking-normal">
-    <div class="bg-red-800 border-b border-indigo-darkest bg-teal py-4 px-2">
+    <div class="bg-red-800 border-b border-indigo-darkest bg-teal py-2 px-1">
         <div class="container mx-auto">
             <nav class="flex items-center justify-between flex-wrap">
-                <div class="flex items-center flex-no-shrink text-white mr-6">
-                    <svg
+
+                    <a class="flex items-center flex-no-shrink text-white mr-6" href="{{ path('frontend_default') }}"><svg class="mt-3 mr-2"
                             xmlns:dc="http://purl.org/dc/elements/1.1/"
                             xmlns:cc="http://creativecommons.org/ns#"
                             xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -49,8 +49,10 @@
                                     sodipodi:nodetypes="cccccccccccccc" />
                         </g>
                     </svg>
-                    <span class="font-semibold text-xl tracking-tight text-3xl">Madatsara</span>
-                </div>
+                    <span class="font-semibold text-xl tracking-tight text-2xl">Madatsara</span>
+                    </a>
+
+
                 <div class="block sm:hidden">
                     <button class="navbar-burger flex items-center px-3 py-2 border rounded text-white border-white hover:text-white hover:border-white">
                         <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
