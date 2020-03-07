@@ -55,7 +55,7 @@
 
 
                 <div class="block sm:hidden">
-                    <button class="hamburger" type="button">
+                    <button class="hamburger hamburger--squeeze" type="button">
                       <span class="hamburger-box">
                         <span class="hamburger-inner "></span>
                       </span>
@@ -66,7 +66,6 @@
                 <div id="main-nav" class="w-full flex-grow sm:flex items-center sm:w-auto hidden">
                     <div class="sm:flex-grow"></div>
                     <div>
-
                         <a href="{{ path('frontend_contact') }}" class="no-underline font-bold block mt-4 sm:inline-block sm:mt-0 text-white hover:text-grey-light mr-4">
                             Contact
                         </a>
@@ -81,5 +80,6 @@
     </div>
 
         {% block endbody %}{% endblock %}
+    <script src="{{ asset('assets/js/javascript.js') }}" />
     </body>
 </html>

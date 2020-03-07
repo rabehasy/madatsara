@@ -25,6 +25,7 @@ body {
  * @link https://github.com/jonsuh/hamburgers
  */
 .hamburger {
+    outline: none;
     padding: 15px 15px;
     display: inline-block;
     cursor: pointer;
@@ -37,10 +38,13 @@ body {
     border: 0;
     margin: 0;
     overflow: visible; }
+.hamburger:focus {
+    outline: none;
+}
 .hamburger.is-active .hamburger-inner,
 .hamburger.is-active .hamburger-inner::before,
 .hamburger.is-active .hamburger-inner::after {
-    background-color: #000; }
+    background-color: #fff; }
 
 .hamburger-box {
     width: 30px;
@@ -55,7 +59,7 @@ body {
     margin-top: -2px; }
 .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
     background-color: #fff;
-    width: 40px;
+    width: 30px;
     height: 4px;
     border-radius: 2px;
     position: absolute;
