@@ -17,6 +17,10 @@ body {
     width: 1px;
     word-wrap: normal !important;
 }
+
+.--bg-button {
+    background-color: #d15c55 !important;
+}
 /*!
  * Hamburgers
  * @description Tasty CSS-animated hamburgers
