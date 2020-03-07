@@ -3,11 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Evénements, concerts, cabarets malgaches et sur Madagascar{% endblock %}</title>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" rel="stylesheet">
         <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css" >
         <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
         {% block headertag %}{% endblock %}
     </head>
-    <body class="font-sans leading-normal tracking-normal">
+    <body class=" leading-normal tracking-normal">
     <div class="bg-red-800 border-b border-indigo-darkest bg-teal py-2 px-1">
         <div class="container mx-auto">
             <nav class="flex items-center justify-between flex-wrap">
@@ -48,7 +51,7 @@
                                     sodipodi:nodetypes="cccccccccccccc" />
                         </g>
                     </svg>
-                    <span class="font-semibold text-xl tracking-tight text-2xl">Madatsara</span>
+                    <span class=" text-xl tracking-tight text-2xl">Madatsara</span>
                     </a>
 
 
@@ -64,20 +67,94 @@
                 <div id="main-nav" class="w-full flex-grow sm:flex items-center sm:w-auto hidden">
                     <div class="sm:flex-grow"></div>
                     <div>
-                        <a href="{{ path('frontend_contact') }}" class="no-underline font-bold block mt-4 sm:inline-block sm:mt-0 text-white hover:text-grey-light mr-4">
+                        <a href="{{ path('frontend_contact') }}" class="no-underline block mt-4 sm:inline-block sm:mt-0 text-white hover:text-grey-light mr-4">
                             Contact
                         </a>
-                        <a href="#" class="--bg-button no-underline inline-block text-sm px-4 py-2 leading-none rounded text-white hover:border-transparent hover:text-teal hover:bg-white lg:mt-0">Ajouter un événement</a>
+                        <a href="#" class="--bg-button no-underline inline-block text-sm px-4 py-2 leading-none rounded text-white hover:border-transparent hover:text-teal hover:bg-white lg:mt-0">Ajouter un événement <i class="fas fa-plus"></i> </a>
                     </div>
                 </div>
             </nav>
         </div>
     </div>
-    <div class="container mx-auto bg-white md:mt-18">
+
+    <div class="p-3">
+        <div class="relative w-full px-3 mt-1 bg-gray-100 shadow rounded-lg flex">
+            <i class="cursor-pointer fas fa-search self-center" data-tippy-content="Chercher"></i>
+            <input data-search-field type="text" maxlength="255" class="bg-gray-100 w-full  outline-none border-0 p-3" placeholder="Chercher un événement ...">
+            <i data-search-more class="cursor-pointer fas fa-sort-down ml-auto self-center" data-tippy-content="+ d'options"></i>
+        </div>
+        <div data-filter-autocomplete class="hidden relative w-full p-3 mb-1 border shadow flex">
+            <span data-placeholder-autocomplete></span>
+        </div>
+        <div data-filter-more class="hidden relative w-full p-3 mb-1 border shadow flex">
+            <div class="w-full mt-2">
+                <div class="md:flex md:items-center mb-6">
+                    <div class="w-1/12">
+                        <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
+                            Artiste / Organisateur
+                        </label>
+                    </div>
+                    <div class=" border-b w-full">
+                        <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Jane Doe" aria-label="Full name">
+                    </div>
+                </div>
+                <div class="md:flex md:items-center mb-6">
+                    <div class="w-1/12" >
+                        <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="inline-username">
+                            Lieu / Ville
+                        </label>
+                    </div>
+                    <div class=" border-b w-full">
+                        <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Jane Doe" aria-label="Full name">
+                    </div>
+                </div>
+                <div class="md:flex md:items-center mb-6">
+                    <div class="w-1/12" >
+                        <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="inline-username">
+                            Date
+                        </label>
+                    </div>
+                    <div class=" w-full">
+                        <div class="flex flex-wrap ">
+                            <div class="w-full md:w-1/2 ">
+                                <select class="block w-full  border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                                    <option></option>
+                                    <option>Ce week end</option>
+                                    <option>La semaine prochaine</option>
+                                    <option>Ce mois-ci</option>
+                                    <option>Le mois prochain</option>
+                                </select>
+                            </div>
+                            <div class="w-full md:w-1/2 px-3  border-b">
+                                <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" id="grid-last-name" type="text" placeholder="Doe">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:flex md:justify-end">
+
+                        <button class="shadow focus:shadow-outline focus:outline-none text-white --bg-button py-2 px-4 rounded" type="button">
+                            Appliquer
+                        </button>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="container p-3 bg-white md:mt-18">
+
+
         {% block body %}Contenu du block par défaut{% endblock %}
     </div>
 
         {% block endbody %}{% endblock %}
+
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
     <script src="{{ asset('assets/js/javascript.js') }}" />
     </body>
 </html>
