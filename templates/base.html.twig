@@ -7,6 +7,8 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" rel="stylesheet">
         <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css" >
+        {# 'app' must match the first argument to addEntry() in webpack.config.js #}
+        {{ encore_entry_link_tags('app') }}
         <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
         {% block headertag %}{% endblock %}
     </head>
@@ -159,5 +161,7 @@
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
     <script src="{{ asset('assets/js/javascript.js') }}"></script>
+    {# 'app' must match the first argument to addEntry() in webpack.config.js #}
+    {{ encore_entry_script_tags('app') }}
     </body>
 </html>
