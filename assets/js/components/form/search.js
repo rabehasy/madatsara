@@ -50,12 +50,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener("click", evt => {
         const $searchMoreButtonElement = document.querySelector("[data-search-more]");
         const $searchMoreFilterElement = document.querySelector("[data-filter-more]");
+        const $datepickrElement = document.querySelector(".flatpickr-calendar");
         let targetElement = evt.target; // clicked element
 
         do {
             if (
                 targetElement == $searchMoreButtonElement ||
-                $searchMoreFilterElement == targetElement
+                $searchMoreFilterElement == targetElement ||
+                $datepickrElement == targetElement
             ) {
                 // This is a click inside. Do nothing, just return.
                 return;

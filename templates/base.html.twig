@@ -131,8 +131,15 @@
                                     <option>Le mois prochain</option>
                                 </select>
                             </div>
-                            <div class="w-full md:w-1/2 px-3  border-b">
-                                <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" id="grid-last-name" type="text" placeholder="">
+                            <div class="w-full md:w-1/2 px-3  border-b" data-datepicker>
+                                <input data-input class="appearance-none bg-transparent border-none w-11/12 text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" id="grid-last-name" type="text" placeholder="">
+                                <a class="input-button" title="toggle" data-toggle>
+                                    <i class="fas fa-calendar-alt"></i>
+                                </a>
+                                <a class="input-button" title="clear" data-clear>
+                                    <i class="fas fa-times"></i>
+                                </a>
+
                             </div>
                         </div>
                     </div>

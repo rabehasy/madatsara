@@ -20,6 +20,14 @@ import 'tailwindcss/dist/utilities.css';
 
 import '../css/app.scss';
 
+// Tooltip
 import './components/tippy';
+
+// Date picker
+import './components/flatpickr';
+
+// Navigation
 import './components/navigation';
+
+// Search field
 import './components/form/search';
