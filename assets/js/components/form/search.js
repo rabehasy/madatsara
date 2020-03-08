@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Search field - autocomplete
-    let $searchField = Array.prototype.slice.call(document.querySelectorAll('[data-search-_field]'), 0);
+    let $searchField = Array.prototype.slice.call(document.querySelectorAll('[data-search-field]'), 0);
     if ($searchField.length > 0) {
 
         // Add a click event on each of them
