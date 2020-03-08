@@ -23,9 +23,3 @@ import '../css/app.scss';
 import './components/tippy';
 import './components/navigation';
 import './components/form/search';
-
-// Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
-// import $ from 'jquery';
-
-// import greet from './components/greet';
-// alert(greet('miary'));
