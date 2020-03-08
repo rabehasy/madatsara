@@ -22,11 +22,7 @@ var debounce = function (func, wait, immediate) {
 };
 
 
-// Navbar Toggle
 document.addEventListener('DOMContentLoaded', function () {
-
-    // Trigger tooltip
-    tippy('[data-tippy-content]');
 
     // Click hamburger menu
     let $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.hamburger'), 0);

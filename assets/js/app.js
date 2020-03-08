@@ -18,6 +18,11 @@ import 'tailwindcss/dist/base.css';
 import 'tailwindcss/dist/components.css';
 import 'tailwindcss/dist/utilities.css';
 
+// popper - tippy
+import tippy from 'tippy.js';
+import 'tippy.js/dist/tippy.css';
+import 'tippy.js/animations/scale.css'
+
 import '../css/app.scss';
 
 
@@ -27,3 +32,8 @@ import '../css/app.scss';
 
 // import greet from './components/greet';
 // alert(greet('miary'));
+
+document.addEventListener('DOMContentLoaded', () => {
+   // Trigger tooltip
+   tippy('[data-tippy-content]');
+});
