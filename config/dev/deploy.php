@@ -32,9 +32,10 @@ return new class extends DefaultDeployer
     // run some local or remote commands after the deployment is finished
     public function beforeFinishingDeploy()
     {
-        // $this->runRemote('{{ console_bin }} app:my-task-name');
-        // $this->runLocal('say "The deployment has finished."');
         $this->log('<h1>chown -R www-data: /current/var</>');
         $this->runRemote('sudo chown -R www-data: {{ deploy_dir }}/current/var');
+        $this->log('<h1>yarn install + yarn encore production</>');
+        $this->runRemote('cd {{ deploy_dir }}/current && yarn install');
+        $this->runRemote('cd {{ deploy_dir }}/current && yarn encore production');
     }
 };
