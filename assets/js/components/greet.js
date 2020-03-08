@@ -1,3 +1,3 @@
-export default function(name) {
+export default (name) => {
     return `Yo yo ${name} - welcome to Encore!`;
 };
