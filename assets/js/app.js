@@ -11,6 +11,6 @@ import '../css/app.css';
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 // import $ from 'jquery';
 
-var greet = require('./components/greet');
+import greet from './components/greet';
 
 alert(greet('miary'));
