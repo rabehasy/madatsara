@@ -6,11 +6,11 @@
  * @param {type} immediate
  * @returns {Function}
  */
-var debounce = function (func, wait, immediate) {
+var debounce = (func, wait, immediate) => {
     var timeout;
-    return function() {
+    return () => {
         var context = this, args = arguments;
-        var later = function() {
+        var later = () => {
             timeout = null;
             if (!immediate) func.apply(context, args);
         };
@@ -26,9 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if ($searchMore.length > 0) {
 
         // Add a click event on each of them
-        $searchMore.forEach(function ($el) {
+        $searchMore.forEach( ($el) => {
 
-            $el.addEventListener('click', function () {
+            $el.addEventListener('click', () => {
 
                 // Hide icon more
                 this.classList.toggle("hidden");
@@ -80,9 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if ($searchField.length > 0) {
 
         // Add a click event on each of them
-        $searchField.forEach(function ($el) {
+        $searchField.forEach( ($el) => {
 
-            $el.addEventListener('keyup', debounce(function () {
+            $el.addEventListener('keyup', debounce(() =>  {
 
                 // hide filter autocomplete if textfield has <= 1 char
                 document.querySelector('[data-filter-autocomplete]').classList.add('hidden');
