@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if ($navbarBurgers.length > 0) {
 
         // Add a click event on each of them
-        $navbarBurgers.forEach( ($el) => {
-            $el.addEventListener('click', () => {
+        $navbarBurgers.forEach( $el => {
+            $el.addEventListener('click', function() {
 
                 // Add class
                 this.classList.toggle("is-active");

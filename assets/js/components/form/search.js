@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add a click event on each of them
         $searchMore.forEach( ($el) => {
 
-            $el.addEventListener('click', () => {
+            $el.addEventListener('click', function () {
 
                 // Hide icon more
                 this.classList.toggle("hidden");
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Click outside - for example outside filter search
-    document.addEventListener("click", (evt) => {
+    document.addEventListener("click", evt => {
         const $searchMoreButtonElement = document.querySelector("[data-search-more]");
         const $searchMoreFilterElement = document.querySelector("[data-filter-more]");
         let targetElement = evt.target; // clicked element
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Search field - autocomplete
-    let $searchField = Array.prototype.slice.call(document.querySelectorAll('[data-search-field]'), 0);
+    let $searchField = Array.prototype.slice.call(document.querySelectorAll('[data-search-_field]'), 0);
     if ($searchField.length > 0) {
 
         // Add a click event on each of them
@@ -93,9 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.querySelector('[data-filter-autocomplete]').classList.remove('hidden');
 
                     // Show placeholder
-                    document.querySelector('[data-placeholder-autocomplete]').textContent = 'Recherche de ' + $el.value + '...';
+                    document.querySelector('[data-placeholder-autocomplete]').textContent = `Recherche de ${$el.value}...`;
 
-                    // TODO call ajax
+                    // TODO call ajax and fill dom
                 }
 
             },100));
