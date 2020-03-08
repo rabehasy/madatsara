@@ -6,11 +6,11 @@
  * @param {type} immediate
  * @returns {Function}
  */
-var debounce = (func, wait, immediate) => {
+var debounce = function (func, wait, immediate) {
     var timeout;
-    return () => {
+    return function() {
         var context = this, args = arguments;
-        var later = () => {
+        var later = function() {
             timeout = null;
             if (!immediate) func.apply(context, args);
         };
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if ($searchMore.length > 0) {
 
         // Add a click event on each of them
-        $searchMore.forEach( ($el) => {
+        $searchMore.forEach(function ($el) {
 
             $el.addEventListener('click', function () {
 
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Click outside - for example outside filter search
-    document.addEventListener("click", evt => {
+    document.addEventListener("click", (evt) => {
         const $searchMoreButtonElement = document.querySelector("[data-search-more]");
         const $searchMoreFilterElement = document.querySelector("[data-filter-more]");
         let targetElement = evt.target; // clicked element
@@ -76,13 +76,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Search field - autocomplete
-    let $searchField = Array.prototype.slice.call(document.querySelectorAll('[data-search-_field]'), 0);
+    let $searchField = Array.prototype.slice.call(document.querySelectorAll('[data-search-field]'), 0);
     if ($searchField.length > 0) {
 
         // Add a click event on each of them
-        $searchField.forEach( ($el) => {
+        $searchField.forEach(function ($el) {
 
-            $el.addEventListener('keyup', debounce(() =>  {
+            $el.addEventListener('keyup', debounce(function () {
 
                 // hide filter autocomplete if textfield has <= 1 char
                 document.querySelector('[data-filter-autocomplete]').classList.add('hidden');
@@ -93,9 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.querySelector('[data-filter-autocomplete]').classList.remove('hidden');
 
                     // Show placeholder
-                    document.querySelector('[data-placeholder-autocomplete]').textContent = `Recherche de ${$el.value}...`;
+                    document.querySelector('[data-placeholder-autocomplete]').textContent = 'Recherche de ' + $el.value + '...';
 
-                    // TODO call ajax and fill dom
+                    // TODO call ajax
                 }
 
             },100));
