@@ -1,6 +1,7 @@
-.navigation-header a{
+.navigation-header a {
     color: #fff;
 }
+
 .col-form-label {
     border: 0;
     clip: rect(1px, 1px, 1px, 1px);
@@ -17,6 +18,7 @@
 .--bg-button {
     background-color: #d15c55 !important;
 }
+
 /*!
  * Hamburgers
  * @description Tasty CSS-animated hamburgers
@@ -24,6 +26,7 @@
  * @site https://jonsuh.com/hamburgers
  * @link https://github.com/jonsuh/hamburgers
  */
+
 .hamburger {
     outline: none;
     padding: 15px 15px;
@@ -37,27 +40,32 @@
     text-transform: none;
     border: 0;
     margin: 0;
-    overflow: visible; }
-.hamburger:focus {
-    outline: none;
+    overflow: visible;
+
+    &:focus {
+        outline: none;
+    }
+
+    &.is-active .hamburger-inner {
+        background-color: #fff;
+
+        &::before, &::after {
+            background-color: #fff;
+        }
+    }
 }
-.hamburger.is-active .hamburger-inner,
-.hamburger.is-active .hamburger-inner::before,
-.hamburger.is-active .hamburger-inner::after {
-    background-color: #fff; }
 
 .hamburger-box {
     width: 30px;
     height: 10px;
     display: inline-block;
-    position: relative; }
+    position: relative;
+}
 
 .hamburger-inner {
-
     display: block;
     top: 50%;
-    margin-top: -2px; }
-.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+    margin-top: -2px;
     background-color: #fff;
     width: 30px;
     height: 4px;
@@ -65,36 +73,66 @@
     position: absolute;
     transition-property: transform;
     transition-duration: 0.15s;
-    transition-timing-function: ease; }
-.hamburger-inner::before, .hamburger-inner::after {
-    content: "";
-    display: block; }
-.hamburger-inner::before {
-    top: -10px; }
-.hamburger-inner::after {
-    bottom: -10px; }
+    transition-timing-function: ease;
 
+    &::before, &::after {
+        background-color: #fff;
+        width: 30px;
+        height: 4px;
+        border-radius: 2px;
+        position: absolute;
+        transition-property: transform;
+        transition-duration: 0.15s;
+        transition-timing-function: ease;
+    }
+
+    &::before, &::after {
+        content: "";
+        display: block;
+    }
+
+    &::before {
+        top: -10px;
+    }
+
+    &::after {
+        bottom: -10px;
+    }
+}
 
 /*
    * Squeeze
    */
-.hamburger--squeeze .hamburger-inner {
-    transition-duration: 0.075s;
-    transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19); }
-.hamburger--squeeze .hamburger-inner::before {
-    transition: top 0.075s 0.12s ease, opacity 0.075s ease; }
-.hamburger--squeeze .hamburger-inner::after {
-    transition: bottom 0.075s 0.12s ease, transform 0.075s cubic-bezier(0.55, 0.055, 0.675, 0.19); }
 
-.hamburger--squeeze.is-active .hamburger-inner {
-    transform: rotate(45deg);
-    transition-delay: 0.12s;
-    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
-.hamburger--squeeze.is-active .hamburger-inner::before {
-    top: 0;
-    opacity: 0;
-    transition: top 0.075s ease, opacity 0.075s 0.12s ease; }
-.hamburger--squeeze.is-active .hamburger-inner::after {
-    bottom: 0;
-    transform: rotate(-90deg);
-    transition: bottom 0.075s ease, transform 0.075s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1); }
+.hamburger--squeeze {
+    .hamburger-inner {
+        transition-duration: 0.075s;
+        transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+        &::before {
+            transition: top 0.075s 0.12s ease, opacity 0.075s ease;
+        }
+
+        &::after {
+            transition: bottom 0.075s 0.12s ease, transform 0.075s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+        }
+    }
+
+    &.is-active .hamburger-inner {
+        transform: rotate(45deg);
+        transition-delay: 0.12s;
+        transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+        &::before {
+            top: 0;
+            opacity: 0;
+            transition: top 0.075s ease, opacity 0.075s 0.12s ease;
+        }
+
+        &::after {
+            bottom: 0;
+            transform: rotate(-90deg);
+            transition: bottom 0.075s ease, transform 0.075s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+    }
+}
