@@ -20,31 +20,7 @@ var debounce = function (func, wait, immediate) {
         if (callNow) func.apply(context, args);
     };
 };
-
-
-document.addEventListener('DOMContentLoaded', function () {
-
-    // Click hamburger menu
-    let $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.hamburger'), 0);
-    if ($navbarBurgers.length > 0) {
-
-        // Add a click event on each of them
-        $navbarBurgers.forEach(function ($el) {
-            $el.addEventListener('click', function () {
-
-                // Add class
-                this.classList.toggle("is-active");
-
-                // Get the "main-nav" element
-                let $target = document.getElementById('main-nav');
-
-                // Toggle the class on "main-nav"
-                $target.classList.toggle('hidden');
-
-            });
-        });
-    }
-
+document.addEventListener('DOMContentLoaded', () => {
     // Click more search - show filter
     let $searchMore = Array.prototype.slice.call(document.querySelectorAll('[data-search-more]'), 0);
     if ($searchMore.length > 0) {
@@ -125,5 +101,4 @@ document.addEventListener('DOMContentLoaded', function () {
             },100));
         });
     }
-
 });
