@@ -11,7 +11,7 @@
         {% endblock %}
     </head>
     <body class=" leading-normal tracking-normal">
-    <div class="bg-red-800 border-b border-indigo-darkest bg-teal py-2 px-1">
+    <div class="bg-red-800 border-b border-indigo-darkest bg-teal py-2 px-1 mb-3">
         <div class="container mx-auto">
             <nav class="flex items-center justify-between flex-wrap">
 
@@ -78,7 +78,6 @@
     </div>
 
     <div class="container mx-auto">
-        <div class="p-3">
             <div class="relative w-full px-3 mt-1 bg-gray-100 shadow rounded-lg flex">
                 <i class="cursor-pointer fas fa-search self-center" data-tippy-content="Chercher"></i>
                 <input data-search-field type="text" maxlength="255" class="bg-gray-100 w-full  outline-none border-0 p-3" placeholder="Chercher un événement ...">
@@ -160,7 +159,7 @@
                 </div>
             </div>
 
-        </div>
+
 
     {% block body %}Contenu du block par défaut{% endblock %}
     </div>
