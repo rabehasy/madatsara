@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Evénements, concerts, cabarets malgaches et sur Madagascar{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
         {% block headertag %}
             {# 'app' must match the first argument to addEntry() in webpack.config.js #}
@@ -133,10 +134,10 @@
                             </div>
                             <div class="w-full md:w-1/2 px-3  border-b" data-datepicker>
                                 <input data-input class="appearance-none bg-transparent border-none w-11/12 text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" id="grid-last-name" type="text" placeholder="">
-                                <a class="input-button" title="toggle" data-toggle>
+                                <a class="input-button" data-tippy-content="Afficher le calendrier" data-toggle>
                                     <i class="fas fa-calendar-alt"></i>
                                 </a>
-                                <a class="input-button" title="clear" data-clear>
+                                <a class="input-button" data-tippy-content="Effacer" data-clear>
                                     <i class="fas fa-times"></i>
                                 </a>
 
