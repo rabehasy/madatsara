@@ -84,7 +84,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add a click event on each of them
         $searchField.forEach( ($el) => {
 
+            $el.addEventListener('keyup', event =>  {
+                if ($el.value.trim().length >= 1 && (event.keyCode === 40 || event.keyCode === 38)) {
+                    // TODO
+                    // console.log('arrow UP/Down');
+                }
+            });
+
             $el.addEventListener('keyup', debounce(() =>  {
+
+
 
                 // hide filter autocomplete if textfield has <= 1 char
                 document.querySelector('[data-filter-autocomplete]').classList.add('hidden');
