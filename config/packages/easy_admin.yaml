@@ -1,5 +1,8 @@
 easy_admin:
     site_name: 'Madatsara'
+    design:
+        brand_color: '#9b2c2c'
+
     entities:
 #        # List the entity class name you want to manage
 #        - App\Entity\Product
