@@ -2,16 +2,29 @@ easy_admin:
     entities:
 #        # List the entity class name you want to manage
 #        - App\Entity\Product
-        - App\Entity\Event
-        - App\Entity\AccessType
-        - App\Entity\Api
-        - App\Entity\Status
-        - App\Entity\Subscriber
-        - App\Entity\Thematic
-        - App\Entity\Artiste
-        - App\Entity\MemberEvent
-        - App\Entity\Organisateur
-        - App\Entity\Place
-        - App\Entity\Commune
-        - App\Entity\Quartier
-        - App\Entity\Region
+        Event:
+            class: App\Entity\Event
+        AccessType:
+            class: App\Entity\AccessType
+        Api:
+            class: App\Entity\Api
+        Status:
+            class: App\Entity\Status
+        Subscriber:
+            class: App\Entity\Subscriber
+        Thematic:
+            class: App\Entity\Thematic
+        Artiste:
+            class: App\Entity\Artiste
+        MemberEvent:
+            class: App\Entity\MemberEvent
+        Organisateur:
+            class: App\Entity\Organisateur
+        Place:
+            class: App\Entity\Place
+        Commune:
+            class: App\Entity\Commune
+        Quartier:
+            class: App\Entity\Quartier
+        Region:
+            class: App\Entity\Region
