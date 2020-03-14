@@ -10,27 +10,92 @@ easy_admin:
 #        - App\Entity\Product
         AccessType:
             class: App\Entity\AccessType
+            label: 'Access Type'
+            list:
+                title: '%%entity_label%%  Management listing'
+            show:
+                title: '%%entity_label%% (#%%entity_id%%)'
         Api:
             class: App\Entity\Api
+            label: 'Api'
+            list:
+                title: '%%entity_label%% Management listing'
+            show:
+                title: '%%entity_label%% (#%%entity_id%%)'
         Artiste:
             class: App\Entity\Artiste
+            label: 'Artists'
+            list:
+                title: '%%entity_label%% Management listing'
+            show:
+                title: '%%entity_label%% (#%%entity_id%%)'
         Commune:
             class: App\Entity\Commune
+            label: 'Communes'
+            list:
+                title: '%%entity_label%% Management listing'
+            show:
+                title: '%%entity_label%% (#%%entity_id%%)'
         Event:
             class: App\Entity\Event
+            label: 'Events'
+            list:
+                title: '%%entity_label%% Management listing'
+            show:
+                title: '%%entity_label%% (#%%entity_id%%)'
         MemberEvent:
             class: App\Entity\MemberEvent
+            label: 'Events by member'
+            list:
+                title: '%%entity_label%% Management listing'
+            show:
+                title: '%%entity_label%% (#%%entity_id%%)'
         Organisateur:
             class: App\Entity\Organisateur
+            label: 'Organizers'
+            list:
+                title: '%%entity_label%% Management listing'
+            show:
+                title: '%%entity_label%% (#%%entity_id%%)'
         Place:
             class: App\Entity\Place
+            label: 'Places'
+            list:
+                title: '%%entity_label%% Management listing'
+            show:
+                title: '%%entity_label%% (#%%entity_id%%)'
         Quartier:
             class: App\Entity\Quartier
+            label: 'Quartiers'
+            list:
+                title: '%%entity_label%% Management listing'
+            show:
+                title: '%%entity_label%% (#%%entity_id%%)'
         Region:
             class: App\Entity\Region
+            label: 'Regions'
+            list:
+                title: '%%entity_label%% Management listing'
+            show:
+                title: '%%entity_label%% (#%%entity_id%%)'
         Status:
             class: App\Entity\Status
+            label: 'Status'
+            list:
+                title: '%%entity_label%% Management listing'
+            show:
+                title: '%%entity_label%% (#%%entity_id%%)'
         Subscriber:
             class: App\Entity\Subscriber
+            label: 'Subscribers'
+            list:
+                title: '%%entity_label%% Management listing'
+            show:
+                title: '%%entity_label%% (#%%entity_id%%)'
         Thematic:
             class: App\Entity\Thematic
+            label: 'Thematics'
+            list:
+                title: '%%entity_label%% Management listing'
+            show:
+                title: '%%entity_label%% (#%%entity_id%%)'
