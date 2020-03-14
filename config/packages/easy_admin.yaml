@@ -4,6 +4,8 @@ easy_admin:
         brand_color: '#9b2c2c'
         assets:
             favicon: '/favicon_admin.png'
+    list:
+        max_results: 30
 
     entities:
 #        # List the entity class name you want to manage
