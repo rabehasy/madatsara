@@ -7,6 +7,9 @@ easy_admin:
     list:
         max_results: 30
 
+    formats:
+        datetime: 'Y-m-d H:i:s'
+
     entities:
 #        # List the entity class name you want to manage
 #        - App\Entity\Product
@@ -44,7 +47,7 @@ easy_admin:
             help: 'Events General Management'
             list:
                 title: '%%entity_label%% Management listing'
-                help: '%%entity_label%% General Management listing'
+                help: 'Events General Management listing'
                 fields: ['id', {property: 'name', label: 'Event name' } ]
             show:
                 title: '%%entity_label%% (#%%entity_id%%)'
