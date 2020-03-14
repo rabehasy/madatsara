@@ -2,6 +2,8 @@ easy_admin:
     site_name: 'Madatsara'
     design:
         brand_color: '#9b2c2c'
+        assets:
+            favicon: '/favicon_admin.png'
 
     entities:
 #        # List the entity class name you want to manage
