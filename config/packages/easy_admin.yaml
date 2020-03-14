@@ -45,6 +45,7 @@ easy_admin:
             list:
                 title: '%%entity_label%% Management listing'
                 help: '%%entity_label%% General Management listing'
+                fields: ['id', 'name']
             show:
                 title: '%%entity_label%% (#%%entity_id%%)'
         MemberEvent:
