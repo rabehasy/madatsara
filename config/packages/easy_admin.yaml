@@ -39,6 +39,7 @@ easy_admin:
         Event:
             class: App\Entity\Event
             label: 'Events'
+            help: 'Events General Management'
             list:
                 title: '%%entity_label%% Management listing'
             show:
