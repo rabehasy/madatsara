@@ -42,6 +42,7 @@ easy_admin:
             help: 'Events General Management'
             list:
                 title: '%%entity_label%% Management listing'
+                help: '%%entity_label%% General Management listing'
             show:
                 title: '%%entity_label%% (#%%entity_id%%)'
         MemberEvent:
