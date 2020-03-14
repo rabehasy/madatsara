@@ -18,6 +18,7 @@ easy_admin:
             label: 'Access Type'
             list:
                 title: '%%entity_label%%  Management listing'
+                sort: ['createdAt', 'DESC']
             show:
                 title: '%%entity_label%% (#%%entity_id%%)'
         Api:
@@ -25,6 +26,7 @@ easy_admin:
             label: 'Api'
             list:
                 title: '%%entity_label%% Management listing'
+                sort: ['createdAt', 'DESC']
             show:
                 title: '%%entity_label%% (#%%entity_id%%)'
         Artiste:
@@ -32,6 +34,7 @@ easy_admin:
             label: 'Artists'
             list:
                 title: '%%entity_label%% Management listing'
+                sort: ['createdAt', 'DESC']
             show:
                 title: '%%entity_label%% (#%%entity_id%%)'
         Commune:
@@ -39,6 +42,7 @@ easy_admin:
             label: 'Communes'
             list:
                 title: '%%entity_label%% Management listing'
+                sort: ['createdAt', 'DESC']
             show:
                 title: '%%entity_label%% (#%%entity_id%%)'
         Event:
@@ -48,7 +52,8 @@ easy_admin:
             list:
                 title: '%%entity_label%% Management listing'
                 help: 'Events General Management listing'
-                fields: ['id', {property: 'name', label: 'Event name' } ]
+                fields: ['id', {property: 'name', label: 'Event name' }, 'createdAt' ]
+                sort: ['createdAt', 'DESC']
             show:
                 title: '%%entity_label%% (#%%entity_id%%)'
         MemberEvent:
@@ -56,6 +61,7 @@ easy_admin:
             label: 'Events by member'
             list:
                 title: '%%entity_label%% Management listing'
+                sort: ['createdAt', 'DESC']
             show:
                 title: '%%entity_label%% (#%%entity_id%%)'
         Organisateur:
@@ -63,6 +69,7 @@ easy_admin:
             label: 'Organizers'
             list:
                 title: '%%entity_label%% Management listing'
+                sort: ['createdAt', 'DESC']
             show:
                 title: '%%entity_label%% (#%%entity_id%%)'
         Place:
@@ -70,6 +77,7 @@ easy_admin:
             label: 'Places'
             list:
                 title: '%%entity_label%% Management listing'
+                sort: ['createdAt', 'DESC']
             show:
                 title: '%%entity_label%% (#%%entity_id%%)'
         Quartier:
@@ -77,6 +85,7 @@ easy_admin:
             label: 'Quartiers'
             list:
                 title: '%%entity_label%% Management listing'
+                sort: ['createdAt', 'DESC']
             show:
                 title: '%%entity_label%% (#%%entity_id%%)'
         Region:
@@ -84,6 +93,7 @@ easy_admin:
             label: 'Regions'
             list:
                 title: '%%entity_label%% Management listing'
+                sort: ['createdAt', 'DESC']
             show:
                 title: '%%entity_label%% (#%%entity_id%%)'
         Status:
@@ -91,6 +101,7 @@ easy_admin:
             label: 'Status'
             list:
                 title: '%%entity_label%% Management listing'
+                sort: ['createdAt', 'DESC']
             show:
                 title: '%%entity_label%% (#%%entity_id%%)'
         Subscriber:
@@ -98,6 +109,7 @@ easy_admin:
             label: 'Subscribers'
             list:
                 title: '%%entity_label%% Management listing'
+                sort: ['createdAt', 'DESC']
             show:
                 title: '%%entity_label%% (#%%entity_id%%)'
         Thematic:
@@ -105,5 +117,6 @@ easy_admin:
             label: 'Thematics'
             list:
                 title: '%%entity_label%% Management listing'
+                sort: ['createdAt', 'DESC']
             show:
                 title: '%%entity_label%% (#%%entity_id%%)'
