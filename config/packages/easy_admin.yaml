@@ -70,9 +70,13 @@ easy_admin:
                     - api
                     - eventGroup
                     - slug
+                    - createdAt
             new:
                 fields:
                     - '-slug'
+            edit:
+                fields:
+                    - {property: 'createdAt', type_options: { widget: 'single_text' }}
         MemberEvent:
             class: App\Entity\MemberEvent
             label: 'Events by member'
