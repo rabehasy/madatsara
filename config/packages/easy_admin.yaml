@@ -54,6 +54,7 @@ easy_admin:
                 help: 'Events General Management listing'
                 fields: ['id', {property: 'name', label: 'Event name' }, 'createdAt' ]
                 sort: ['createdAt', 'DESC']
+                dql_filter: "entity.api is not null"
             show:
                 title: '%%entity_label%% (#%%entity_id%%)'
         MemberEvent:
