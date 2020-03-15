@@ -57,6 +57,22 @@ easy_admin:
                 dql_filter: "entity.api is not null"
             show:
                 title: '%%entity_label%% (#%%entity_id%%)'
+            form:
+                fields:
+                    - name
+                    - thematic
+                    - media
+                    - accessType
+                    - place
+                    - artiste
+                    - organisateur
+                    - description
+                    - api
+                    - eventGroup
+                    - slug
+            new:
+                fields:
+                    - '-slug'
         MemberEvent:
             class: App\Entity\MemberEvent
             label: 'Events by member'
