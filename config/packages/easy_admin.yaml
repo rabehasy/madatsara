@@ -58,6 +58,7 @@ easy_admin:
             show:
                 title: '%%entity_label%% (#%%entity_id%%)'
             form:
+                title: 'Add/Edit Event'
                 fields:
                     - name
                     - thematic
