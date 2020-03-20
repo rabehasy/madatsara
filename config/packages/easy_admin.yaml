@@ -9,6 +9,10 @@ easy_admin:
 
     formats:
         datetime: 'Y-m-d H:i:s'
+    edit:
+      title: '%%entity_label%%_edit'
+    new:
+        title: 'Create %%entity_label%%'
 
     entities:
 #        # List the entity class name you want to manage
