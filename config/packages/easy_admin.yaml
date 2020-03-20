@@ -65,14 +65,16 @@ easy_admin:
                 title: 'Add/Edit Event'
                 fields:
                     - { property: 'name', label: 'Event name', help: 'Name/Title of event' }
+                    - description
+                    - { type: 'section', label: 'Metadata' }
                     - thematic
                     - media
                     - accessType
+                    - api
+                    - { type: 'section', label: 'Entities' }
                     - { property: 'place', type: 'easyadmin_autocomplete'}
                     - { property: 'artiste', type: 'easyadmin_autocomplete'}
                     - { property: 'organisateur', type: 'easyadmin_autocomplete'}
-                    - description
-                    - api
                     - eventGroup
                     - slug
                     - createdAt
