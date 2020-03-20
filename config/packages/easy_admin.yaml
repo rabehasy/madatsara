@@ -64,7 +64,7 @@ easy_admin:
             form:
                 title: 'Add/Edit Event'
                 fields:
-                    - name
+                    - { property: 'name', label: 'Event name', help: 'Name/Title of event' }
                     - thematic
                     - media
                     - accessType
