@@ -68,9 +68,9 @@ easy_admin:
                     - thematic
                     - media
                     - accessType
-                    - place
-                    - artiste
-                    - organisateur
+                    - { property: 'place', type: 'easyadmin_autocomplete'}
+                    - { property: 'artiste', type: 'easyadmin_autocomplete'}
+                    - { property: 'organisateur', type: 'easyadmin_autocomplete'}
                     - description
                     - api
                     - eventGroup
