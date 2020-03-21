@@ -5,7 +5,7 @@ easy_admin:
         assets:
             favicon: '/favicon_admin.png'
         menu:
-            - Event
+            - {entity: 'Event', default: true}
             - Thematic
             - Status
             - {entity: 'Artiste', icon: 'user' }
