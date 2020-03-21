@@ -6,6 +6,7 @@ easy_admin:
             favicon: '/favicon_admin.png'
         menu:
             - {entity: 'Event', default: true}
+            - { label: 'Event Metadata'}
             - Thematic
             - Status
             - {entity: 'Artiste', icon: 'user' }
