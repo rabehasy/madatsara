@@ -71,6 +71,11 @@ class Thematic
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
