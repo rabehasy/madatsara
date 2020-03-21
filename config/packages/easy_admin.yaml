@@ -8,16 +8,16 @@ easy_admin:
             - Event
             - Thematic
             - Status
-            - Artiste
-            - Place
+            - {entity: 'Artiste', icon: 'user' }
+            - {entity: 'Place', icon: 'map-marker-alt' }
             - AccessType
             - Api
-            - Organisateur
-            - Commune
-            - Quartier
-            - Region
+            - {entity: 'Organisateur', icon: 'user' }
+            - {entity: 'Commune', icon: 'map-marker-alt' }
+            - {entity: 'Quartier', icon: 'map-marker-alt' }
+            - {entity: 'Region', icon: 'map-marker-alt' }
             - MemberEvent
-            - Subscriber
+            - {entity: 'Subscriber', icon: 'user' }
     list:
         max_results: 30
         actions:
