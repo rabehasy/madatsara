@@ -6,6 +6,8 @@ easy_admin:
             favicon: '/favicon_admin.png'
     list:
         max_results: 30
+        actions:
+            - { name: 'new', icon: 'plus'}
 
     formats:
         datetime: 'Y-m-d H:i:s'
