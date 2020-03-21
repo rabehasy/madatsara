@@ -4,6 +4,12 @@ easy_admin:
         brand_color: '#9b2c2c'
         assets:
             favicon: '/favicon_admin.png'
+            css:
+                - '/assets/dropzone.min.css'
+                - '/assets/custom.css'
+            js:
+                - '/assets/dropzone.min.js'
+                - '/assets/custom.js'
         menu:
             - { label: 'Event Metadata'}
             - {entity: 'Event', default: true}
@@ -97,7 +103,7 @@ easy_admin:
                     - { property: 'name', label: 'Event name', help: 'Name/Title of event' }
                     - description
                     - { type: 'group', columns: 6, label: 'Metadata' }
-                    - media
+                    - {property: 'media', css_class: 'media_dropzone' }
                     - thematic
                     - accessType
                     - api

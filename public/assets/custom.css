@@ -1,0 +1,10 @@
+.media_dropzone .form-group {
+    display:none!important;
+}
+
+.dropz {
+    border: 2px dashed #0087F7;
+    border-radius: 5px;
+    background: white;
+    width:100%;
+}
