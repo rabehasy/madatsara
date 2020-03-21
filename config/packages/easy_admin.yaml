@@ -101,7 +101,7 @@ easy_admin:
                     - thematic
                     - accessType
                     - api
-                    - { type: 'group', , columns: 6, label: 'Entities' }
+                    - { type: 'group', columns: 6, label: 'Entities' }
                     - { property: 'place', type: 'easyadmin_autocomplete'}
                     - { property: 'artiste', type: 'easyadmin_autocomplete'}
                     - { property: 'organisateur', type: 'easyadmin_autocomplete'}
