@@ -1,5 +1,5 @@
 easy_admin:
-    site_name: 'Madatsara'
+    site_name: '<a href="/" target="_blank">Madatsara</a>'
     design:
         brand_color: '#9b2c2c'
         assets:
@@ -82,7 +82,10 @@ easy_admin:
             list:
                 title: '%%entity_label%% Management listing'
                 help: 'Events General Management listing'
-                fields: ['id', {property: 'name', label: 'Event name' }, 'createdAt' ]
+                fields:
+                  - 'id'
+                  - {property: 'name', label: 'Event name', template: '@backend/event/list/format_name.html.twig' }
+                  -  'createdAt'
                 sort: ['createdAt', 'DESC']
                 dql_filter: "entity.api is not null"
             show:
