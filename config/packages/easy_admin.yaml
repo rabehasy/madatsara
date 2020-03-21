@@ -93,14 +93,15 @@ easy_admin:
             form:
                 title: 'Add/Edit Event'
                 fields:
+                    - { type: 'group', columns: 6, label: 'Event' }
                     - { property: 'name', label: 'Event name', help: 'Name/Title of event' }
                     - description
-                    - { type: 'section', label: 'Metadata' }
-                    - thematic
+                    - { type: 'group', columns: 6, label: 'Metadata' }
                     - media
+                    - thematic
                     - accessType
                     - api
-                    - { type: 'section', label: 'Entities' }
+                    - { type: 'group', , columns: 6, label: 'Entities' }
                     - { property: 'place', type: 'easyadmin_autocomplete'}
                     - { property: 'artiste', type: 'easyadmin_autocomplete'}
                     - { property: 'organisateur', type: 'easyadmin_autocomplete'}
