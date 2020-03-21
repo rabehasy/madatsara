@@ -5,8 +5,8 @@ easy_admin:
         assets:
             favicon: '/favicon_admin.png'
         menu:
-            - {entity: 'Event', default: true}
             - { label: 'Event Metadata'}
+            - {entity: 'Event', default: true}
             - Thematic
             - Status
             - label: 'Artistes/Organisateurs'

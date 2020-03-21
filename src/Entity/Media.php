@@ -77,6 +77,11 @@ class Media
         return $this->file;
     }
 
+    public function __toString()
+    {
+        return $this->getFile();
+    }
+
     public function setFile(string $file): self
     {
         $this->file = $file;
