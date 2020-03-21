@@ -9,15 +9,18 @@ easy_admin:
             - { label: 'Event Metadata'}
             - Thematic
             - Status
-            - {entity: 'Artiste', icon: 'user' }
+            - label: 'Artistes/Organisateurs'
+              children:
+                - {entity: 'Artiste', icon: 'user' }
+                - {entity: 'Organisateur', icon: 'user' }
             - {entity: 'Place', icon: 'map-marker-alt' }
             - AccessType
             - Api
-            - {entity: 'Organisateur', icon: 'user' }
-            - { label: 'Localization'}
-            - {entity: 'Commune', icon: 'map-marker-alt' }
-            - {entity: 'Quartier', icon: 'map-marker-alt' }
-            - {entity: 'Region', icon: 'map-marker-alt' }
+            - label: 'Localization'
+              children:
+                - {entity: 'Commune', icon: 'map-marker-alt' }
+                - {entity: 'Quartier', icon: 'map-marker-alt' }
+                - {entity: 'Region', icon: 'map-marker-alt' }
             - { label: 'Members/Subscribers'}
             - MemberEvent
             - {entity: 'Subscriber', icon: 'user' }
