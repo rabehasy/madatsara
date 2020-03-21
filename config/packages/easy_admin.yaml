@@ -4,6 +4,20 @@ easy_admin:
         brand_color: '#9b2c2c'
         assets:
             favicon: '/favicon_admin.png'
+        menu:
+            - Event
+            - Thematic
+            - Status
+            - Artiste
+            - Place
+            - AccessType
+            - Api
+            - Organisateur
+            - Commune
+            - Quartier
+            - Region
+            - MemberEvent
+            - Subscriber
     list:
         max_results: 30
         actions:
