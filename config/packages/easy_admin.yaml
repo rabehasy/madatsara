@@ -13,9 +13,11 @@ easy_admin:
             - AccessType
             - Api
             - {entity: 'Organisateur', icon: 'user' }
+            - { label: 'Localization'}
             - {entity: 'Commune', icon: 'map-marker-alt' }
             - {entity: 'Quartier', icon: 'map-marker-alt' }
             - {entity: 'Region', icon: 'map-marker-alt' }
+            - { label: 'Members/Subscribers'}
             - MemberEvent
             - {entity: 'Subscriber', icon: 'user' }
     list:
