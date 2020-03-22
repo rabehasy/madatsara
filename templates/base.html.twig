@@ -82,14 +82,15 @@
     </div>
 
     <div class="container mx-auto px-3 lg:p-0">
+        <form action="{{ path('frontend_search') }}">
             <div class="relative w-full px-3 mt-1 bg-gray-100 shadow rounded-lg flex">
                 <i class="cursor-pointer fas fa-search self-center" data-tippy-content="Chercher"></i>
-                <input data-search-field type="text" maxlength="255" class="bg-gray-100 w-full  outline-none border-0 p-3" placeholder="Chercher un événement ...">
+                <input name="search" data-search-field type="text" maxlength="255" class="bg-gray-100 w-full  outline-none border-0 p-3" placeholder="Chercher un événement ...">
                 <i data-search-more class="cursor-pointer fas fa-sort-down ml-auto self-center" data-tippy-content="+ d'options"></i>
             </div>
             <div data-filter-autocomplete class=" relative w-full  mb-1 border shadow ">
                 <div data-placeholder-autocomplete class="w-full p-3 hidden"></div>
-                <div data-result-autocomplete class="w-full">
+                <div data-result-autocomplete class="w-full overflow-y-scroll max-h-screen">
                     <ul></ul>
                 </div>
             </div>
@@ -158,7 +159,7 @@
                     </div>
                 </div>
             </div>
-
+    </form>
 
 
     {% block body %}Contenu du block par défaut{% endblock %}

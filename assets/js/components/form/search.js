@@ -2,6 +2,7 @@
 // Axios
 import Axios from 'axios';
 
+
 /**
  * Execute a function given a delay time
  *
@@ -24,8 +25,10 @@ var debounce = (func, wait, immediate) => {
         if (callNow) func.apply(context, args);
     };
 };
-
-function updateList(data) {
+function setSubmitForm(el) {
+    console.log(el.closest('form').action);
+}
+function updateList(data, field) {
 
     let $target = document.querySelector('[data-result-autocomplete] ul');
 
@@ -35,9 +38,7 @@ function updateList(data) {
     let $list = Array.prototype.slice.call(data, 0);
     let n = 0;
     $list.forEach(($el) => {
-        if (n<10) {
-            listHtml.push('<li data-plain-txt="' + $el.first_name + '" class="p-3 ' + (n == 0 ? ' border-b bg-gray-200 active' : '')+ '">' + $el.first_name + '</li>');
-        }
+        listHtml.push('<li onclick="document.querySelector(\'[data-search-field]\').value = \'' + $el.first_name + '\';" onmouseenter="this.classList.add(\'bg-gray-200\');" onmouseleave="this.classList.remove(\'bg-gray-200\');" data-plain-txt="' + $el.first_name + '" class="cursor-pointer p-3 ' + (n == 0 ? ' border-b bg-gray-200 active' : '')+ '">' + $el.first_name + '</li>');
         n++;
     });
     $target.innerHTML = listHtml.join(' ');
@@ -66,10 +67,6 @@ function setSelectedList(keyCode, field) {
     if (stepIndex==$list.length) {
         stepIndex = 0;
     }
-    /*console.log('keyCode',keyCode);
-    console.log('currIndex',currIndex);
-    console.log('$list.length',$list.length);
-    console.log('stepIndex',stepIndex);*/
 
 
 
@@ -89,6 +86,8 @@ function setSelectedList(keyCode, field) {
 
 
 }
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
     // Click more search - show filter
@@ -182,11 +181,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     // TODO call ajax and fill dom
                     Axios.get('https://www.balldontlie.io/api/v1/players')
                         .then(function (response) {
-                            updateList(response.data.data);
+                            updateList(response.data.data, $el);
                         });
                 }
 
             });
         });
+
     }
+
 });
