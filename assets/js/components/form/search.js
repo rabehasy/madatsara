@@ -1,3 +1,7 @@
+
+// Axios
+import Axios from 'axios';
+
 /**
  * Execute a function given a delay time
  *
@@ -20,6 +24,72 @@ var debounce = (func, wait, immediate) => {
         if (callNow) func.apply(context, args);
     };
 };
+
+function updateList(data) {
+
+    let $target = document.querySelector('[data-result-autocomplete] ul');
+
+    let listHtml = [];
+
+    // Fill dom
+    let $list = Array.prototype.slice.call(data, 0);
+    let n = 0;
+    $list.forEach(($el) => {
+        if (n<10) {
+            listHtml.push('<li data-plain-txt="' + $el.first_name + '" class="p-3 ' + (n == 0 ? ' border-b bg-gray-200 active' : '')+ '">' + $el.first_name + '</li>');
+        }
+        n++;
+    });
+    $target.innerHTML = listHtml.join(' ');
+
+    // Hide  data-placeholder-autocomplete
+    document.querySelector('[data-placeholder-autocomplete]').classList.add('hidden');
+
+}
+
+function setSelectedList(keyCode, field) {
+    // TODO
+    console.log('arrow UP/Down');
+    let children = document.querySelector('[data-result-autocomplete] ul').children;
+
+    let $list = Array.prototype.slice.call(children, 0);
+    let currIndex = 0;
+    for(let i = 0; i<$list.length; i++) {
+        let $el = $list[i];
+        if ($el.className.includes('active')) {
+            currIndex = i;
+        }
+    }
+
+    let stepIndex = keyCode == 40 ? currIndex + 1 : currIndex - 1;
+
+    if (stepIndex==$list.length) {
+        stepIndex = 0;
+    }
+    /*console.log('keyCode',keyCode);
+    console.log('currIndex',currIndex);
+    console.log('$list.length',$list.length);
+    console.log('stepIndex',stepIndex);*/
+
+
+
+    for(let i = 0; i<$list.length; i++) {
+        let $el = $list[i];
+        $el.classList.remove('border-b');
+        $el.classList.remove('bg-gray-200');
+        $el.classList.remove('active');
+        if (stepIndex == i) {
+            $el.classList.add('border-b');
+            $el.classList.add('bg-gray-200');
+            $el.classList.add('active');
+            field.value = $el.textContent;
+
+        }
+    }
+
+
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // Click more search - show filter
     let $searchMore = Array.prototype.slice.call(document.querySelectorAll('[data-search-more]'), 0);
@@ -86,13 +156,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             $el.addEventListener('keyup', event =>  {
                 if ($el.value.trim().length >= 1 && (event.keyCode === 40 || event.keyCode === 38)) {
-                    // TODO
-                    // console.log('arrow UP/Down');
+                    setSelectedList(event.keyCode, $el);
                 }
             });
 
-            $el.addEventListener('keyup', debounce(() =>  {
+            $el.addEventListener('keyup', (event) =>  {
 
+                if ( (event.keyCode === 40 || event.keyCode === 38)) {
+                    return;
+                }
 
 
                 // hide filter autocomplete if textfield has <= 1 char
@@ -104,12 +176,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.querySelector('[data-filter-autocomplete]').classList.remove('hidden');
 
                     // Show placeholder
+                    document.querySelector('[data-placeholder-autocomplete]').classList.remove('hidden');
                     document.querySelector('[data-placeholder-autocomplete]').textContent = `Recherche de ${$el.value}...`;
 
                     // TODO call ajax and fill dom
+                    Axios.get('https://www.balldontlie.io/api/v1/players')
+                        .then(function (response) {
+                            updateList(response.data.data);
+                        });
                 }
 
-            },100));
+            });
         });
     }
 });
