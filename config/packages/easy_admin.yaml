@@ -5,11 +5,11 @@ easy_admin:
         assets:
             favicon: '/favicon_admin.png'
             css:
-                - '/assets/dropzone.min.css'
-                - '/assets/custom.css'
+                - '/bundles/eadmin/dropzone.min.css'
+                - '/bundles/eadmin/custom.css'
             js:
-                - '/assets/dropzone.min.js'
-                - '/assets/custom.js'
+                - '/bundles/eadmin/dropzone.min.js'
+                - '/bundles/eadmin/custom.js'
         menu:
             - { label: 'Event Metadata'}
             - {entity: 'Event', default: true}
