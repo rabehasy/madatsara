@@ -2,6 +2,8 @@
 // Axios
 import Axios from 'axios';
 
+// Autocomplete
+import AutoComplete from './autocomplete';
 
 /**
  * Execute a function given a delay time
@@ -25,68 +27,6 @@ var debounce = (func, wait, immediate) => {
         if (callNow) func.apply(context, args);
     };
 };
-function setSubmitForm(el) {
-    console.log(el.closest('form').action);
-}
-function updateList(data, field) {
-
-    let $target = document.querySelector('[data-result-autocomplete] ul');
-
-    let listHtml = [];
-
-    // Fill dom
-    let $list = Array.prototype.slice.call(data, 0);
-    let n = 0;
-    $list.forEach(($el) => {
-        listHtml.push('<li onclick="document.querySelector(\'[data-search-field]\').value = \'' + $el.first_name + '\';" onmouseenter="this.classList.add(\'bg-gray-200\');" onmouseleave="this.classList.remove(\'bg-gray-200\');" data-plain-txt="' + $el.first_name + '" class="cursor-pointer p-3 ' + (n == 0 ? ' border-b bg-gray-200 active' : '')+ '">' + $el.first_name + '</li>');
-        n++;
-    });
-    $target.innerHTML = listHtml.join(' ');
-
-    // Hide  data-placeholder-autocomplete
-    document.querySelector('[data-placeholder-autocomplete]').classList.add('hidden');
-
-}
-
-function setSelectedList(keyCode, field) {
-    // TODO
-    console.log('arrow UP/Down');
-    let children = document.querySelector('[data-result-autocomplete] ul').children;
-
-    let $list = Array.prototype.slice.call(children, 0);
-    let currIndex = 0;
-    for(let i = 0; i<$list.length; i++) {
-        let $el = $list[i];
-        if ($el.className.includes('active')) {
-            currIndex = i;
-        }
-    }
-
-    let stepIndex = keyCode == 40 ? currIndex + 1 : currIndex - 1;
-
-    if (stepIndex==$list.length) {
-        stepIndex = 0;
-    }
-
-
-
-    for(let i = 0; i<$list.length; i++) {
-        let $el = $list[i];
-        $el.classList.remove('border-b');
-        $el.classList.remove('bg-gray-200');
-        $el.classList.remove('active');
-        if (stepIndex == i) {
-            $el.classList.add('border-b');
-            $el.classList.add('bg-gray-200');
-            $el.classList.add('active');
-            field.value = $el.textContent;
-
-        }
-    }
-
-
-}
-
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -101,9 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Hide icon more
                 this.classList.toggle("hidden");
-
-                // Hide filter autocomplete
-                document.querySelector('[data-filter-autocomplete]').classList.add('hidden');
 
                 // Get the "main-nav" element
                 let $target = document.querySelector('[data-filter-more]');
@@ -150,44 +87,29 @@ document.addEventListener('DOMContentLoaded', () => {
     let $searchField = Array.prototype.slice.call(document.querySelectorAll('[data-search-field]'), 0);
     if ($searchField.length > 0) {
 
-        // Add a click event on each of them
-        $searchField.forEach( ($el) => {
-
-            $el.addEventListener('keyup', event =>  {
-                if ($el.value.trim().length >= 1 && (event.keyCode === 40 || event.keyCode === 38)) {
-                    setSelectedList(event.keyCode, $el);
-                }
-            });
-
-            $el.addEventListener('keyup', (event) =>  {
-
-                if ( (event.keyCode === 40 || event.keyCode === 38)) {
-                    return;
-                }
-
-
-                // hide filter autocomplete if textfield has <= 1 char
-                document.querySelector('[data-filter-autocomplete]').classList.add('hidden');
-
-                if ($el.value.trim().length >= 1) {
-
-                    // show filter autocomplete
-                    document.querySelector('[data-filter-autocomplete]').classList.remove('hidden');
-
-                    // Show placeholder
-                    document.querySelector('[data-placeholder-autocomplete]').classList.remove('hidden');
-                    document.querySelector('[data-placeholder-autocomplete]').textContent = `Recherche de ${$el.value}...`;
-
-                    // TODO call ajax and fill dom
-                    Axios.get('https://www.balldontlie.io/api/v1/players')
-                        .then(function (response) {
-                            updateList(response.data.data, $el);
-                        });
-                }
-
-            });
+        new AutoComplete({
+            selector: '[data-search-field]',
+            minChars: 2,
+            selectedClass: 'bg-gray-200',
+            source: function(term, suggest){
+                Axios.get('https://www.balldontlie.io/api/v1/players?q=' + encodeURIComponent(term))
+                    .then(function (response) {
+                        let choices = response.data.data;
+                        var matches = [];
+                        for (let i=0; i<choices.length; i++) {
+                            matches.push(choices[i].first_name);
+                        }
+                        suggest(matches);
+                    });
+            },
+            renderItem: function (item, search){
+                search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                return '<li class="autocomplete-suggestion cursor-pointer p-3 " data-val="' + item  + '"><i class="fa fa-search"></i> ' + item  + '</li>';
+            }
         });
 
     }
+
+
 
 });
