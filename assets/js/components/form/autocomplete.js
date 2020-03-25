@@ -1,3 +1,6 @@
+/**
+ * Autocompletion
+ */
 var autoComplete = (function(){
     function autoComplete(options){
         if (!document.querySelector) return;
