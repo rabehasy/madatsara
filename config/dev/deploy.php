@@ -27,7 +27,7 @@ return new class extends DefaultDeployer
     public function beforePublishing()
     {
         $this->log('<h1>chown -R web: /releases</>');
-        $this->runRemote('ln -s {{ deploy_dir }}/releases/assets/eadmin {{ deploy_dir }}/releases/public/bundles/eadmin');
+        $this->runRemote('ln -s assets/eadmin public/bundles/eadmin');
         $this->runRemote('sudo chown -R web: {{ deploy_dir }}/releases');
     }
     // run some local or remote commands after the deployment is finished
