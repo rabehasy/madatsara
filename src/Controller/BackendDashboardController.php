@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\EasyAdminController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class BackendDashboardController extends AbstractController
+class BackendDashboardController extends EasyAdminController
 {
     /**
      * @Route("/backend/dashboard", name="backend_dashboard")

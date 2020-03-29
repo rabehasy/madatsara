@@ -36,9 +36,12 @@ easy_admin:
         actions:
             - { name: 'new', icon: 'plus'}
             - { name: 'edit', icon: 'pencil'}
+            - { name: 'copy', icon: 'copy'}
             - { name: 'delete', icon: 'trash'}
         collapse_actions: true
-        batch_actions: ['delete']
+        batch_actions:
+            - { name: 'delete', icon: 'trash'}
+            - { name: 'copy', icon: 'copy'}
 
     formats:
         datetime: 'Y-m-d H:i:s'
@@ -84,6 +87,7 @@ easy_admin:
                 title: '%%entity_label%% (#%%entity_id%%)'
         Event:
             class: App\Entity\Event
+            controller: App\Controller\BackendEventController
             label: 'Events'
             help: 'Events General Management'
             list:
