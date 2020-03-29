@@ -11,6 +11,7 @@ easy_admin:
                 - '/bundles/eadmin/dropzone.min.js'
                 - '/bundles/eadmin/custom.js'
         menu:
+            - { label: 'Dashboard', route: 'backend_dashboard', icon: 'home' }
             - { label: 'Event Metadata'}
             - {entity: 'Event', default: true}
             - Thematic
