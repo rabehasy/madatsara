@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ApiController extends AbstractController
 {
     /**
-     * @Route("/api", name="api")
+     * @Route("/oldapi", name="api")
      */
     public function index()
     {
