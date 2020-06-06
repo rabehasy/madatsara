@@ -57,7 +57,7 @@ class Commune
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $deletedAt;
+    private $disabledAt;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -197,14 +197,14 @@ class Commune
         return $this;
     }
 
-    public function getDeletedAt(): ?\DateTimeInterface
+    public function getDisabledAt(): ?\DateTimeInterface
     {
-        return $this->deletedAt;
+        return $this->disabledAt;
     }
 
-    public function setDeletedAt(?\DateTimeInterface $deletedAt): self
+    public function setDisabledAt(?\DateTimeInterface $disabledAt): self
     {
-        $this->deletedAt = $deletedAt;
+        $this->disabledAt = $disabledAt;
 
         return $this;
     }

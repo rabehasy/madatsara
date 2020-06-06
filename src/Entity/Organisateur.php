@@ -42,7 +42,7 @@ class Organisateur
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $deletedAt;
+    private $disabledAt;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Media", inversedBy="organisateurs")
@@ -134,14 +134,14 @@ class Organisateur
         return $this;
     }
 
-    public function getDeletedAt(): ?\DateTimeInterface
+    public function getDisabledAt(): ?\DateTimeInterface
     {
-        return $this->deletedAt;
+        return $this->disabledAt;
     }
 
-    public function setDeletedAt(?\DateTimeInterface $deletedAt): self
+    public function setDisabledAt(?\DateTimeInterface $disabledAt): self
     {
-        $this->deletedAt = $deletedAt;
+        $this->disabledAt = $disabledAt;
 
         return $this;
     }

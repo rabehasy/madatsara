@@ -47,7 +47,7 @@ class EventGroup
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $deletedAt;
+    private $disabledAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\EventGroup", inversedBy="eventGroups")
@@ -151,14 +151,14 @@ class EventGroup
         return $this;
     }
 
-    public function getDeletedAt(): ?\DateTimeInterface
+    public function getDisabledAt(): ?\DateTimeInterface
     {
-        return $this->deletedAt;
+        return $this->disabledAt;
     }
 
-    public function setDeletedAt(?\DateTimeInterface $deletedAt): self
+    public function setDisabledAt(?\DateTimeInterface $disabledAt): self
     {
-        $this->deletedAt = $deletedAt;
+        $this->disabledAt = $disabledAt;
 
         return $this;
     }
