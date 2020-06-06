@@ -59,6 +59,11 @@ class Media
      */
     private $organisateurs;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $main;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -249,6 +254,18 @@ class Media
             $this->organisateurs->removeElement($organisateur);
             $organisateur->removeMedium($this);
         }
+
+        return $this;
+    }
+
+    public function getMain(): ?bool
+    {
+        return $this->main;
+    }
+
+    public function setMain(?bool $main): self
+    {
+        $this->main = $main;
 
         return $this;
     }
