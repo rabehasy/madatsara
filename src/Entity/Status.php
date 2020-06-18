@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,7 +25,7 @@ class Status
     private $name;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $createdAt;
 
@@ -36,6 +38,16 @@ class Status
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $disabledAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\MemberEvent", mappedBy="Status")
+     */
+    private $memberEvents;
+
+    public function __construct()
+    {
+        $this->memberEvents = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -104,5 +116,36 @@ class Status
     public function PreUpdate()
     {
         $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * @return Collection|MemberEvent[]
+     */
+    public function getMemberEvents(): Collection
+    {
+        return $this->memberEvents;
+    }
+
+    public function addMemberEvent(MemberEvent $memberEvent): self
+    {
+        if (!$this->memberEvents->contains($memberEvent)) {
+            $this->memberEvents[] = $memberEvent;
+            $memberEvent->setStatus($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMemberEvent(MemberEvent $memberEvent): self
+    {
+        if ($this->memberEvents->contains($memberEvent)) {
+            $this->memberEvents->removeElement($memberEvent);
+            // set the owning side to null (unless already changed)
+            if ($memberEvent->getStatus() === $this) {
+                $memberEvent->setStatus(null);
+            }
+        }
+
+        return $this;
     }
 }

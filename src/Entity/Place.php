@@ -37,7 +37,7 @@ class Place
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $address;
+    private $contacts;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -137,14 +137,14 @@ class Place
         return $this;
     }
 
-    public function getAddress(): ?string
+    public function getContacts(): ?string
     {
-        return $this->address;
+        return $this->contacts;
     }
 
-    public function setAddress(?string $address): self
+    public function setContacts(?string $contacts): self
     {
-        $this->address = $address;
+        $this->contacts = $contacts;
 
         return $this;
     }

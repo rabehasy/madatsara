@@ -28,16 +28,6 @@ class MemberEvent
     private $description;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $Event;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $status;
-
-    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $createdAt;
@@ -51,6 +41,26 @@ class MemberEvent
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $disabledAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Status", inversedBy="memberEvents")
+     */
+    private $Status;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="memberEvents")
+     */
+    private $Event;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="memberEvents")
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Media", inversedBy="memberEvents")
+     */
+    private $media;
 
     public function getId(): ?int
     {
@@ -77,30 +87,6 @@ class MemberEvent
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getEvent(): ?int
-    {
-        return $this->Event;
-    }
-
-    public function setEvent(?int $Event): self
-    {
-        $this->Event = $Event;
-
-        return $this;
-    }
-
-    public function getStatus(): ?int
-    {
-        return $this->status;
-    }
-
-    public function setStatus(?int $status): self
-    {
-        $this->status = $status;
 
         return $this;
     }
@@ -155,5 +141,53 @@ class MemberEvent
     public function PreUpdate()
     {
         $this->updatedAt = new \DateTime();
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->Status;
+    }
+
+    public function setStatus(?Status $Status): self
+    {
+        $this->Status = $Status;
+
+        return $this;
+    }
+
+    public function getEvent(): ?Event
+    {
+        return $this->Event;
+    }
+
+    public function setEvent(?Event $Event): self
+    {
+        $this->Event = $Event;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getMedia(): ?Media
+    {
+        return $this->media;
+    }
+
+    public function setMedia(?Media $media): self
+    {
+        $this->media = $media;
+
+        return $this;
     }
 }

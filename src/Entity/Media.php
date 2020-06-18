@@ -64,12 +64,18 @@ class Media
      */
     private $main;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\MemberEvent", mappedBy="media")
+     */
+    private $memberEvents;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
         $this->places = new ArrayCollection();
         $this->artistes = new ArrayCollection();
         $this->organisateurs = new ArrayCollection();
+        $this->memberEvents = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -266,6 +272,37 @@ class Media
     public function setMain(?bool $main): self
     {
         $this->main = $main;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|MemberEvent[]
+     */
+    public function getMemberEvents(): Collection
+    {
+        return $this->memberEvents;
+    }
+
+    public function addMemberEvent(MemberEvent $memberEvent): self
+    {
+        if (!$this->memberEvents->contains($memberEvent)) {
+            $this->memberEvents[] = $memberEvent;
+            $memberEvent->setMedia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMemberEvent(MemberEvent $memberEvent): self
+    {
+        if ($this->memberEvents->contains($memberEvent)) {
+            $this->memberEvents->removeElement($memberEvent);
+            // set the owning side to null (unless already changed)
+            if ($memberEvent->getMedia() === $this) {
+                $memberEvent->setMedia(null);
+            }
+        }
 
         return $this;
     }

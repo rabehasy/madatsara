@@ -77,11 +77,6 @@ class Event
     private $eventGroup;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\MemberEvent", cascade={"persist", "remove"})
-     */
-    private $memberEvent;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Hour", inversedBy="events")
      */
     private $hour;
@@ -105,6 +100,11 @@ class Event
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $slug;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\MemberEvent", mappedBy="Event")
+     */
+    private $memberEvents;
 
     public function __construct()
     {
@@ -354,18 +354,6 @@ class Event
         if ($this->eventGroup->contains($eventGroup)) {
             $this->eventGroup->removeElement($eventGroup);
         }
-
-        return $this;
-    }
-
-    public function getMemberEvent(): ?MemberEvent
-    {
-        return $this->memberEvent;
-    }
-
-    public function setMemberEvent(?MemberEvent $memberEvent): self
-    {
-        $this->memberEvent = $memberEvent;
 
         return $this;
     }
