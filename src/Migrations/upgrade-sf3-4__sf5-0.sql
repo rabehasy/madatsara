@@ -1,35 +1,38 @@
 -- TRUNCATE
-TRUNCATE TABLE `access_type`;
-TRUNCATE TABLE `api`;
-TRUNCATE TABLE `artiste`;
-TRUNCATE TABLE `artiste_artiste`;
-TRUNCATE TABLE `artiste_media`;
-TRUNCATE TABLE `commune`;
-TRUNCATE TABLE `date`;
-TRUNCATE TABLE `event`;
 TRUNCATE TABLE `event_artiste`;
 TRUNCATE TABLE `event_date`;
-TRUNCATE TABLE `event_group`;
 TRUNCATE TABLE `event_group_related`;
 TRUNCATE TABLE `event_hour`;
 TRUNCATE TABLE `event_media`;
 TRUNCATE TABLE `event_organisateur`;
 TRUNCATE TABLE `event_place`;
 TRUNCATE TABLE `event_thematic`;
-TRUNCATE TABLE `fake_data`;
-TRUNCATE TABLE `hour`;
-TRUNCATE TABLE `keyword_search`;
-TRUNCATE TABLE `media`;
-TRUNCATE TABLE `member_event`;
-TRUNCATE TABLE `organisateur`;
+TRUNCATE TABLE `artiste_artiste`;
+TRUNCATE TABLE `artiste_media`;
 TRUNCATE TABLE `organisateur_media`;
-TRUNCATE TABLE `place`;
 TRUNCATE TABLE `place_media`;
-TRUNCATE TABLE `quartier`;
-TRUNCATE TABLE `region`;
-TRUNCATE TABLE `status`;
-TRUNCATE TABLE `subscriber`;
-TRUNCATE TABLE `thematic`;
+--
+DELETE FROM `event_group` WHERE parent_id IS NOT NULL;
+DELETE FROM `event_group` ;
+DELETE FROM `artiste`;
+DELETE FROM `commune`;
+DELETE FROM `date`;
+DELETE FROM `fake_data`;
+DELETE FROM `hour`;
+DELETE FROM `keyword_search`;
+DELETE FROM `member_event`;
+DELETE FROM `media`;
+DELETE FROM `organisateur`;
+DELETE FROM `place`;
+DELETE FROM `quartier`;
+DELETE FROM `region`;
+DELETE FROM `status`;
+DELETE FROM `subscriber`;
+DELETE FROM `thematic`;
+DELETE FROM `event`;
+DELETE FROM `api`;
+DELETE FROM `access_type`;
+DELETE FROM `user`;
 -- thematic
 INSERT INTO `thematic` (`id`, `name`, `created_at`, `updated_at`, `disabled_at`, `slug`)
 SELECT `id`, `name`, `created_at`, `updated_at`, NULL,  `slug` FROM `madatsara`.`event_type`;
@@ -39,6 +42,9 @@ SELECT `id`, `name`, `created_at`, `updated_at`, NULL FROM `madatsara`.`api`;
 -- artiste
 INSERT INTO `artiste` (`id`, `name`, `updated_at`, `disabled_at`, `slug`)
 SELECT `id`, `name`, `updated_at`, NULL,  `slug` FROM `madatsara`.`event_artistes_dj_organisateurs` WHERE `type` IN('artiste','--- Choisir ---');
+-- artiste_artiste
+INSERT INTO `artiste_artiste` (`artiste_source`, `artiste_target`)
+SELECT `child_id`, `parent_id` FROM `madatsara`.artiste_by_groupartists;
 -- media
 INSERT INTO `media` (`file`)
 SELECT `photo` FROM `madatsara`.`event_artistes_dj_organisateurs` WHERE `type` IN('artiste','--- Choisir ---') AND `photo` IS NOT NULL;
@@ -64,9 +70,12 @@ WHERE x.`type` IN('organisateur') AND x.`photo` IS NOT NULL;
 -- Date
 INSERT INTO `date` (`id`, `date`)
 SELECT `id`, `date` FROM `madatsara`.`event_date`;
+-- access
+INSERT INTO `access_type` (`id`, `name`, `created_at`, `updated_at`, `disabled_at`)
+SELECT `id`, `name`, `created_at`, `updated_at`, NULL FROM `madatsara`.`entree_type`;
 -- event
-INSERT INTO `event` (`id`, `name`, `description`, `api_id`, `created_at`, `disabled_at`, `slug`)
-SELECT `id`, `name`, `description`, `api_id`, `created_at`, `deletedAt`, `slug` FROM `madatsara`.`event` WHERE `name` IS NOT NULL;
+INSERT INTO `event` (`id`, `name`, `description`, `api_id`, `created_at`, `disabled_at`, `slug`, `access_type_id`)
+SELECT `id`, `name`, `description`, `api_id`, `created_at`, `deletedAt`, `slug`, `entreetype_id` FROM `madatsara`.`event` WHERE `name` IS NOT NULL;
 -- event_artiste
 INSERT INTO `event_artiste` (`event_id`, `artiste_id`)
 SELECT b.`id`, x.`event_artistes_dj_organisateurs_id` FROM `event` b
@@ -116,9 +125,6 @@ INNER JOIN `place` a ON a.id = x.`event_lieu_id`;
 INSERT INTO `event_thematic` (`event_id`, `thematic_id`)
 SELECT `event_id`, `event_type_id` FROM `madatsara`.`event_event_type` x
 INNER JOIN `thematic` a ON a.id = x.`event_type_id`;
--- access
-INSERT INTO `access_type` (`id`, `name`, `created_at`, `updated_at`, `disabled_at`)
-SELECT `id`, `name`, `created_at`, `updated_at`, NULL FROM `madatsara`.`entree_type`;
 -- media lieux
 INSERT INTO `media` (`file`)
 SELECT `logo` FROM `madatsara`.`event_lieu` WHERE `logo` != "";
@@ -147,4 +153,3 @@ SELECT a.`id`, a.`name`, a.`description`, a.`created_at`, a.`updated_at`, a.`sta
 FROM `madatsara`.`event_by_member` a
 INNER JOIN `media` x ON x.file = a.flyer AND a.flyer != ""
 WHERE `name` IS NOT NULL AND `description` IS NOT NULL;
-
