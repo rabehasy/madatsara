@@ -5,12 +5,24 @@
     {{ block('form_widget_simple') }}
 {% endblock %}
 
-{% block button_widget -%}
-        <div class="mt-10 flex justify-center">
-            {%- set attr = attr|merge({class: (attr.class|default('bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'))|trim}) -%}
-            {{- parent() -}}
-        </div>
-{%- endblock button_widget %}
+{%- block button_widget -%}
+<div class="mt-10 flex justify-center">
+    {%- if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+                '%name%': name,
+                '%id%': id,
+            }) %}
+        {%- elseif label is same as(false) -%}
+            {% set translation_domain = false %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    <button class="{{ block('custom_button_class') }}" type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ translation_domain is same as(false) ? label : label|trans(label_translation_parameters, translation_domain) }}</button>
+    </div>
+{%- endblock button_widget -%}
+
 
 {%- block form_widget_simple -%}
     <input type="{{ type }}"
@@ -21,30 +33,90 @@
             {% if required is defined %}required {% endif %}/>
 {%- endblock form_widget_simple -%}
 
-{% block form_label -%}
-    {%- if label is same as(false) -%}
-        <div class="{{ block('form_label_class') }}"></div>
-    {%- else -%}
-        {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' ' ~ block('form_label_class'))|trim}) -%}
-        <div class="md:w-1/3">
-            {{- parent() -}}
-        </div>
-    {%- endif -%}
-{%- endblock form_label %}
+{%- block textarea_widget -%}
+    <textarea
+            class="{{ block('input_class') }}"
+            {{ block('widget_attributes') }}>{{ value }}</textarea>
+{%- endblock textarea_widget -%}
+
 
 {% block form_row -%}
+    {%- if compound is defined and compound -%}
+        {%- set element = 'fieldset' -%}
+    {%- endif -%}
     {%- set widget_attr = {} -%}
-    <div class="mb-6">
-        <div class="md:flex md:items-center row mb-2">
+    <{{ element|default('div') }} class="mb-6">
+        {%- if compound is defined and compound -%}
+        {% else %}
+            <div class="md:flex md:items-center row mb-2">
+        {% endif %}
             {{- form_label(form) -}}
             <div class="{{ block('form_group_class') }}">
                 {{- form_widget(form, widget_attr) -}}
                 {{- form_help(form) -}}
             </div>
+    {%- if compound is defined and compound -%}
+    {% else %}
         </div>
+    {% endif %}
         {{ form_errors(form)  }}
-    </div>
+    </{{ element|default('div') }}>
 {%- endblock form_row %}
+
+{# Labels #}
+
+{% block form_label -%}
+    {% if label is not same as(false) -%}
+        {%- if compound is defined and compound -%}
+            {%- set element = 'legend' -%}
+            {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' col-form-label')|trim}) -%}
+        {%- else -%}
+            {%- set label_attr = label_attr|merge({for: id}) -%}
+        {%- endif -%}
+        {% if required -%}
+            {% set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' required')|trim}) %}
+        {%- endif -%}
+        {% if label is empty -%}
+            {%- if label_format is not empty -%}
+                {% set label = label_format|replace({
+                    '%name%': name,
+                    '%id%': id,
+                }) %}
+            {%- else -%}
+                {% set label = name|humanize %}
+            {%- endif -%}
+        {%- endif -%}
+
+        {%- if compound is defined and compound -%}
+        {% else %}
+            <div class="md:w-1/3">
+        {%- endif -%}
+
+        <{{ element|default('label') }}
+             {% if label_attr %}
+                 {% with { attr: label_attr } %}
+                    {{ block('attributes') }}
+                {% endwith %}
+             {% endif %}>
+            {{ translation_domain is same as(false) ? label : label|trans(label_translation_parameters, translation_domain) }}
+            {% block form_label_errors %}
+                {{- form_errors(form) -}}
+            {% endblock form_label_errors %}
+        </{{ element|default('label') }}>
+
+        {%- if compound is defined and compound -%}
+        {% else %}
+            </div>
+        {%- endif -%}
+
+    {%- else -%}
+        {%- if errors|length > 0 -%}
+            <div id="{{ id }}_errors" class="error-label">
+                {{- form_errors(form) -}}
+            </div>
+        {%- endif -%}
+    {%- endif -%}
+{%- endblock form_label %}
 
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
