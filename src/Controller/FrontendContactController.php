@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Length;
@@ -23,7 +24,7 @@ class FrontendContactController extends AbstractController
     public function index(Request $request)
     {
         $form = $this->createFormBuilder()
-            ->add('Name', null, [
+            ->add('Name', TextType::class, [
                 // Todo - Translate
                 'label' => 'Votre nom : ',
                 'constraints' => [
