@@ -33,23 +33,3 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-
-    App\Routing\ExtraLoader:
-        tags: [routing.loader]
-
-    App\Service\FileUploader:
-        arguments:
-            $targetDirectory: '%dossier.flyers%'
-
-#    App\EventListener\EventActionsPersist:
-#            tags:
-#                -
-#                    name: 'doctrine.orm.entity_listener'
-#                    event: 'prePersist'
-#                    entity: 'App\Entity\Event'
-
-    App\EventListener\EntitiesActionPersist:
-            tags:
-                -
-                    name: 'doctrine.event_listener'
-                    event: 'prePersist'
