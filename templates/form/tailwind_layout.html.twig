@@ -154,6 +154,18 @@
     </form></div>
 {%- endblock form_end -%}
 
+{%- block checkbox_widget -%}
+    <div class="bg-white border-2 rounded border-gray-400 w-6 h-6 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500">
+        <input
+                type="checkbox"
+                class="opacity-0 absolute"
+                {% if value is defined %} value="{{ value }}"{% endif %}
+                {% if checked %} checked="checked"{% endif %}
+        />
+        <svg class="fill-current hidden w-4 h-4 text-green-500 pointer-events-none" viewBox="0 0 20 20"><path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/></svg>
+    </div>
+{%- endblock checkbox_widget -%}
+
 {% block form_label_class -%}
     block text-grey-darker font-bold md:text-right mb-1 md:mb-0 pr-4
 {% endblock form_label_class -%}
