@@ -133,6 +133,27 @@
     {%- endif -%}
 {%- endblock form_errors -%}
 
+{%- block form_start -%}
+    {%- do form.setMethodRendered() -%}
+    {% set method = method|upper %}
+    {%- if method in ["GET", "POST"] -%}
+        {% set form_method = method %}
+    {%- else -%}
+        {% set form_method = "POST" %}
+    {%- endif -%}
+    <div class="mt-4"><form{% if name != '' %} name="{{ name }}"{% endif %} method="{{ form_method|lower }}"{% if action != '' %} action="{{ action }}"{% endif %}{{ block('attributes') }}{% if multipart %} enctype="multipart/form-data"{% endif %}>
+    {%- if form_method != method -%}
+        <input type="hidden" name="_method" value="{{ method }}" />
+    {%- endif -%}
+{%- endblock form_start -%}
+
+{%- block form_end -%}
+        {%- if not render_rest is defined or render_rest -%}
+            {{ form_rest(form) }}
+        {%- endif -%}
+    </form></div>
+{%- endblock form_end -%}
+
 {% block form_label_class -%}
     block text-grey-darker font-bold md:text-right mb-1 md:mb-0 pr-4
 {% endblock form_label_class -%}
