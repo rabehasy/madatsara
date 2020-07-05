@@ -167,6 +167,10 @@
     </div>
 {%- endblock checkbox_widget -%}
 
+{% block re_captcha_row %}
+    <div data-sitekey="{{ gg_recaptcha_site_key }}"  class="g-recaptcha"></div>
+{% endblock %}
+
 {% block form_label_class -%}
     block text-grey-darker font-bold md:text-right mb-1 md:mb-0 pr-4
 {% endblock form_label_class -%}

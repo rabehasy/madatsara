@@ -32,3 +32,5 @@ import './components/navigation';
 // Search field
 import './components/form/search';
 import Axios from "axios";
+
+import './components/form/parsley';

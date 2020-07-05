@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Form\Type\PostalAdressType;
 use App\Form\Type\RecaptchaType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -58,6 +57,10 @@ class FrontendContactController extends AbstractController
                 // Todo - Translate
                 'label' => 'Souscrire à notre newsletter',
                 'required' => false
+            ])
+
+            ->add('captcha', ReCaptchaType::class, [
+                'type' => 'invisible' // (invisible, checkbox)
             ])
             // Todo - add recaptcha bundle
             ->add('Save', SubmitType::class,[
