@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Form\Type\RecaptchaType;
+use App\Form\Type\ReCaptchaType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
