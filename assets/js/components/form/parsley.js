@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import 'parsleyjs'
+import 'parsleyjs/dist/i18n/fr'
 
 $(function () {
     $('form[name=form]').parsley().on('field:validated', function() {

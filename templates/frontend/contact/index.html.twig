@@ -13,18 +13,13 @@
     {% endfor %}
 {% endfor %}
 
-{# form #}
-{% if form is rootform  %}
-    {{ form_errors(form) }}
-{% endif %}
+
 
 <div class="mt-4 mb-4 bs-callout-warning bg-red-100 border-l-4 border-red-500 text-red-700 p-4 hidden" role="alert">
-    <p class="font-bold">Oh snap!</p>
     <p>This form seems to be invalid :(</p>
 </div>
 
 <div class="mt-4 mb-4 bs-callout-info  bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 hidden" role="alert">
-    <p class="font-bold">ay!</p>
     <p>Everything seems to be ok :)</p>
 </div>
 
