@@ -69,7 +69,16 @@
 
                 </div>
                 <div id="main-nav" class="w-full flex-grow sm:flex items-center sm:w-auto hidden">
-                    <div class="sm:flex-grow"></div>
+                    <div class="sm:flex-grow">
+                        <form action="{{ path('frontend_search') }}" class="flex mx-5">
+                            <div class="relative w-full mt-1 bg-gray-100 shadow rounded-lg ">
+                                <input name="search" data-search-field type="text" maxlength="255" class="bg-gray-100 w-full  outline-none border-0 p-3" placeholder="Chercher un événement ...">
+                            </div>
+                            <div class="bg-white px-2 ">
+                                <i class="cursor-pointer fas fa-search self-center" data-tippy-content="Chercher"></i>
+                            </div>
+                        </form>
+                    </div>
                     <div>
                         <a href="{{ path('frontend_contact') }}" class="no-underline block mt-4 sm:inline-block sm:mt-0 text-white hover:text-grey-light mr-4">
                             Contact
@@ -82,79 +91,7 @@
     </div>
 
     <div class="container mx-auto px-3 lg:p-0">
-        <form action="{{ path('frontend_search') }}">
-            <div class="relative w-full px-3 mt-1 bg-gray-100 shadow rounded-lg flex">
-                <i class="cursor-pointer fas fa-search self-center" data-tippy-content="Chercher"></i>
-                <input name="search" data-search-field type="text" maxlength="255" class="bg-gray-100 w-full  outline-none border-0 p-3" placeholder="Chercher un événement ...">
-                <i data-search-more class="cursor-pointer fas fa-sort-down ml-auto self-center" data-tippy-content="+ d'options"></i>
-            </div>
 
-            <div data-filter-more class="hidden relative w-full p-3 mb-1 border shadow flex">
-                <div class="w-full mt-2">
-                    <div class="md:flex md:items-center mb-6">
-                        <div class="w-1/12">
-                            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
-                                Artiste / Organisateur
-                            </label>
-                        </div>
-                        <div class=" border-b w-full">
-                            <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="" aria-label="">
-                        </div>
-                    </div>
-                    <div class="md:flex md:items-center mb-6">
-                        <div class="w-1/12" >
-                            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="inline-username">
-                                Lieu / Ville
-                            </label>
-                        </div>
-                        <div class=" border-b w-full">
-                            <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="" aria-label="">
-                        </div>
-                    </div>
-                    <div class="md:flex md:items-center mb-6">
-                        <div class="w-1/12" >
-                            <label class="block text-gray-500 md:text-right mb-1 md:mb-0 pr-4" for="inline-username">
-                                Date
-                            </label>
-                        </div>
-                        <div class=" w-full">
-                            <div class="flex flex-wrap ">
-                                <div class="w-full md:w-1/2 ">
-                                    <select class="block w-full  border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-                                        <option></option>
-                                        <option>Ce week end</option>
-                                        <option>La semaine prochaine</option>
-                                        <option>Ce mois-ci</option>
-                                        <option>Le mois prochain</option>
-                                    </select>
-                                </div>
-                                <div class="w-full md:w-1/2 px-3  border-b" data-datepicker>
-                                    <input data-input class="appearance-none bg-transparent border-none w-11/12 text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" id="grid-last-name" type="text" placeholder="">
-                                    <a class="input-button" data-tippy-content="Afficher le calendrier" data-toggle>
-                                        <i class="fas fa-calendar-alt"></i>
-                                    </a>
-                                    <a class="input-button" data-tippy-content="Effacer" data-clear>
-                                        <i class="fas fa-times"></i>
-                                    </a>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="md:flex md:justify-end">
-
-                            <a href="#" data-tippy-content="Reçevoir une alerte par email ?">
-                                Créer une alerte
-                            </a>
-                            <button class="ml-2 shadow focus:shadow-outline focus:outline-none text-white --bg-button py-2 px-4 rounded" type="button">
-                                Appliquer
-                            </button>
-
-                    </div>
-                </div>
-            </div>
-    </form>
 
 
     {% block body %}Contenu du block par défaut{% endblock %}

@@ -49,7 +49,7 @@ var autoComplete = (function(){
 
             // create suggestions container "sc"
             that.sc = document.createElement('div');
-            that.sc.className = ' w-full border shadow ';
+            that.sc.className = ' w-full border shadow bg-white ';
 
             that.autocompleteAttr = that.getAttribute('autocomplete');
             that.setAttribute('autocomplete', 'off');
@@ -60,9 +60,10 @@ var autoComplete = (function(){
                 var rect = that.getBoundingClientRect();
                 that.sc.style.left = Math.round(rect.left + (window.pageXOffset || document.documentElement.scrollLeft) + o.offsetLeft) + 'px';
                 that.sc.style.top = Math.round(rect.bottom + (window.pageYOffset || document.documentElement.scrollTop) + o.offsetTop) + 'px';
-                // that.sc.style.width = Math.round(rect.right - rect.left) + 'px'; // outerWidth
+                that.sc.style.width = Math.round(rect.right - rect.left) + 'px'; // outerWidth
                 if (!resize) {
                     that.sc.style.display = 'block';
+                    that.sc.style.position = 'absolute';
                     if (!that.sc.maxHeight) { that.sc.maxHeight = parseInt((window.getComputedStyle ? getComputedStyle(that.sc, null) : that.sc.currentStyle).maxHeight); }
                     if (!that.sc.suggestionHeight) that.sc.suggestionHeight = that.sc.querySelector('.autocomplete-suggestion').offsetHeight;
                     if (that.sc.suggestionHeight)
@@ -76,7 +77,8 @@ var autoComplete = (function(){
                         }
                 }
 
-                that.closest('form').appendChild(that.sc);
+                // that.closest('form').appendChild(that.sc);
+                document.querySelector('body').appendChild(that.sc);
             }
 
             addEvent(window, 'resize', that.updateSC);
