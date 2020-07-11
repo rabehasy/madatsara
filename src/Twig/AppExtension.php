@@ -18,7 +18,7 @@ class AppExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('widget_recaptcha', [AppWidget::class, 'widgetRecaptcha'])
+//            new TwigFunction('widget_recaptcha', [AppWidget::class, 'widgetRecaptcha'])
         ];
     }
 
