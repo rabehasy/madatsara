@@ -92,6 +92,9 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "doctrine/sql-formatter": {
+        "version": "1.1.1"
+    },
     "easycorp/easy-deploy-bundle": {
         "version": "v1.0.6"
     },
@@ -126,6 +129,9 @@
     "fig/link-util": {
         "version": "1.1.0"
     },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.3"
+    },
     "google/recaptcha": {
         "version": "1.1",
         "recipe": {
@@ -140,6 +146,15 @@
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
+    },
+    "laminas/laminas-code": {
+        "version": "4.0.0"
+    },
+    "laminas/laminas-eventmanager": {
+        "version": "3.3.0"
+    },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.1.1"
     },
     "monolog/monolog": {
         "version": "2.0.2"
@@ -255,6 +270,9 @@
     },
     "symfony/dependency-injection": {
         "version": "v5.0.2"
+    },
+    "symfony/deprecation-contracts": {
+        "version": "v2.2.0"
     },
     "symfony/doctrine-bridge": {
         "version": "v5.0.2"
@@ -429,6 +447,9 @@
     "symfony/polyfill-php73": {
         "version": "v1.13.1"
     },
+    "symfony/polyfill-php80": {
+        "version": "v1.22.0"
+    },
     "symfony/process": {
         "version": "v5.0.2"
     },
@@ -440,6 +461,9 @@
     },
     "symfony/property-info": {
         "version": "v5.0.2"
+    },
+    "symfony/proxy-manager-bridge": {
+        "version": "v5.0.11"
     },
     "symfony/routing": {
         "version": "4.2",
