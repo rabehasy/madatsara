@@ -14,8 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Get the "main-nav" element
                 let $target = document.getElementById('main-nav');
 
+                let originStyleDisplay = $target.style.display;
+
                 // Toggle the class on "main-nav"
-                $target.classList.toggle('hidden');
+                $target.style.display = 'none' == originStyleDisplay || '' == originStyleDisplay ? 'block' : 'none';
 
             });
         });

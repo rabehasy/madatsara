@@ -1,0 +1,87 @@
+.header {
+  overflow: hidden;
+  background-color: var(--main-bg-color);
+  padding: 20px 10px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 10px;
+
+  a {
+    color: var(--link-active-bgcolor);
+    padding: 5px;
+    text-decoration: none;
+  }
+
+  nav {
+
+    a {
+      position: relative;
+
+      &:hover {
+
+        &:after {
+          width: 100%;
+          left: 0;
+        }
+      }
+      // Animation underline
+      &:after {
+        background: none repeat scroll 0 0 transparent;
+        bottom: 0;
+        content: "";
+        display: block;
+        height: 2px;
+        left: 50%;
+        position: absolute;
+        background: var(--link-active-bgcolor);
+        transition: width 0.3s ease 0s, left 0.3s ease 0s;
+        width: 0;
+      }
+
+      &.active {
+        &:after {
+          width: 100%;
+          left: 0;
+        }
+      }
+
+
+    }
+  }
+}
+
+.header-right {
+  // Align right
+  justify-self: end;
+  a {
+    padding: 12px;
+  }
+}
+
+#hamburger {
+  display: none;
+  .hamburger {
+    background-color: var(--main-bg-color);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #hamburger {
+    display: inline-block;
+    justify-self: end;
+  }
+  .header {
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr;
+  }
+  .header a {
+    display: block;
+    text-align: left;
+  }
+
+  .header-right {
+    display: none;
+    justify-self: auto;
+    grid-column: span 2;
+  }
+}

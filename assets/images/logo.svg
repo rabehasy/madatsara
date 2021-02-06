@@ -9,8 +9,8 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="54"
-   height="54"
+   width="45"
+   height="45"
    viewBox="0 0 14.287499 14.2875"
    version="1.1"
    id="svg8"
@@ -64,7 +64,7 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <g
+  <!--<g
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="s"
@@ -75,7 +75,7 @@
        id="path1389"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cssccsscc" />
-  </g>
+  </g>-->
   <g
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
