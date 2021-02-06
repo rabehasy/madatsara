@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MemberEventController extends AbstractController
 {
     /**
-     * @Route("/event", name="index")
+     * @Route("/event", name="member_event_index")
      */
     public function index()
     {

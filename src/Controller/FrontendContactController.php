@@ -58,10 +58,6 @@ class FrontendContactController extends AbstractController
                 'label' => 'Souscrire à notre newsletter',
                 'required' => false
             ])
-
-            ->add('captcha', ReCaptchaType::class, [
-                'type' => 'invisible' // (invisible, checkbox)
-            ])
             // Todo - add recaptcha bundle
             ->add('Save', SubmitType::class,[
                 // Todo - Translate

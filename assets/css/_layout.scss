@@ -10,6 +10,13 @@
     color: var(--link-active-bgcolor);
     padding: 5px;
     text-decoration: none;
+
+    // Text logo
+    &.logo {
+      color: var(--white-color);
+      font-size: 2em;
+      font-weight: bold;
+    }
   }
 
   nav {
@@ -64,7 +71,13 @@
     background-color: var(--main-bg-color);
   }
 }
-
+.container  {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
 @media screen and (max-width: 500px) {
   #hamburger {
     display: inline-block;
