@@ -13,11 +13,6 @@ import '@fortawesome/fontawesome-free/scss/regular.scss';
 import '@fortawesome/fontawesome-free/scss/solid.scss';
 import '@fortawesome/fontawesome-free/scss/brands.scss';
 
-// Tailwind
-import 'tailwindcss/dist/base.css';
-import 'tailwindcss/dist/components.css';
-import 'tailwindcss/dist/utilities.css';
-
 import '../css/app.scss';
 
 // Tooltip
