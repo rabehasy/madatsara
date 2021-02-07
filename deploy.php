@@ -47,6 +47,6 @@ task('chown:web', function () {
 after('cleanup', 'chown:clearcache:apps');
 task('chown:clearcache:apps', function () {
     // Yarn build
-    $task = run('cd ~/madatsara/{{branch}}/web && yarn install && yarn encore production');
+    $task = run('cd ~/madatsara/{{branch}}/sources && yarn install && yarn encore production');
     writeln('task results (yarn): '.$task);
 });
