@@ -15,31 +15,34 @@
         {% endblock %}
     </head>
     <body>
-    <header class="header">
-        <a href="{{ path('frontend_default') }}" class="logo">
-            <img src="{{ asset('build/images/logo.svg') }}" alt="">
-            Madatsara
-        </a>
-        <div id="hamburger">
-            <button  class="hamburger hamburger--squeeze" type="button">
-              <span class="hamburger-box">
-                <span class="hamburger-inner"></span>
-              </span>
-            </button>
-        </div>
-        <nav class="header-right" id="main-nav">
-            <a href="{{ path('frontend_event_all') }}">{{ 'Event' | trans }}</a>
-            <a href="{{ path('frontend_search') }}">{{ 'Recherche' | trans }}</a>
-            <a href="{{ path('frontend_contact') }}">{{ 'Contact' | trans }}</a>
-            <a href="{{ path('frontend_subscribenewsletter') }}">{{ 'Newsletter' | trans }}</a>
-            <a href="{{ path('member_event_index') }}">{{ 'Member event' | trans }}</a>
-            <a href="{{ path('frontend_realisation') }}">{{ 'Autres_realisations' | trans }}</a>
-        </nav>
-    </header>
+    <div id="holder">
+        <header id="header-content" class="header">
+            <a href="{{ path('frontend_default') }}" class="logo">
+                <img src="{{ asset('build/images/logo.svg') }}" alt="">
+                Madatsara
+            </a>
+            <div id="hamburger">
+                <button  class="hamburger hamburger--squeeze" type="button">
+                  <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                  </span>
+                </button>
+            </div>
+            <nav class="header-right" id="main-nav">
+                <a href="{{ path('frontend_event_all') }}">{{ 'Evénements' | trans }}</a>
+                <a href="{{ path('frontend_contact') }}"><i class="far fa-heart"></i> {{ 'Favoris' | trans }}</a>
+                <a href="{{ path('member_event_index') }}"><i class="far fa-user"></i> {{ 'Mon compte' | trans }}</a>
+            </nav>
+        </header>
 
-    <section class="container">
-        {% block body %}Contenu du block par défaut{% endblock %}
-    </section>
+        <section id="body-content" class="container">
+            {% block body %}Contenu du block par défaut{% endblock %}
+        </section>
+
+        <footer id="footer-content" class="container">
+            sss
+        </footer>
+    </div>
 
     {% block endbody %}
         {# 'app' must match the first argument to addEntry() in webpack.config.js #}
