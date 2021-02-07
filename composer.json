@@ -33,7 +33,8 @@
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {
-        "easycorp/easy-deploy-bundle": "^1.0",
+        "deployer/deployer": "^6.8",
+        "deployer/recipes": "^6.2",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
         "symfony/profiler-pack": "*",
