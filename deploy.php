@@ -27,7 +27,7 @@ set('allow_anonymous_stats', false);
 
 //host('madatsara')
 localhost()
-    ->set('deploy_path', '~/madatsara/{{branch}}');
+    ->set('deploy_path', '~/madatsara/{{branch}}/web');
 
 // Tasks
 
@@ -49,6 +49,6 @@ after('deploy:cache:clear', 'copy:build');
 after('cleanup', 'chown:clearcache:apps');
 task('chown:clearcache:apps', function () {
     // Yarn build
-    $task = run('cd ~/madatsara/{{branch}} && yarn install && yarn encore production');
+    $task = run('cd ~/madatsara/{{branch}}/web && yarn install && yarn encore production');
     writeln('task results (yarn): '.$task);
 });
