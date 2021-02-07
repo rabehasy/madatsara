@@ -44,8 +44,6 @@ task('chown:web', function () {
     run('cd {{release_path}} && sudo chown -R web.web {{release_path}}/var');
 });
 
-after('deploy:cache:clear', 'copy:build');
-
 after('cleanup', 'chown:clearcache:apps');
 task('chown:clearcache:apps', function () {
     // Yarn build
