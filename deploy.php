@@ -44,6 +44,11 @@ task('chown:web', function () {
     run('cd {{release_path}} && sudo chown -R web.web {{release_path}}/var');
 });
 
+after('deploy:cache:clear', 'copy:build');
+task('copy:build', function () {
+    run('ln -s ~/madatsara/{{branch}}/sources/public/build {{release_path}}/public/build');
+});
+
 after('cleanup', 'chown:clearcache:apps');
 task('chown:clearcache:apps', function () {
     // Yarn build
