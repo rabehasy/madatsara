@@ -10,10 +10,7 @@ class FrontendDefaultController extends AbstractController
     /**
      * @Route(
      *     "/",
-     *     name="frontend_default",
-     *     host="{domain}",
-     *     defaults={"domain"="madatsara.localhost"},
-     *     requirements={"domain"="madatsara.localhost|madatsara.com|dev.madatsara.com"}
+     *     name="frontend_default"
      * )
      */
     public function index()
