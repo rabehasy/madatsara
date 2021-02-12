@@ -12,6 +12,13 @@ html,body{
   background-color: var(--light-grayish-red-color);
   padding: 10px;
   border-top: solid 1px var(--very-soft-red-color);
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 10px;
+
+  a {
+    text-decoration: none;
+    color: var(--black-color);
+  }
 }
 
 .header {

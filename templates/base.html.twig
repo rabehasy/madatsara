@@ -28,19 +28,20 @@
                   </span>
                 </button>
             </div>
-            <nav class="header-right" id="main-nav">
-                <a href="{{ path('frontend_event_all') }}">{{ 'Evénements' | trans }}</a>
-                <a href="{{ path('frontend_contact') }}"><i class="far fa-heart"></i> {{ 'Favoris' | trans }}</a>
-                <a href="{{ path('member_event_index') }}"><i class="far fa-user"></i> {{ 'Mon compte' | trans }}</a>
-            </nav>
+            {% include '_partials/menu/main_nav.html.twig' %}
         </header>
 
         <section id="body-content" class="container">
             {% block body %}Contenu du block par défaut{% endblock %}
         </section>
 
-        <footer id="footer-content" class="container">
-            sss
+        <footer id="footer-content" class="container display__grid">
+             <div>
+                {{ 'now' | date('Y') }} - Madatsara
+             </div>
+            <div class="justify-self__end">
+             {% include '_partials/menu/footer_nav.html.twig' %}
+            </div>
         </footer>
     </div>
 
