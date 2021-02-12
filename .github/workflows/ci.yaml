@@ -3,7 +3,17 @@ name: CI
 on: [push]
 
 jobs:
+  build:
+    runs-on: [ubuntu-latest]
+    container:
+      image: mrabs/schoolmg-app-mg:exif
+    steps:
+      - uses: actions/checkout@v1
+      - name: composer update
+        run: composer update --prefer-dist --no-ansi --no-interaction --no-progress
+
   deploy:
+    if: github.ref == 'refs/heads/develop'
     runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v1
