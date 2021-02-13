@@ -15,7 +15,7 @@ class EntitiesActionPersist
         $this->slugger = $slugger;
     }
 
-    public function PrePersist(LifecycleEventArgs $args)
+    public function PrePersist(LifecycleEventArgs $args): void
     {
         $entity = $args->getObject();
 
@@ -27,9 +27,9 @@ class EntitiesActionPersist
             case "App\Entity\Artiste":
             case "App\Entity\Organisateur":
             case "App\Entity\Place":
-            case  "App\Entity\Commune" :
-            case "App\Entity\Region" :
-            case "App\Entity\Quartier" :
+            case "App\Entity\Commune":
+            case "App\Entity\Region":
+            case "App\Entity\Quartier":
             case "App\Entity\Thematic":
                 $entityToSlug = true;
                 break;
@@ -43,12 +43,14 @@ class EntitiesActionPersist
             return;
         }
 
-
         // setSlug
         $this->setSlugName($entity);
     }
 
-    private function setSlugName($entity)
+    /**
+     * @param mixed $entity
+     */
+    private function setSlugName($entity): void
     {
         // Convert to slug
         $slug = $this->slugger->slug($entity->getName());

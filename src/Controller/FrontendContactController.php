@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Form\Type\ReCaptchaType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -10,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -20,7 +20,7 @@ class FrontendContactController extends AbstractController
      * @Route("/contacter-madatsara.html", name="frontend_contact")
      */
     // http://madatsara.localhost/contacter-madatsara.html
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         $form = $this->createFormBuilder()
             ->add('Name', TextType::class, [
@@ -37,7 +37,7 @@ class FrontendContactController extends AbstractController
                 'constraints' => [
                     new NotBlank(),
                     new Length([
-                        'min' => 2
+                        'min' => 2,
                     ]),
                 ],
             ])
@@ -49,26 +49,25 @@ class FrontendContactController extends AbstractController
                     new Length([
                         'min' => 2,
                         // Todo - Translate
-                        'minMessage' => 'Value too short. It should have {{ limit }} character or more.|Value too short. It should have {{ limit }} characters or more.'
+                        'minMessage' => 'Value too short. It should have {{ limit }} character or more.|Value too short. It should have {{ limit }} characters or more.',
                     ]),
                 ],
             ])
             ->add('NewsletterSubscribe', CheckboxType::class, [
                 // Todo - Translate
                 'label' => 'Souscrire à notre newsletter',
-                'required' => false
+                'required' => false,
             ])
             // Todo - add recaptcha bundle
-            ->add('Save', SubmitType::class,[
+            ->add('Save', SubmitType::class, [
                 // Todo - Translate
-                'label' => 'Envoyer'
+                'label' => 'Envoyer',
             ])
             ->getForm();
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             // Todo - send email confirm
 
             // Todo - Send mail admin
@@ -79,7 +78,7 @@ class FrontendContactController extends AbstractController
             $this->addFlash('notice', 'frontend.contact.success_message');
 
             // Todo - Redirect to route "frontend_contact"
-            return $this->redirectToRoute("frontend_contact");
+            return $this->redirectToRoute('frontend_contact');
         }
 
         return $this->render('frontend/contact/index.html.twig', [

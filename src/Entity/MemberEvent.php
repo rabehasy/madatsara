@@ -130,7 +130,7 @@ class MemberEvent
     /**
      * @ORM\PrePersist()
      */
-    public function PrePersist()
+    public function PrePersist(): void
     {
         $this->createdAt = new \DateTime();
     }
@@ -138,7 +138,7 @@ class MemberEvent
     /**
      * @ORM\PreUpdate()
      */
-    public function PreUpdate()
+    public function PreUpdate(): void
     {
         $this->updatedAt = new \DateTime();
     }

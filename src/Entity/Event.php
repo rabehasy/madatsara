@@ -423,7 +423,7 @@ class Event
     /**
      * @ORM\PrePersist()
      */
-    public function PrePersist()
+    public function PrePersist(): void
     {
         $this->createdAt = new \DateTime();
     }
@@ -431,7 +431,7 @@ class Event
     /**
      * @ORM\PreUpdate()
      */
-    public function PreUpdate()
+    public function PreUpdate(): void
     {
         $this->updatedAt = new \DateTime();
     }

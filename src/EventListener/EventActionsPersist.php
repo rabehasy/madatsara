@@ -16,13 +16,13 @@ class EventActionsPersist
         $this->slugger = $slugger;
     }
 
-    public function PrePersist(Event $event, LifecycleEventArgs $eventArgs)
+    public function PrePersist(Event $event, LifecycleEventArgs $eventArgs): void
     {
         // setSlug
         $this->setSlugName($event);
     }
 
-    private function setSlugName(Event $event)
+    private function setSlugName(Event $event): void
     {
         // Convert to slug
         $slug = $this->slugger->slug($event->getName());

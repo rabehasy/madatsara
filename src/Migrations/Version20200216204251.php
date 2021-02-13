@@ -12,15 +12,15 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20200216204251 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return '';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('CREATE TABLE artiste_media (artiste_id INT NOT NULL, media_id INT NOT NULL, INDEX IDX_1E05BBF221D25844 (artiste_id), INDEX IDX_1E05BBF2EA9FDD75 (media_id), PRIMARY KEY(artiste_id, media_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE organisateur_media (organisateur_id INT NOT NULL, media_id INT NOT NULL, INDEX IDX_D2335517D936B2FA (organisateur_id), INDEX IDX_D2335517EA9FDD75 (media_id), PRIMARY KEY(organisateur_id, media_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -33,10 +33,10 @@ final class Version20200216204251 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_2CDBF5E9727ACA70 ON event_group (parent_id)');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('DROP TABLE artiste_media');
         $this->addSql('DROP TABLE organisateur_media');

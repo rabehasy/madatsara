@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class FrontendSubscribenewsletterController extends AbstractController
@@ -10,7 +11,7 @@ class FrontendSubscribenewsletterController extends AbstractController
     /**
      * @Route("/inscription-newsletter.html", name="frontend_subscribenewsletter")
      */
-    public function index()
+    public function index(): Response
     {
         return $this->render('frontend/subscribenewsletter/index.html.twig', [
             'controller_name' => 'FrontendSubscribenewsletterController',

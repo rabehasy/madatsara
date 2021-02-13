@@ -95,7 +95,6 @@ class Place
         return $this->getName();
     }
 
-
     public function getId(): ?int
     {
         return $this->id;
@@ -252,7 +251,7 @@ class Place
     /**
      * @ORM\PrePersist()
      */
-    public function PrePersist()
+    public function PrePersist(): void
     {
         $this->createdAt = new \DateTime();
     }
@@ -260,7 +259,7 @@ class Place
     /**
      * @ORM\PreUpdate()
      */
-    public function PreUpdate()
+    public function PreUpdate(): void
     {
         $this->updatedAt = new \DateTime();
     }

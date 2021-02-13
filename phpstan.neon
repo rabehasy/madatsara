@@ -1,0 +1,13 @@
+parameters:
+  checkMissingIterableValueType: false
+  checkGenericClassInNonGenericObjectType: false
+  level: 6
+  paths:
+    - src
+    - tests
+  excludes_analyse:
+    - src/Kernel.php
+    - src/Maker/skeleton
+    - tests/bootstrap.php
+  ignoreErrors:
+    - '#Property [A-Za-z\\]+::\$[A-Za-z_]+ has no typehint specified#'
