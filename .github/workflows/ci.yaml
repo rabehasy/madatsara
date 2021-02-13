@@ -36,9 +36,22 @@ jobs:
           composer update --prefer-dist --no-ansi --no-interaction --no-progress
           composer qa
 
-  deploy:
-    if: github.ref == 'refs/heads/develop'
+  test:
     needs: quality
+    runs-on: [ubuntu-latest]
+    container:
+      image: mrabs/php7_4-mysql-composer2-nodejs15
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Unit test
+        run: |
+          composer update --prefer-dist --no-ansi --no-interaction --no-progress
+          composer unit
+
+  deploy_dev:
+    if: github.ref == 'refs/heads/develop'
+    needs: test
     runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v1
@@ -51,5 +64,23 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd ${{ secrets.PATH_DEVELOP }}
+            git pull
+            dep deploy
+
+  deploy_main:
+    if: github.ref == 'refs/heads/main'
+    needs: test
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Push to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd ${{ secrets.PATH_MAIN }}
             git pull
             dep deploy
