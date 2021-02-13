@@ -30,12 +30,13 @@ jobs:
       image: mrabs/php7_4-mysql-composer2-nodejs15
 
     steps:
+      - uses: actions/checkout@v1
       - name: Quality code
         run: composer qa
 
   deploy:
     if: github.ref == 'refs/heads/develop'
-    needs: build
+    needs: quality
     runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v1
