@@ -32,7 +32,9 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Quality code
-        run: composer qa
+        run: |
+          composer update --prefer-dist --no-ansi --no-interaction --no-progress
+          composer qa
 
   deploy:
     if: github.ref == 'refs/heads/develop'
