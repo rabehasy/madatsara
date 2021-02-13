@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: [ubuntu-latest]
     container:
-      image: mrabs/schoolmg-app-mg:exif
+      image: mrabs/php7_4-mysql-composer2-nodejs15
 
     services:
       mysql:
@@ -22,6 +22,16 @@ jobs:
       - uses: actions/checkout@v1
       - name: composer update
         run: composer update --prefer-dist --no-ansi --no-interaction --no-progress
+
+  quality:
+    needs: build
+    runs-on: [ubuntu-latest]
+    container:
+      image: mrabs/php7_4-mysql-composer2-nodejs15
+
+    steps:
+      - name: Quality code
+        run: composer qa
 
   deploy:
     if: github.ref == 'refs/heads/develop'

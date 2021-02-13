@@ -16,6 +16,21 @@
             "src/Entity/.gitignore"
         ]
     },
+    "clue/stdio-react": {
+        "version": "v2.4.0"
+    },
+    "clue/term-react": {
+        "version": "v1.3.0"
+    },
+    "clue/utf8-react": {
+        "version": "v1.2.0"
+    },
+    "composer/semver": {
+        "version": "3.2.4"
+    },
+    "composer/xdebug-handler": {
+        "version": "1.4.5"
+    },
     "deployer/deployer": {
         "version": "v6.8.0"
     },
@@ -119,14 +134,32 @@
     "egulias/email-validator": {
         "version": "2.1.12"
     },
+    "evenement/evenement": {
+        "version": "v3.0.1"
+    },
     "fig/link-util": {
         "version": "1.1.0"
+    },
+    "friendsofphp/php-cs-fixer": {
+        "version": "2.16",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.16",
+            "ref": "c1947bad147704aeaf0285745f0baae927a58959"
+        },
+        "files": [
+            ".php_cs.dist"
+        ]
     },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.3"
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
+    },
+    "jolicode/jolinotif": {
+        "version": "v2.2.0"
     },
     "laminas/laminas-code": {
         "version": "4.0.0"
@@ -161,8 +194,14 @@
     "ocramius/proxy-manager": {
         "version": "2.2.3"
     },
+    "pdepend/pdepend": {
+        "version": "2.8.0"
+    },
     "php": {
         "version": "7.3"
+    },
+    "php-cs-fixer/diff": {
+        "version": "v1.3.1"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.0.0"
@@ -172,6 +211,21 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "1.0.1"
+    },
+    "phpmd/phpmd": {
+        "version": "2.9.1"
+    },
+    "phpro/grumphp-shim": {
+        "version": "v1.3.1"
+    },
+    "phpstan/phpstan": {
+        "version": "0.12.76"
+    },
+    "phpunit/php-file-iterator": {
+        "version": "3.0.5"
+    },
+    "phpunit/php-timer": {
+        "version": "5.0.3"
     },
     "pimple/pimple": {
         "version": "v3.3.1"
@@ -191,6 +245,21 @@
     "psr/log": {
         "version": "1.1.2"
     },
+    "react/event-loop": {
+        "version": "v1.1.1"
+    },
+    "react/stream": {
+        "version": "v1.1.1"
+    },
+    "sebastian/cli-parser": {
+        "version": "1.0.1"
+    },
+    "sebastian/phpcpd": {
+        "version": "6.0.3"
+    },
+    "sebastian/version": {
+        "version": "3.0.2"
+    },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
         "recipe": {
@@ -202,6 +271,9 @@
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "spatie/phpunit-watcher": {
+        "version": "1.23.1"
     },
     "symfony/asset": {
         "version": "v5.0.2"
@@ -602,11 +674,17 @@
     "twig/twig": {
         "version": "v3.0.0"
     },
+    "veewee/composer-run-parallel": {
+        "version": "v1.0.0"
+    },
     "webmozart/assert": {
         "version": "1.6.0"
     },
     "willdurand/negotiation": {
         "version": "v2.3.1"
+    },
+    "yosymfony/resource-watcher": {
+        "version": "v2.0.1"
     },
     "zendframework/zend-code": {
         "version": "3.4.1"
