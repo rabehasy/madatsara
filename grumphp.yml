@@ -1,2 +1,7 @@
 grumphp:
-    tasks: { phpstan: null }
+  tasks:
+    phpstan: ~
+  ascii:
+    failed: ~
+    succeeded: ~
+  process_timeout: null
