@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\UniqueConstraint;
@@ -14,6 +12,8 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  */
 class Hour
 {
+    use EventRelatedTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -31,11 +31,6 @@ class Hour
      */
     private $events;
 
-    public function __construct()
-    {
-        $this->events = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -51,14 +46,6 @@ class Hour
         $this->hour = $hour;
 
         return $this;
-    }
-
-    /**
-     * @return Collection|Event[]
-     */
-    public function getEvents(): Collection
-    {
-        return $this->events;
     }
 
     public function addEvent(Event $event): self

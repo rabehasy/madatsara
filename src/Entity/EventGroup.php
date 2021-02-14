@@ -5,7 +5,6 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EventGroupRepository")
@@ -13,6 +12,10 @@ use DateTime;
  */
 class EventGroup
 {
+    use TimeableTrait;
+    use SluggableTrait;
+    use EventRelatedTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -36,21 +39,6 @@ class EventGroup
     private $events;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $updatedAt;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $disabledAt;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\EventGroup", inversedBy="eventGroups")
      */
     private $parent;
@@ -60,14 +48,8 @@ class EventGroup
      */
     private $eventGroups;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $slug;
-
     public function __construct()
     {
-        $this->events = new ArrayCollection();
         $this->eventGroups = new ArrayCollection();
     }
 
@@ -105,14 +87,6 @@ class EventGroup
         return $this;
     }
 
-    /**
-     * @return Collection|Event[]
-     */
-    public function getEvents(): Collection
-    {
-        return $this->events;
-    }
-
     public function addEvent(Event $event): self
     {
         if (!$this->events->contains($event)) {
@@ -131,58 +105,6 @@ class EventGroup
         }
 
         return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(?\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getDisabledAt(): ?\DateTimeInterface
-    {
-        return $this->disabledAt;
-    }
-
-    public function setDisabledAt(?\DateTimeInterface $disabledAt): self
-    {
-        $this->disabledAt = $disabledAt;
-
-        return $this;
-    }
-
-    /**
-     * @ORM\PrePersist()
-     */
-    public function PrePersist(): void
-    {
-        $this->createdAt = new DateTime();
-    }
-
-    /**
-     * @ORM\PreUpdate()
-     */
-    public function PreUpdate(): void
-    {
-        $this->updatedAt = new DateTime();
     }
 
     public function getParent(): ?self
@@ -224,18 +146,6 @@ class EventGroup
                 $eventGroup->setParent(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
 
         return $this;
     }

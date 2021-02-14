@@ -3,7 +3,6 @@
 namespace App\EventListener;
 
 use App\Entity\Event;
-use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use function Symfony\Component\String\u;
 

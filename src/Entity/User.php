@@ -12,6 +12,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
+    use TimeableTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -34,21 +36,6 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $updatedAt;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $disabledAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -181,42 +168,6 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(?\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getDisabledAt(): ?\DateTimeInterface
-    {
-        return $this->disabledAt;
-    }
-
-    public function setDisabledAt(?\DateTimeInterface $disabledAt): self
-    {
-        $this->disabledAt = $disabledAt;
-
-        return $this;
     }
 
     public function getLastloginAt(): ?\DateTimeInterface
