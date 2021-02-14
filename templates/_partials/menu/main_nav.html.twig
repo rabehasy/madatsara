@@ -1,5 +1,8 @@
+{% set cssMenuActive = 'active' %}
+{% set cssMenuInactive = '' %}
+
 <nav class="header-right" id="main-nav">
-    <a href="{{ path('frontend_event_all') }}">{{ 'Evénements' | trans }}</a>
-    <a href="{{ path('frontend_contact') }}"><i class="fas fa-envelope-open-text"></i> {{ 'Contact' | trans }}</a>
-    <a href="{{ path('member_event_index') }}"><i class="far fa-user"></i> {{ 'Mon compte' | trans }}</a>
+    <a href="{{ path('frontend_event_all') }}" class="{{ currentRoute is defined and 'frontend_event_all' == currentRoute ? cssMenuActive : cssMenuInactive  }}">{{ 'Evénements' | trans }}</a>
+    <a href="{{ path('frontend_contact') }}" class="{{ currentRoute is defined and 'frontend_contact' == currentRoute ? cssMenuActive : cssMenuInactive  }}"><i class="fas fa-envelope-open-text"></i> {{ 'Contact' | trans }}</a>
+    <a href="{{ path('member_event_index') }}" class="{{ currentRoute is defined and 'member_event_index' == currentRoute ? cssMenuActive : cssMenuInactive  }}"><i class="far fa-user"></i> {{ 'Mon compte' | trans }}</a>
 </nav>
