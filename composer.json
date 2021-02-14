@@ -93,7 +93,7 @@
         "phpmd": "php vendor/bin/phpmd src/ text phpmd-ruleset.xml --exclude *src/Migrations*",
         "phpcpd": "php vendor/bin/phpcpd src/ --exclude *src/Migrations*",
         "qa": [
-            "@parallel phpcsff stan phpmd"
+            "@parallel phpcsff stan phpmd phpcpd"
         ],
         "test": [
             "@unit"
