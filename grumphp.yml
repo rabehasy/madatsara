@@ -1,6 +1,7 @@
 grumphp:
   tasks:
     phpstan: ~
+    phpunit: ~
   ascii:
     failed: ~
     succeeded: ~
