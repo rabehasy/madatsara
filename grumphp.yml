@@ -1,7 +1,8 @@
 grumphp:
   tasks:
     phpstan: ~
-    phpunit: ~
+    phpunit:
+      always_execute: true
   ascii:
     failed: ~
     succeeded: ~
