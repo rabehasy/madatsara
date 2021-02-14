@@ -11,3 +11,4 @@ parameters:
     - tests/bootstrap.php
   ignoreErrors:
     - '#Property [A-Za-z\\]+::\$[A-Za-z_]+ has no typehint specified#'
+    - '#Unable to resolve the template type T in call to method [A-Za-z\\]+::getRepository\(\)#'
