@@ -16,7 +16,7 @@ class EventActionsPersist
         $this->slugger = $slugger;
     }
 
-    public function PrePersist(Event $event, LifecycleEventArgs $eventArgs): void
+    public function PrePersist(Event $event): void
     {
         // setSlug
         $this->setSlugName($event);

@@ -90,8 +90,9 @@
         "stan": "php -d memory_limit=4G vendor/bin/phpstan analyse -c phpstan.neon",
         "unit": "php bin/console doctrine:database:drop --if-exists --force --env=test && php bin/console doctrine:database:create --env=test && php bin/console doctrine:schema:update --force --env=test && php -d memory_limit=4G vendor/bin/phpunit",
         "unitw": "php vendor/bin/phpunit-watcher watch",
+        "phpmd": "php vendor/bin/phpmd src/ text phpmd-ruleset.xml --exclude *src/Migrations*",
         "qa": [
-            "@parallel phpcsff stan"
+            "@parallel phpcsff stan phpmd"
         ],
         "test": [
             "@unit"
