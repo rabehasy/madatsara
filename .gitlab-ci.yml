@@ -1,14 +1,12 @@
 image: mrabs/php7_4-mysql-composer2-nodejs15
 
 services:
-  - postgres
+  - mysql
 
 variables:
   # Configure postgres service (https://hub.docker.com/_/postgres/)
-  POSTGRES_DB: db_name
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: secret
-  DATABASE_HOST: postgres
+  MYSQL_DATABASE: madatsara
+  MYSQL_ROOT_PASSWORD: secret
 
 
 cache:
