@@ -90,6 +90,7 @@ jobs:
       - name: Unit test
         run: |
           composer update --prefer-dist --no-ansi --no-interaction --no-progress
+          npm install -g yarn && yarn install && yarn encore production
           composer test
 
   deploy_dev:
