@@ -17,6 +17,7 @@ parameters:
     fallbacks_locale:
         - fr
         - en
+        - mg
 
 services:
     # default configuration for services in *this* file

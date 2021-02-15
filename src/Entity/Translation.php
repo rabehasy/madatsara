@@ -9,9 +9,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TranslationRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Translation implements EntityInterface
 {
+    use TimeableTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -58,21 +61,6 @@ class Translation implements EntityInterface
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="translations")
      */
     private $createdBy;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $updatedAt;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $disabledAt;
 
     public function __construct()
     {
@@ -161,42 +149,6 @@ class Translation implements EntityInterface
     public function setCreatedBy(?User $createdBy): self
     {
         $this->createdBy = $createdBy;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getDisabledAt(): ?\DateTimeInterface
-    {
-        return $this->disabledAt;
-    }
-
-    public function setDisabledAt(?\DateTimeInterface $disabledAt): self
-    {
-        $this->disabledAt = $disabledAt;
 
         return $this;
     }

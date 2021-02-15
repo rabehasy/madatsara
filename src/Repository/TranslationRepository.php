@@ -83,7 +83,6 @@ class TranslationRepository extends ServiceEntityRepository
 
         // Filter option_locale
         if (!empty($query['option_locale']) && '' !== $query['option_locale']) {
-
             $qb = $qb->where('a.locale = :locale');
             if ($isWhereAnd) {
                 $qb = $qb->andWhere('a.locale = :locale');

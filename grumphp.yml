@@ -1,7 +1,5 @@
 grumphp:
   tasks:
-    phpcsfixer:
-      allow_risky: true
     phpstan: ~
     phpunit:
       always_execute: true
