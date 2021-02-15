@@ -1,0 +1,80 @@
+image: mrabs/php7_4-mysql-composer2-nodejs15
+
+services:
+  - postgres
+
+variables:
+  # Configure postgres service (https://hub.docker.com/_/postgres/)
+  POSTGRES_DB: db_name
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: secret
+  DATABASE_HOST: postgres
+
+
+cache:
+  paths:
+    - vendor/
+
+stages:
+  - build
+  - qa
+  - test
+  - deploy
+
+.init_ssh: &init_ssh |
+  eval $(ssh-agent -s)
+  echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+  mkdir -p ~/.ssh
+  chmod 700 ~/.ssh
+  [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+
+.deploy_ssh_dev: &deploy_ssh_dev |
+  ssh $SERVER_INFO "cd $SERVER_PATH_DEV && git pull && dep deploy"
+
+.deploy_ssh_master: &deploy_ssh_master |
+  ssh $SERVER_INFO "cd $SERVER_PATH_MASTER && git pull && dep deploy"
+
+before_script:
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+  - *init_ssh
+
+build:
+  stage: build
+  script:
+    - composer update --prefer-dist --no-ansi --no-interaction --no-progress
+
+qa:
+  stage: qa
+  script:
+    - composer qa
+  dependencies:
+    - build
+
+test:
+  stage: test
+  script:
+    - npm install -g yarn && yarn install && yarn encore production
+    - composer unit
+  dependencies:
+    - qa
+
+deploy:develop:
+  stage: deploy
+  script:
+    - *init_ssh
+    - *deploy_ssh_dev
+  dependencies:
+    - test
+  only:
+    - develop
+
+deploy:master:
+  stage: deploy
+  script:
+    - *init_ssh
+    - *deploy_ssh_master
+  dependencies:
+    - test
+
+  only:
+    - master
