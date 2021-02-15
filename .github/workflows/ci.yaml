@@ -90,6 +90,8 @@ jobs:
       - name: Unit test
         run: |
           composer update --prefer-dist --no-ansi --no-interaction --no-progress
+          npm update --depth 5 @babel/preset-env
+          npm update --depth 5 @babel/compat-data
           npm install -g yarn && yarn install && yarn encore production
           composer test
 
