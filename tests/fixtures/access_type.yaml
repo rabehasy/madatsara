@@ -1,0 +1,8 @@
+# AccessType
+App\Entity\AccessType:
+
+  gratuit:
+    name: "Gratuit"
+
+  payant:
+    name: "Payant"

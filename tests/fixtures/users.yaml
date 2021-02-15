@@ -1,0 +1,13 @@
+# User
+App\Entity\User:
+
+  superadmin:
+    email: "madatsara\\@gmail.com"
+    password: "\\$2y\\$10\\$MOfIT1hU4AmFDkWogPTxbuw5Ztgmjt.mG7FCyiou1s0U2eGasEzKS"
+    roles: "[]"
+
+  admin:
+    email: "rabehasy\\@gmail.com"
+    password: "\\$2y\\$10\\$MOfIT1hU4AmFDkWogPTxbuw5Ztgmjt.mG7FCyiou1s0U2eGasEzKS"
+    roles: "[]"
+

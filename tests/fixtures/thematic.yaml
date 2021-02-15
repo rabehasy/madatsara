@@ -1,0 +1,23 @@
+# Thematic
+App\Entity\Thematic:
+
+  sorties_musiques:
+    name: "Sorties / Musique"
+
+  culture:
+    name: "Arts / Culture"
+
+  festival:
+    name: "Festival"
+
+  sports_danse:
+    name: "Sports / Danse"
+
+  conferences_debat:
+    name: "Conférence / Projection débat"
+
+  expo_salons:
+    name: "Expositions / Salons"
+
+  carnaval:
+    name: "Carnaval"

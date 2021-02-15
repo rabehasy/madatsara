@@ -1,0 +1,38 @@
+# Event
+App\Entity\Event:
+
+  ev01:
+    name: "Soirée tropicale animée par Dedesse et Toto Mwandjani."
+    description: "--- Soirée tropicale animée par Dedesse et Toto Mwandjani. ---"
+    api: "@web"
+    accessType: "@gratuit"
+    thematic:
+      - "@sorties_musiques"
+      - "@culture"
+    artiste:
+      - "@bodo"
+      - "@mahaleo"
+    organisateur:
+      - "@sound_prod"
+      - "@madavision"
+    place:
+      - "@piment_cafe"
+      - "@trass"
+
+  ev02:
+    name: "YPHEN hivazo BON JOVI, GUNS 'N' ROSES, EUROPE ary SCORPIONS."
+    description: "--- YPHEN hivazo BON JOVI, GUNS 'N' ROSES, EUROPE ary SCORPIONS. ---"
+    api: "@web"
+    accessType: "@gratuit"
+    thematic:
+      - "@sorties_musiques"
+      - "@culture"
+    artiste:
+      - "@bodo"
+      - "@mahaleo"
+    organisateur:
+      - "@sound_prod"
+      - "@madavision"
+    place:
+      - "@piment_cafe"
+      - "@trass"

@@ -1,0 +1,11 @@
+# Artiste
+App\Entity\Artiste:
+
+  bodo:
+    name: "Bodo"
+
+  mahaleo:
+    name: "Mahaleo"
+
+  rossy:
+    name: "Rossy"

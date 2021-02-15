@@ -1,0 +1,14 @@
+# Api
+App\Entity\Api:
+
+  android:
+    name: "Android app"
+
+  web:
+    name: "Web"
+
+  desktop:
+    name: "Desktop app"
+
+  ios:
+    name: "Ios app"

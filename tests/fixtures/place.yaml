@@ -1,0 +1,8 @@
+# Place
+App\Entity\Place:
+
+  piment_cafe:
+    name: "Piment Café"
+
+  trass:
+    name: "Trass"

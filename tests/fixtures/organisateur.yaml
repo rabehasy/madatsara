@@ -1,0 +1,11 @@
+# Organisateur
+App\Entity\Organisateur:
+
+  sound_prod:
+    name: "Sound Production"
+
+  mc:
+    name: "Media Consulting"
+
+  madavision:
+    name: "Madavision"
