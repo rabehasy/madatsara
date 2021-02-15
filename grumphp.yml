@@ -1,7 +1,9 @@
 grumphp:
   tasks:
-    phpcsfixer: ~
-    phpstan: ~
+    phpcsfixer:
+      always_execute: true
+    phpstan:
+      always_execute: true
     phpunit:
       always_execute: true
   ascii:
