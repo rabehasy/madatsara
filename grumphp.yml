@@ -1,5 +1,6 @@
 grumphp:
   tasks:
+    phpcsfixer: ~
     phpstan: ~
     phpunit:
       always_execute: true

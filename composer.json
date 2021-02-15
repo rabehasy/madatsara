@@ -93,8 +93,15 @@
         "unitw": "php vendor/bin/phpunit-watcher watch",
         "phpmd": "php vendor/bin/phpmd src/ text phpmd-ruleset.xml --exclude *src/Migrations*",
         "phpcpd": "php vendor/bin/phpcpd src/ --exclude *src/Migrations*",
+        "lint_twig": "php -d memory_limit=4G bin/console lint:twig templates/",
+        "lint_translation": "php -d memory_limit=4G bin/console lint:yaml translations",
+        "lint_container": "php -d memory_limit=4G bin/console lint:container",
         "qa": [
             "@parallel phpcsff stan phpmd phpcpd"
+        ],
+        "symfony": [
+            "@parallel lint_twig lint_translation lint_container",
+            "symfony security:check"
         ],
         "test": [
             "@unit"
