@@ -99,10 +99,10 @@
         "qa": [
             "@parallel phpcsff stan phpmd phpcpd"
         ],
-        "symfony": [
-            "@parallel lint_twig lint_translation lint_container",
-            "symfony security:check"
+        "symfony_lint": [
+            "@parallel lint_twig lint_translation lint_container"
         ],
+        "symfony_check": "symfony security:check",
         "test": [
             "@unit"
         ],

@@ -46,8 +46,31 @@ jobs:
           composer update --prefer-dist --no-ansi --no-interaction --no-progress
           composer qa
 
+  symfony_lint:
+    needs: build
+    runs-on: [ubuntu-latest]
+    container:
+      image: mrabs/php7_4-mysql-composer2-nodejs15
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_DATABASE: madatsara
+          MYSQL_ROOT_PASSWORD: secret
+        ports:
+          - 3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: symfony Lint (twig, translations, container)
+        run: |
+          composer update --prefer-dist --no-ansi --no-interaction --no-progress
+          composer symfony_lint
+
   test:
-    needs: qa
+    needs: [qa, symfony_lint]
     runs-on: [ubuntu-latest]
     container:
       image: mrabs/php7_4-mysql-composer2-nodejs15
