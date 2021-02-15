@@ -51,6 +51,7 @@ qa:
 test:
   stage: test
   script:
+    - npm install -g yarn && yarn install && yarn encore production
     - composer unit
   dependencies:
     - qa
