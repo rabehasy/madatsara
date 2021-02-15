@@ -35,6 +35,7 @@
     "require-dev": {
         "deployer/deployer": "^6.8",
         "deployer/recipes": "^6.2",
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "friendsofphp/php-cs-fixer": "^2.18",
         "phpmd/phpmd": "^2.9",
         "phpro/grumphp-shim": "^1.3",
