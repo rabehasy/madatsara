@@ -23,7 +23,7 @@ jobs:
       - name: composer update
         run: composer update --prefer-dist --no-ansi --no-interaction --no-progress
 
-  quality:
+  qa:
     needs: build
     runs-on: [ubuntu-latest]
     container:
@@ -46,8 +46,8 @@ jobs:
           composer update --prefer-dist --no-ansi --no-interaction --no-progress
           composer qa
 
-  unit-test:
-    needs: quality
+  test:
+    needs: qa
     runs-on: [ubuntu-latest]
     container:
       image: mrabs/php7_4-mysql-composer2-nodejs15
@@ -71,7 +71,7 @@ jobs:
 
   deploy_dev:
     if: github.ref == 'refs/heads/develop'
-    needs: quality
+    needs: test
     runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v1
@@ -89,7 +89,7 @@ jobs:
 
   deploy_main:
     if: github.ref == 'refs/heads/main'
-    needs: quality
+    needs: test
     runs-on: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v1
